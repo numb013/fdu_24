@@ -9,7 +9,7 @@
  * @license http://www.opensource.org/licenses/mit-license.php MIT License
  */
 App::uses('ModelBehavior', 'Model');
-App::uses('String', 'Utility');
+
 /**
  * Searchable behavior
  *
@@ -89,26 +89,25 @@ class SearchableBehavior extends ModelBehavior {
 	public function parseCriteria(Model $Model, $data) {
 		$this->setupFilterArgs($Model);
 		$conditions = array();
-		if (is_array($Model->filterArgs)) {
-			foreach ($Model->filterArgs as $field) {
-				// If this field was not passed and a default value exists, use that instead.
-				if (!array_key_exists($field['name'], $data) && array_key_exists('defaultValue', $field)) {
-					$data[$field['name']] = $field['defaultValue'];
-				}
 
-				if (in_array($field['type'], array('like'))) {
-					$this->_addCondLike($Model, $conditions, $data, $field, 'LIKE');
-				} elseif (in_array($field['type'], array('ilike'))) {
-					$this->_addCondLike($Model, $conditions, $data, $field, 'ILIKE');
-				} elseif (in_array($field['type'], array('value', 'lookup'))) {
-					$this->_addCondValue($Model, $conditions, $data, $field);
-				} elseif ($field['type'] === 'expression') {
-					$this->_addCondExpression($Model, $conditions, $data, $field);
-				} elseif ($field['type'] === 'query') {
-					$this->_addCondQuery($Model, $conditions, $data, $field);
-				} elseif ($field['type'] === 'subquery') {
-					$this->_addCondSubquery($Model, $conditions, $data, $field);
-				}
+		foreach ($Model->filterArgs as $field) {
+			// If this field was not passed and a default value exists, use that instead.
+			if (!array_key_exists($field['name'], $data) && array_key_exists('defaultValue', $field)) {
+				$data[$field['name']] = $field['defaultValue'];
+			}
+
+			if (in_array($field['type'], array('like'))) {
+				$this->_addCondLike($Model, $conditions, $data, $field, 'LIKE');
+			} elseif (in_array($field['type'], array('ilike'))) {
+				$this->_addCondLike($Model, $conditions, $data, $field, 'ILIKE');
+			} elseif (in_array($field['type'], array('value', 'lookup'))) {
+				$this->_addCondValue($Model, $conditions, $data, $field);
+			} elseif ($field['type'] === 'expression') {
+				$this->_addCondExpression($Model, $conditions, $data, $field);
+			} elseif ($field['type'] === 'query') {
+				$this->_addCondQuery($Model, $conditions, $data, $field);
+			} elseif ($field['type'] === 'subquery') {
+				$this->_addCondSubquery($Model, $conditions, $data, $field);
 			}
 		}
 		return $conditions;

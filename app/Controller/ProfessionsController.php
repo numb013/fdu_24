@@ -30,52 +30,24 @@ App::uses('AppController', 'Controller');
  */
 class ProfessionsController extends AppController {
 	public $uses = array('Profession', 'Image', 'Movie' ,'CheckLike', 'CheckPersonal');
-	public $components = array(
-			'Search.Prg' => array(
-			'commonProcess' => array(
-			'paramType' => 'querystring',
-			'filterEmpty' =>  true,
-			),
-		),
-    'Session',
-	);
+	public $components = array('Search.Prg', 'Session');
 	public $presetVars = true;
-	public $scaffold;
+	public $paginate = array();
 
-  function search() {
+
+	public function index($para = null) {
+
+		//echo pr($this->request->data);
+		//exit();
+
 		$this->layout = "default";
     // レイアウト関係
-		$check_personal = $this->request->data['CheckPersonals']['check_personal'];
-
-		// 案件カテゴリー
-		if (!empty($check_personal)) {
-			$r = array();
-			foreach ($check_personal as $val) {
-				if (!empty($val)) {
-					$r[] = 'FIND_IN_SET(\'' . $val . '\', Profession.check_personal)';
-				}
-			}
-			$condition[]['AND'] = $r;
-		}
-		$conditions = array(
-			'conditions' => array(
-				 'delete_flag' => '0',
-				 $condition,
-			 ),
-		);
-		$datas = $this->Profession->find('all', $conditions);
-		$this->set('datas',$datas);
-	}
-
-  function admin_index() {
-		$this->layout = "default";
-    // レイアウト関係
-		$param = (!empty($_SERVER['QUERY_STRING'])) ? '?' . $_SERVER['QUERY_STRING'] : '';
 		$this->Prg->commonProcess();
-		$parsedConditions = $this->Profession->parseCriteria($this->passedArgs);
-		$conditions = array(
-			$parsedConditions,
-		);
+		$this->paginate['conditions'] = $this->Profession->parseCriteria($this->passedArgs);
+		//echo pr($this->paginate['conditions']);
+
+
+
 		if (empty($this->request->data)) {
 			// 初期表示時
 			$this->paginate = array(
@@ -85,21 +57,60 @@ class ProfessionsController extends AppController {
 				'order' => array(
 					'created' => 'DESC',
 				),
-				'limit' => 5,
 			);
+			$this->set('flag', '1');
 		} else {
-			// 検索時
+			$this->paginate['conditions']['Profession.delete_flag'] = '0';
+		}
+
+
+
+//echo pr($this->paginate['conditions']);
+//exit();
+
+
+		$datas = $this->paginate();
+		//$sql = $this->getDataSource()->getLog();
+
+//echo pr($sql);
+		//exit();
+		$this->_getCheckParameter();
+		$this->set('datas',$datas);
+		$this->set('para',$para);
+	}
+
+
+
+
+
+
+  public function admin_index() {
+		$this->layout = 'default';
+		$this->paginate = array(
+			'limit' => 5,
+		);
+
+		echo pr($this->request->data);
+		exit();
+
+		$this->Prg->commonProcess();
+		$this->paginate['conditions'] = $this->Profession->parseCriteria($this->passedArgs);
+		if (empty($this->request->data)) {
+			// 初期表示時
 			$this->paginate = array(
 				'conditions' => array(
-					$conditions,
-					'delete_flag' => '0',
-				),
+				   'delete_flag' => '0'
+				 ),
 				'order' => array(
 					'created' => 'DESC',
 				),
-				'limit' => 5,
 			);
+		} else {
+			$this->paginate['conditions']['Profession.delete_flag'] = '0';
 		}
+
+		echo pr($this->paginate['conditions']);
+		exit();
 
 
 		$datas = $this->paginate();
@@ -121,7 +132,7 @@ class ProfessionsController extends AppController {
 /*
 /*
 /**/
-  function admin_add() {
+  public function admin_add() {
 		$this->layout = "default";
     if ($this->request->is(array('post', 'put'))) {
 		//動画処理
@@ -315,7 +326,7 @@ class ProfessionsController extends AppController {
   /*
   /**/
 
-  function admin_regist() {
+  public function admin_regist() {
 		$this->layout = "default";
     if ($this->request->is(array('post', 'put'))) {
 			//戻るボタン
@@ -408,7 +419,7 @@ class ProfessionsController extends AppController {
 /*
 /*
 /**/
-function admin_edit($id = null){
+public function admin_edit($id = null){
   // レイアウト関係
 	$this->layout = "default";
   if ($this->request->is(array('post', 'put'))) {
@@ -673,7 +684,7 @@ function admin_edit($id = null){
   }
 
 
-  function admin_edit_regist(){
+  public function admin_edit_regist(){
       // レイアウト関係
 		$this->layout = "default";
     if ($this->request->is(array('post', 'put'))) {
@@ -811,7 +822,7 @@ function admin_edit($id = null){
   /*
   /**/
 
-  function admin_detail($id = null){
+  public function admin_detail($id = null){
     // レイアウト関係
 		$this->layout = "default";
     if (isset($id)) {
@@ -867,7 +878,7 @@ function admin_edit($id = null){
 /*
 /*
 /**/
-  function admin_delete($id = null){
+  public function admin_delete($id = null){
 		$this->layout = "default";
     $status = array(
       'delete_flag' => 1,

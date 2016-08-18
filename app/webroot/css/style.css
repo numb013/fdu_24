@@ -398,7 +398,6 @@ h6 {
 
 .job-memu img {
   margin: 0 auto;
-  width: 100%;
 }
 .job-memu p {
   margin-top: 10px;
@@ -407,9 +406,6 @@ h6 {
   margin-bottom:0px;
 }
 
-.check-group {
-    float: left;
-}
 
 .check-group input {
     display: none;
@@ -511,7 +507,6 @@ h6 {
   }
   .job-memu img {
     margin: 0 auto;
-    width: 100%;
   }
   .job-memu p {
     margin-top: 5px;
@@ -614,7 +609,6 @@ h6 {
   }
   .job-memu img {
     margin: 0 auto;
-    width: 100%;
   }
   .job-memu p {
     margin-top: 5px;

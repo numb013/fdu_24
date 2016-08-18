@@ -82,7 +82,6 @@ class Profession extends AppModel {
             'message' => '本文は1000文字以内'
         )
       ),
-
   );
 
   public $filterArgs = array(

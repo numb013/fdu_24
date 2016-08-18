@@ -9,10 +9,10 @@
 							<h2>Your gender?</h2>
 							<div class="parameter-frame">
 								<p class="parameter">
-									<?php echo $this->Html->link('MAN', array('controller' => 'CheckPersonals','action' => 'check_box', '1'), array('class'=>'btn btn-primary btn-lg'));?>
+									<?php echo $this->Html->link('MAN', array('controller' => 'Professions','action' => 'index', '1'), array('class'=>'btn btn-primary btn-lg'));?>
 								</p>
 								<p class="parameter">
-									<?php echo $this->Html->link('WOMAN', array('controller' => 'CheckPersonals','action' => 'check_box', '2'), array('class'=>'btn btn-primary btn-lg'));?>
+									<?php echo $this->Html->link('WOMAN', array('controller' => 'Professions','action' => 'index', '2'), array('class'=>'btn btn-primary btn-lg'));?>
 								</p>
 							</div>
 					</div>
@@ -27,10 +27,10 @@
 							<h2>DO YOU LIKE?</h2>
 							<div class="parameter-frame">
 								<p class="parameter">
-									<?php echo $this->Html->link('MUSIC', array('controller' => 'CheckPersonals','action' => 'check_box', '3'), array('class'=>'btn btn-primary btn-lg'));?>
+									<?php echo $this->Html->link('MUSIC', array('controller' => 'Professions','action' => 'index', '3'), array('class'=>'btn btn-primary btn-lg'));?>
 								</p>
 								<p class="parameter">
-									<?php echo $this->Html->link('SPORT', array('controller' => 'CheckPersonals','action' => 'check_box', '4'), array('class'=>'btn btn-primary btn-lg'));?>
+									<?php echo $this->Html->link('SPORT', array('controller' => 'Professions','action' => 'index', '4'), array('class'=>'btn btn-primary btn-lg'));?>
 								</p>
 							</div>
 					</div>
@@ -45,10 +45,10 @@
 							<h2>DO YOU LIKE?</h2>
 							<div class="parameter-frame">
 								<p class="parameter">
-									<?php echo $this->Html->link('GAME', array('controller' => 'CheckPersonals','action' => 'check_box', '5'), array('class'=>'btn btn-primary btn-lg'));?>
+									<?php echo $this->Html->link('GAME', array('controller' => 'Professions','action' => 'index', '5'), array('class'=>'btn btn-primary btn-lg'));?>
 								</p>
 								<p class="parameter">
-									<?php echo $this->Html->link('COOKING', array('controller' => 'CheckPersonals','action' => 'check_box', '6'), array('class'=>'btn btn-primary btn-lg'));?>
+									<?php echo $this->Html->link('COOKING', array('controller' => 'Professions','action' => 'index', '6'), array('class'=>'btn btn-primary btn-lg'));?>
 								</p>
 							</div>
 					</div>

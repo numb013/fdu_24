@@ -34,29 +34,106 @@
        'Search.Searchable'
    );
 
-   public $filterArgs = array(
-     'profession_name' => array(
-       'type' => 'like'
-     ),
-     'genre' => array(
-       'type' => 'value'
-     ),
-     'core_status' => array(
-       'type' => 'value'
-     ),
-     'check_sex' => array(
-       'type' => 'query',
-       'method' => 'CheckSex',
-     ),
-     'check_personal' => array(
-       'type' => 'query',
-       'method' => 'CheckPersonal',
-     ),
-     'check_like' => array(
-       'type' => 'query',
-       'method' => 'CheckLike',
-     ),
-   );
+   public $hasMany = array(
+     'Movie' => array(
+         'className' => 'Movie',
+         'conditions'=>array(
+           'delete_flag'=>0,
+           'partner_name'=> 'Profession',
+             ),
+         'order' => '',
+         'foreignKey' => 'partner_id',
+         'dependent' => '',
+         'exclusive' => '',
+         'finderQuery' => '',
+         'limit' => '',
+       ),
+       'Image' => array(
+           'className' => 'Image',
+           'conditions'=>array(
+             'delete_flag'=>0,
+             'partner_name'=> 'Profession',
+               ),
+           'order' => '',
+           'foreignKey' => 'partner_id',
+           'dependent' => '',
+           'exclusive' => '',
+           'finderQuery' => '',
+           'limit' => '',
+         ),
+     );
+
+     public $filterArgs = array(
+       'profession_name' => array(
+         'type' => 'like'
+       ),
+       'genre' => array(
+         'type' => 'value'
+       ),
+       'core_status' => array(
+         'type' => 'value'
+       ),
+       'check_sex' => array(
+         'type' => 'query',
+         'method' => 'CheckSex',
+       ),
+       'CheckPersonal' => array(
+         'type' => 'query',
+         'method' => 'CheckPers',
+       ),
+       'check_like' => array(
+         'type' => 'query',
+         'method' => 'CheckLike',
+       ),
+     );
+
+     public function CheckSex($data = array()) {
+   		$conditions = array();
+   		// 案件カテゴリー
+   		if (!empty($data['check_sex'])) {
+   			$r = array();
+   			foreach ($data['check_sex'] as $val) {
+   				if (!empty($val)) {
+   					$r[] = 'FIND_IN_SET(\'' . $val . '\', Profession.check_sex)';
+   				}
+   			}
+   			$r[] = 'check_sex IS NULL ';
+   			$conditions[]['OR'] = $r;
+   		}
+   		return $conditions;
+   	}
+
+     public function CheckPers($data = array()) {
+   		$conditions = array();
+   		// 案件カテゴリー
+   		if (!empty($data['check_personal'])) {
+   			$r = array();
+   			foreach ($data['check_personal'] as $val) {
+   				if (!empty($val)) {
+   					$r[] = 'FIND_IN_SET(\'' . $val . '\', Profession.CheckPersonal)';
+   				}
+   			}
+   			$r[] = 'CheckPersonal IS NULL ';
+   			$conditions[]['OR'] = $r;
+   		}
+   		return $conditions;
+   	}
+
+     public function CheckLike($data = array()) {
+   		$conditions = array();
+   		// 案件カテゴリー
+   		if (!empty($data['check_like'])) {
+   			$r = array();
+   			foreach ($data['check_like'] as $val) {
+   				if (!empty($val)) {
+   					$r[] = 'FIND_IN_SET(\'' . $val . '\', Profession.check_like)';
+   				}
+   			}
+   			$r[] = 'check_like IS NULL ';
+   			$conditions[]['OR'] = $r;
+   		}
+   		return $conditions;
+   	}
 
 
 }

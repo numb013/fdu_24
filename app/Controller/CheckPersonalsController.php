@@ -34,31 +34,34 @@ class CheckPersonalsController extends AppController {
 
 	public $components = array('Search.Prg');
 	public $presetVars = true;
+	public $paginate = array();
 
 
 	public function check_box($para = null) {
 		$this->layout = "default";
     // レイアウト関係
-		$this->CheckPersonal->recursive = 0;
-
 		$this->Prg->commonProcess();
-		$this->paginate = array(
-				'conditions' => $this->CheckPersonal->parseCriteria($this->passedArgs),
-		);
-
-
-
-
+		$this->paginate['conditions'] = $this->Profession->parseCriteria($this->passedArgs);
+		if (empty($this->request->data)) {
+			// 初期表示時
+			$this->paginate = array(
+				'conditions' => array(
+				   'delete_flag' => '0'
+				 ),
+				'order' => array(
+					'created' => 'DESC',
+				),
+			);
+			$this->set('flag', '1');
+		} else {
+			$this->paginate['conditions']['CheckPersonal.delete_flag'] = '0';
+		}
 
 		$datas = $this->paginate();
-
-
-
 		$this->_getCheckParameter();
 		$this->set('datas',$datas);
 		$this->set('para',$para);
 	}
-
 
 
 

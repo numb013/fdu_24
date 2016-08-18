@@ -20,7 +20,7 @@
       $this->Auth->allow('add', 'index', 'home', 'search', 'check_box');
       $url = $_SERVER["REQUEST_URI"];
       if(strpos($url,'admin') !== false) {
-        $this->theme = 'Admins';
+        $this->theme = 'admin';
       }
      }
 

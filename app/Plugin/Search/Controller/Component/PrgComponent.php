@@ -206,29 +206,26 @@ class PrgComponent extends Component {
 				$args[$field['field']] = base64_decode($fieldContent);
 			}
 
-			switch ($field['type']) {
-				case 'lookup':
-					if (!empty($args[$field['field']])) {
-						$searchModel = $field['model'];
-						$this->controller->loadModel($searchModel);
-						$this->controller->{$searchModel}->recursive = -1;
-						$result = $this->controller->{$searchModel}->findById($args[$field['field']]);
-						$parsedParams[$field['field']] = $args[$field['field']];
-						$parsedParams[$field['formField']] = $result[$searchModel][$field['modelField']];
-						$data[$model][$field['field']] = $args[$field['field']];
-						$data[$model][$field['formField']] = $result[$searchModel][$field['modelField']];
-					}
-					break;
-
-				case 'checkbox':
-					$values = explode('|', $args[$field['field']]);
-					$parsedParams[$field['field']] = $values;
-					$data[$model][$field['field']] = $values;
-					break;
-				case 'value':
+			if ($field['type'] === 'lookup') {
+				if (!empty($args[$field['field']])) {
+					$searchModel = $field['model'];
+					$this->controller->loadModel($searchModel);
+					$this->controller->{$searchModel}->recursive = -1;
+					$result = $this->controller->{$searchModel}->findById($args[$field['field']]);
 					$parsedParams[$field['field']] = $args[$field['field']];
+					$parsedParams[$field['formField']] = $result[$searchModel][$field['modelField']];
 					$data[$model][$field['field']] = $args[$field['field']];
-					break;
+					$data[$model][$field['formField']] = $result[$searchModel][$field['modelField']];
+				}
+
+			} elseif ($field['type'] === 'checkbox') {
+				$values = explode('|', $args[$field['field']]);
+				$parsedParams[$field['field']] = $values;
+				$data[$model][$field['field']] = $values;
+
+			} elseif ($field['type'] === 'value') {
+				$parsedParams[$field['field']] = $args[$field['field']];
+				$data[$model][$field['field']] = $args[$field['field']];
 			}
 
 			if (isset($data[$model][$field['field']]) && $data[$model][$field['field']] !== '') {
@@ -387,7 +384,6 @@ class PrgComponent extends Component {
 				}
 
 				$searchParams = $this->controller->request->data[$modelName];
-				//$searchParams = $this->controller->request->data;
 				$this->serializeParams($searchParams);
 
 				if ($paramType === 'named') {
