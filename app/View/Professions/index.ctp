@@ -29,6 +29,11 @@
   </div>
 </aside>
 
+<?php
+echo pr($this->request->data);
+exit();
+ ;?>
+
 <?php elseif(!empty($datas)): ?>
 
 <div class="col-md-12 text-center animate-box" style="background-color:#000; padding:0px;">
