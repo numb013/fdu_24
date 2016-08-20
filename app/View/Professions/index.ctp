@@ -29,10 +29,6 @@
   </div>
 </aside>
 
-<?php
-echo pr($this->request->data);
-exit();
- ;?>
 
 <?php elseif(!empty($datas)): ?>
 
