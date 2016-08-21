@@ -69,7 +69,7 @@ class CheckPersonalsController extends AppController {
 
 
 
-	function admin_index() {
+	public function admin_index() {
 		$this->layout = "default";
     $datas = $this->CheckPersonal->find('all',array(
         'conditions' => array(
@@ -82,7 +82,7 @@ class CheckPersonalsController extends AppController {
     $this->set('datas',$datas);
     }
 
-  function admin_add() {
+  public function admin_add() {
 		$this->layout = "default";
     if ($this->request->is(array('post', 'put'))) {
       if ($this->CheckPersonal->save($this->request->data)) {
@@ -95,7 +95,7 @@ class CheckPersonalsController extends AppController {
     }
   }
 
-  function admin_edit($id = null) {
+  public function admin_edit($id = null) {
 		$this->layout = "default";
     if ($this->request->is(array('post', 'put'))) {
         $status = array(
@@ -119,54 +119,49 @@ class CheckPersonalsController extends AppController {
   }
 
 
-		public function _getCheckParameter() {
-			$check_sex = array(
-				'1' => 'MAN',
-				'5' => 'GIRL'
-			);
+	public function _getCheckParameter() {
+		$check_sex = array(
+			'1' => 'MAN',
+			'5' => 'GIRL'
+		);
 
-			$genre = array(
-				'1' => 'デザイン・アート系職業',
-				'2' => 'ものつくり・製造系職業',
-				'3' => 'IT系職業',
-				'4' => 'マスコミ・芸能系職業',
-				'5' => '食べ物・フード系職業',
-				'6' => '教育系職業',
-				'7' => '建築・現場系職業',
-				'8' => 'スポーツ系職業',
-			);
-
-
-			$personals = $this->CheckPersonal->find('all',
-					array(
-						'fields' => array('*'),
-						'conditions' => array('delete_flag' => 0),
-						'order' => array('id' => 'asc'),
-					)
-			);
+		$genre = array(
+			'1' => 'デザイン・アート系職業',
+			'2' => 'ものつくり・製造系職業',
+			'3' => 'IT系職業',
+			'4' => 'マスコミ・芸能系職業',
+			'5' => '食べ物・フード系職業',
+			'6' => '教育系職業',
+			'7' => '建築・現場系職業',
+			'8' => 'スポーツ系職業',
+		);
 
 
-			$likes = $this->CheckLike->find('all',
-					array(
-						'fields' => array('*'),
-						'conditions' => array('delete_flag' => 0),
-						'order' => array('id' => 'asc'),
-					)
-			);
-
-			foreach ($personals as $key => $personal) {
-					$check_personals[$personal['CheckPersonal']['id']] = $personal['CheckPersonal']['name'];
-				}
-
-				foreach ($likes as $key => $like) {
-					$check_likes[$like['CheckLike']['id']] = $like['CheckLike']['name'];
-				}
+		$personals = $this->CheckPersonal->find('all',
+				array(
+					'fields' => array('*'),
+					'conditions' => array('delete_flag' => 0),
+					'order' => array('id' => 'asc'),
+				)
+		);
 
 
+		$likes = $this->CheckLike->find('all',
+				array(
+					'fields' => array('*'),
+					'conditions' => array('delete_flag' => 0),
+					'order' => array('id' => 'asc'),
+				)
+		);
 
-				$this->set(compact("check_likes", "check_personals", "check_sex", "genre"));
-				return;
-			}
+		foreach ($personals as $key => $personal) {
+			$check_personals[$personal['CheckPersonal']['id']] = $personal['CheckPersonal']['name'];
+		}
 
-
+		foreach ($likes as $key => $like) {
+			$check_likes[$like['CheckLike']['id']] = $like['CheckLike']['name'];
+		}
+		$this->set(compact("check_likes", "check_personals", "check_sex", "genre"));
+			return;
+		}
 }

@@ -106,6 +106,11 @@ class Profession extends AppModel {
       'type' => 'query',
       'method' => 'CheckLike',
     ),
+    'personal_check' => array(
+      'type' => 'query',
+      'method' => 'PersonalCheck',
+    ),
+
   );
 
   public function CheckSex($data = array()) {
@@ -152,6 +157,22 @@ class Profession extends AppModel {
 			}
 			$r[] = 'check_like IS NULL ';
 			$conditions[]['OR'] = $r;
+		}
+		return $conditions;
+	}
+
+  public function PersonalCheck($data = array()) {
+		$conditions = array();
+		// 案件カテゴリー
+		if (!empty($data['personal_check'])) {
+			$r = array();
+			foreach ($data['personal_check'] as $val) {
+				if (!empty($val)) {
+					$r[] = 'FIND_IN_SET(\'' . $val . '\', Profession.check_personal)';
+				}
+			}
+			//$r[] = 'check_personal IS NULL ';
+			$conditions[]['AND'] = $r;
 		}
 		return $conditions;
 	}

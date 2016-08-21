@@ -36,16 +36,21 @@ class ProfessionsController extends AppController {
 
 
 	public function index($para = null) {
+    $param = (!empty($_SERVER['QUERY_STRING'])) ? '?' . $_SERVER['QUERY_STRING'] : '';
+
+    //echo pr($param);
+    //exit();
+
 
 		//echo pr($this->request->data);
 		//exit();
 
-		$this->layout = "default";
+		//$this->layout = "default";
     // レイアウト関係
 		$this->Prg->commonProcess();
 		$this->paginate['conditions'] = $this->Profession->parseCriteria($this->passedArgs);
-		//echo pr($this->paginate['conditions']);
-
+    //echo pr($this->paginate['conditions']);
+    //exit();
 
 
 		if (empty($this->request->data)) {
@@ -70,17 +75,21 @@ class ProfessionsController extends AppController {
 
 
 		$datas = $this->paginate();
-		//$sql = $this->getDataSource()->getLog();
-
-//echo pr($sql);
+    //echo pr($this->Profession->getDataSource()->getLog());
+    //exit();
+    //echo pr($sql);
 		//exit();
 		$this->_getCheckParameter();
-		$this->set('datas',$datas);
-		$this->set('para',$para);
+    $this->set(compact('datas', 'para', 'param'));
 	}
 
 
+  public function search_more($para = null) {
+    $param = (!empty($_SERVER['QUERY_STRING'])) ? '?' . $_SERVER['QUERY_STRING'] : '';
+		$this->_getCheckParameter();
+    $this->set(compact('datas', 'para', 'param'));
 
+}
 
 
 
@@ -90,8 +99,8 @@ class ProfessionsController extends AppController {
 			'limit' => 5,
 		);
 
-		echo pr($this->request->data);
-		exit();
+		//echo pr($this->request->data);
+		//exit();
 
 		$this->Prg->commonProcess();
 		$this->paginate['conditions'] = $this->Profession->parseCriteria($this->passedArgs);
@@ -109,8 +118,8 @@ class ProfessionsController extends AppController {
 			$this->paginate['conditions']['Profession.delete_flag'] = '0';
 		}
 
-		echo pr($this->paginate['conditions']);
-		exit();
+		//echo pr($this->paginate['conditions']);
+		//exit();
 
 
 		$datas = $this->paginate();
@@ -908,6 +917,14 @@ public function admin_edit($id = null){
 			'8' => 'スポーツ系職業',
 		);
 
+    $like_genre = array(
+			'1' => '性格（part１）',
+			'2' => '性格（part２）',
+			'3' => '性格（part３）',
+			'4' => '興味があること',
+			'5' => 'エンタテインメント',
+		);
+		$this->set('like_genre',$like_genre);
 
 		$personals = $this->CheckPersonal->find('all',
 				array(
@@ -931,12 +948,23 @@ public function admin_edit($id = null){
 			}
 
 			foreach ($likes as $key => $like) {
-				$check_likes[$like['CheckLike']['id']] = $like['CheckLike']['name'];
+        //echo pr($like);
+        //exit();
+        if ($like['CheckLike']['like_genre'] == '1') {
+          $check_likes['1'][$like['CheckLike']['id']] = $like['CheckLike']['name'];
+        } elseif($like['CheckLike']['like_genre'] == '2') {
+          $check_likes['2'][$like['CheckLike']['id']] = $like['CheckLike']['name'];
+        } elseif($like['CheckLike']['like_genre'] == '3') {
+          $check_likes['3'][$like['CheckLike']['id']] = $like['CheckLike']['name'];
+        } elseif($like['CheckLike']['like_genre'] == '4') {
+          $check_likes['4'][$like['CheckLike']['id']] = $like['CheckLike']['name'];
+        } elseif($like['CheckLike']['like_genre'] == '5') {
+          $check_likes['5'][$like['CheckLike']['id']] = $like['CheckLike']['name'];
+        }
+				//$check_likes[$like['CheckLike']['id']] = $like['CheckLike']['name'];
 			}
 
-
-
-			$this->set(compact("check_likes", "check_personals", "check_sex", "genre"));
+			$this->set(compact("check_likes", "check_personals", "check_sex", "genre", "like_genre"));
 			return;
 		}
 

@@ -4,6 +4,14 @@
   </head>
   <body>
     <h1>Edit Page</h1>
+
+    <?php
+
+    echo pr($this->request->data);
+    exit();
+
+     ?>
+
     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
         <tr>
           <td >職業名</td>

@@ -9,10 +9,25 @@
     <?php echo $this->Form->create('CheckLike', array('type' => 'file', 'url' => 'add')); ?>
     <table>
       <tr>
+        <th>趣味ジャンル</th>
+        <td>
+          <?php
+            echo $this->Form->input('like_genre', array(
+                'options' => $like_genre,
+                'label' => false,
+                'div' => false,
+                'empty' => '選択してください'
+            ));
+           ?>
+        </td>
+      </tr>
+      <tr>
         <th>性格名</th>
         <td>
           <?php echo $this->Form->input('name', array('label' => false, 'div' => false)); ?>
         </td>
+      </tr>
+
     </table>
     <?php echo $this->Form->end('Submit'); ?>
     <?php echo $this->Html->link('一覧へ', array('controller' => 'CheckLikes', 'action' => 'index')); ?>

@@ -29,7 +29,7 @@ App::uses('AppController', 'Controller');
  * @link http://book.cakephp.org/2.0/en/controllers/pages-controller.html
  */
 class DashboardsController extends AppController {
-	function admin_index() {
+	public function admin_index() {
 		$this->layout = "default";
   }
 }

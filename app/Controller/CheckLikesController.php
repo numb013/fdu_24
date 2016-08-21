@@ -29,7 +29,9 @@ App::uses('AppController', 'Controller');
  * @link http://book.cakephp.org/2.0/en/controllers/pages-controller.html
  */
 class CheckLikesController extends AppController {
-	function admin_index() {
+
+
+	public function admin_index() {
 		$this->layout = "default";
     $datas = $this->CheckLike->find('all',array(
         'conditions' => array(
@@ -39,11 +41,13 @@ class CheckLikesController extends AppController {
           'created DESC'
         ),
     ));
+		$this->_getCheckGenre();
     $this->set('datas',$datas);
-    }
+  }
 
-  function admin_add() {
+  public function admin_add() {
 		$this->layout = "default";
+		$this->_getCheckGenre();
     if ($this->request->is(array('post', 'put'))) {
       if ($this->CheckLike->save($this->request->data)) {
         return $this->redirect(
@@ -55,16 +59,26 @@ class CheckLikesController extends AppController {
     }
   }
 
-  function admin_edit($id = null) {
+  public function admin_edit($id = null) {
 		$this->layout = "default";
+		$this->_getCheckGenre();
     if ($this->request->is(array('post', 'put'))) {
+
+
+			//echo pr($this->request->data);
+			//exit();
         $status = array(
 					'CheckLike.name' => '"'.$this->request->data['CheckLike']['name'].'"',
+					'CheckLike.like_genre' => $this->request->data['CheckLike']['like_genre'],
         );
         $conditions = array(
 					'CheckLike.id' => $this->request->data['CheckLike']['id'],
         );
         $this->CheckLike->updateAll($status, $conditions);
+
+//echo pr($this->CheckLike->getDataSource()->getLog());
+//exit();
+
         return $this->redirect(
           array('controller' => 'CheckLikes', 'action' => 'admin_index')
         );
@@ -77,7 +91,8 @@ class CheckLikesController extends AppController {
     }
   }
 
-	function admin_detail($id = null) {
+	public function admin_detail($id = null) {
+		$this->_getCheckGenre();
 		if (isset($id)) {
 			$status = array(
 			'conditions' =>
@@ -88,8 +103,19 @@ class CheckLikesController extends AppController {
 			);
 			// 以下がデータベース関係
 			$datas = $this->CheckLike->find('first', $status);
-      $this->set('data',$datas);
-			}
+	    $this->set('data',$datas);
 		}
+	}
+
+	public function _getCheckGenre() {
+		$like_genre = array(
+			'1' => '性格（part１）',
+			'2' => '性格（part２）',
+			'3' => '性格（part３）',
+			'4' => '興味があること',
+			'5' => 'エンタテインメント',
+		);
+		$this->set('like_genre',$like_genre);
+	}
 
 }

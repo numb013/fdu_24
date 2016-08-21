@@ -67,7 +67,23 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 </head>
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 <link href='https://fonts.googleapis.com/css?family=Squada+One' rel='stylesheet' type='text/css'>
+<script type="text/javascript">
+jQuery(function($) {
+var nav    = $('#fixedBox'),
+		offset = nav.offset();
+	$(window).scroll(function () {
+		if($(window).scrollTop() > offset.top) {
+			nav.addClass('fixed');
 
+			if ($(document).height() < $(window).scrollTop() + $(window).height() + 150) {
+				$('.nav').css("display","none");
+			} else {
+				$('.nav').css("display","block");
+			}
+		}
+	});
+});
+</script>
 <body>
 	<?php echo $this->element('head'); ?>
 	<?php echo $this->Flash->render(); ?>

@@ -5,10 +5,10 @@
     <td>
       <?php
         echo $this->Form->input('genre', array(
-            'options' => $genre,
-            'label' => false,
-            'div' => false,
-            'empty' => '選択してください'
+          'options' => $genre,
+          'label' => false,
+          'div' => false,
+          'empty' => '選択してください'
         ));
        ?>
     </td>
@@ -24,10 +24,10 @@
     <td>
       <?php
         echo $this->Form->input('Profession.check_sex', array(
-            'type' => 'select',
-            'label' => false,
-            'multiple'=> 'checkbox',
-            'options' => $check_sex,
+          'type' => 'select',
+          'label' => false,
+          'multiple'=> 'checkbox',
+          'options' => $check_sex,
         ));
       ?>
     </td>
@@ -37,11 +37,11 @@
     <td>
       <?php
         echo $this->Form->input('Profession.check_personal', array(
-            'type' => 'select',
-            'label' => false,
-            'div' => false,
-            'multiple'=> 'checkbox',
-            'options' => $check_personals,
+          'type' => 'select',
+          'label' => false,
+          'div' => false,
+          'multiple'=> 'checkbox',
+          'options' => $check_personals,
         ));
       ?>
     </td>
@@ -51,11 +51,11 @@
     <td>
       <?php
         echo $this->Form->input('Profession.check_like', array(
-            'type' => 'select',
-            'label' => false,
-            'div' => false,
-            'multiple'=> 'checkbox',
-            'options' => $check_likes,
+          'type' => 'select',
+          'label' => false,
+          'div' => false,
+          'multiple'=> 'checkbox',
+          'options' => $check_likes,
         ));
       ?>
     </td>
