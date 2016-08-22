@@ -12,7 +12,6 @@
               echo $this->Form->input('Profession.personal_check', array(
                   'type' => 'select',
                   'label' => false,
-                  'div' => false,
                   'multiple'=> 'checkbox',
                   'options' => $check_personals,
               ));

@@ -6,33 +6,36 @@
   </div>
 </div>
 <?php
-//echo pr($check_likes);
-//exit();
+echo pr($check_likes);
+echo pr($param);
  ?>
 
 <div class="col-md-12 text-center animate-box" style="background-color:#000; padding:0px;">
   <div class="col-md-12 col-sm-12 col-sm-push-0 col-xs-push-0 more-search-bar">
     <div class="good-search">こだわり検索</div>
+    <?php echo $this->Form->create('Profession', array('type' => 'file', 'url' =>  'index')); ?>
     <div class="fh5co-services" style="padding:0px;">
+
       <?php foreach ($check_likes as $key => $data): ?>
-          <div class="col-md-4 text-center wrap_search">
-            <div class="search-title"><?php echo $like_genre[$key] ;?></div>
-            <div class="list_search">
-              <ul class="float list_none">
-                <li>
-                  <?php
-                    echo $this->Form->input('Profession.check_likes', array(
-                      'type' => 'select',
-                      'label' => false,
-                      'multiple'=> 'checkbox',
-                      'options' => $data,
-                    ));
-                  ?>
-                </li>
-              </ul>
-            </div>
+        <div class="col-md-4 text-center wrap_search">
+          <div class="search-title"><?php echo $like_genre[$key] ;?></div>
+          <div class="list_search">
+            <ul class="float list_none">
+              <li>
+                <?php
+                  echo $this->Form->input('Profession.likes_check', array(
+                    'type' => 'select',
+                    'label' => false,
+                    'multiple'=> 'checkbox',
+                    'options' => $data,
+                  ));
+                ?>
+              </li>
+            </ul>
           </div>
-        <?php endforeach; ?>
+        </div>
+      <?php endforeach; ?>
+
     </div>
   </div>
   <div class="col-md-12 text-center" style="padding:0px;">
@@ -40,6 +43,10 @@
       <a href="services.html">診断する</a>
     </div>
   </div>
+
+  <?php echo $this->Form->hidden('param', array('value' => $param)); ?>
+
+  <?php echo $this->Form->end('検索', array('class' => 'set-btn animated fadeInUp')); ?>
 </div>
 </div>
 

@@ -36,24 +36,36 @@ class ProfessionsController extends AppController {
 
 
 	public function index($para = null) {
-    $param = (!empty($_SERVER['QUERY_STRING'])) ? '?' . $_SERVER['QUERY_STRING'] : '';
 
-    //echo pr($param);
-    //exit();
-
-
-		//echo pr($this->request->data);
+		//echo pr($this->request->query);
 		//exit();
-
-		//$this->layout = "default";
+		if (!empty($this->request->query['param'])) {
+			$check_likes = array();
+		if (!empty($this->request->query['check_likes1'])) {
+			$check_likes = array_merge($check_likes, $this->request->query['check_likes1']);
+		}
+		if (!empty($this->request->query['check_likes2'])) {
+			$check_likes = array_merge($check_likes, $this->request->query['check_likes2']);
+		}
+		if (!empty($this->request->query['check_likes3'])) {
+			$check_likes = array_merge($check_likes, $this->request->query['check_likes3']);
+		}
+		if (!empty($this->request->query['check_likes4'])) {
+			$check_likes = array_merge($check_likes, $this->request->query['check_likes4']);
+		}
+		if (!empty($this->request->query['check_likes5'])) {
+			$check_likes = array_merge($check_likes, $this->request->query['check_likes5']);
+		}
+			$param = $this->request->query['param'];
+	} else {
+		$param = (!empty($_SERVER['QUERY_STRING'])) ? '?' . $_SERVER['QUERY_STRING'] : '';
+	}
     // レイアウト関係
 		$this->Prg->commonProcess();
 		$this->paginate['conditions'] = $this->Profession->parseCriteria($this->passedArgs);
-    //echo pr($this->paginate['conditions']);
-    //exit();
-
-
-		if (empty($this->request->data)) {
+		if (!empty($this->request->data)) {
+			$this->paginate['conditions']['Profession.delete_flag'] = '0';
+		} else {
 			// 初期表示時
 			$this->paginate = array(
 				'conditions' => array(
@@ -64,20 +76,9 @@ class ProfessionsController extends AppController {
 				),
 			);
 			$this->set('flag', '1');
-		} else {
-			$this->paginate['conditions']['Profession.delete_flag'] = '0';
-		}
-
-
-
-//echo pr($this->paginate['conditions']);
-//exit();
-
-
+			}
 		$datas = $this->paginate();
-    //echo pr($this->Profession->getDataSource()->getLog());
-    //exit();
-    //echo pr($sql);
+		//echo pr($this->Profession->getDataSource()->getLog());
 		//exit();
 		$this->_getCheckParameter();
     $this->set(compact('datas', 'para', 'param'));

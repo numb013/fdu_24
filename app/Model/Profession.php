@@ -110,6 +110,10 @@ class Profession extends AppModel {
       'type' => 'query',
       'method' => 'PersonalCheck',
     ),
+    'likes_check' => array(
+      'type' => 'query',
+      'method' => 'LikeCheck',
+    ),
 
   );
 
@@ -173,6 +177,22 @@ class Profession extends AppModel {
 			}
 			//$r[] = 'check_personal IS NULL ';
 			$conditions[]['AND'] = $r;
+		}
+		return $conditions;
+	}
+
+  public function LikeCheck($data = array()) {
+		$conditions = array();
+		// 案件カテゴリー
+		if (!empty($data['likes_check'])) {
+			$k = array();
+			foreach ($data['likes_check'] as $val) {
+				if (!empty($val)) {
+					$k[] = 'FIND_IN_SET(\'' . $val . '\', Profession.check_like)';
+				}
+			}
+			//$r[] = 'check_like IS NULL ';
+			$conditions[]['AND'] = $k;
 		}
 		return $conditions;
 	}
