@@ -23,19 +23,22 @@ echo pr($param);
             <ul class="float list_none">
               <li>
                 <?php
-                  echo $this->Form->input('Profession.likes_check', array(
+                $active = $this->Form->input('Profession.like_checks', array(
                     'type' => 'select',
-                    'label' => false,
-                    'multiple'=> 'checkbox',
+                    'multiple' => 'checkbox',
+                    'legend' => false,
                     'options' => $data,
-                  ));
+
+                    'hiddenField' => false,
+                    'label' => false,
+                    ));
+                echo preg_replace('/<div class="checkbox">(.+)<label[^>]+>(.+)<\/label><\/div>/', '<label class="checkbox">$1$2</label>', $active);
                 ?>
               </li>
             </ul>
           </div>
         </div>
       <?php endforeach; ?>
-
     </div>
   </div>
   <div class="col-md-12 text-center" style="padding:0px;">

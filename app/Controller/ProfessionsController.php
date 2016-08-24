@@ -37,34 +37,27 @@ class ProfessionsController extends AppController {
 
 	public function index($para = null) {
 
-		//echo pr($this->request->query);
+		//echo pr($this->request->data);
 		//exit();
-		if (!empty($this->request->query['param'])) {
-			$check_likes = array();
-		if (!empty($this->request->query['check_likes1'])) {
-			$check_likes = array_merge($check_likes, $this->request->query['check_likes1']);
-		}
-		if (!empty($this->request->query['check_likes2'])) {
-			$check_likes = array_merge($check_likes, $this->request->query['check_likes2']);
-		}
-		if (!empty($this->request->query['check_likes3'])) {
-			$check_likes = array_merge($check_likes, $this->request->query['check_likes3']);
-		}
-		if (!empty($this->request->query['check_likes4'])) {
-			$check_likes = array_merge($check_likes, $this->request->query['check_likes4']);
-		}
-		if (!empty($this->request->query['check_likes5'])) {
-			$check_likes = array_merge($check_likes, $this->request->query['check_likes5']);
-		}
-			$param = $this->request->query['param'];
-	} else {
 		$param = (!empty($_SERVER['QUERY_STRING'])) ? '?' . $_SERVER['QUERY_STRING'] : '';
-	}
+		$params = $this->Prg->exclude($this->params['url'], array());
     // レイアウト関係
 		$this->Prg->commonProcess();
 		$this->paginate['conditions'] = $this->Profession->parseCriteria($this->passedArgs);
+
+		echo pr($params);
+		//echo pr($params);
+		echo pr($this->paginate['conditions']);
+		//exit();
+
 		if (!empty($this->request->data)) {
 			$this->paginate['conditions']['Profession.delete_flag'] = '0';
+			$this->paginate = array(
+				'conditions' =>  $this->paginate['conditions'],
+				'order' => array(
+					'created' => 'DESC',
+				),
+			);
 		} else {
 			// 初期表示時
 			$this->paginate = array(
@@ -76,10 +69,12 @@ class ProfessionsController extends AppController {
 				),
 			);
 			$this->set('flag', '1');
-			}
+		}
+
 		$datas = $this->paginate();
-		//echo pr($this->Profession->getDataSource()->getLog());
+		echo pr($this->Profession->getDataSource()->getLog());
 		//exit();
+		//echo pr($datas);
 		$this->_getCheckParameter();
     $this->set(compact('datas', 'para', 'param'));
 	}

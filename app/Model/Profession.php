@@ -110,7 +110,7 @@ class Profession extends AppModel {
       'type' => 'query',
       'method' => 'PersonalCheck',
     ),
-    'likes_check' => array(
+    'like_checks' => array(
       'type' => 'query',
       'method' => 'LikeCheck',
     ),
@@ -184,9 +184,9 @@ class Profession extends AppModel {
   public function LikeCheck($data = array()) {
 		$conditions = array();
 		// 案件カテゴリー
-		if (!empty($data['likes_check'])) {
+		if (!empty($data['like_checks'])) {
 			$k = array();
-			foreach ($data['likes_check'] as $val) {
+			foreach ($data['like_checks'] as $val) {
 				if (!empty($val)) {
 					$k[] = 'FIND_IN_SET(\'' . $val . '\', Profession.check_like)';
 				}
