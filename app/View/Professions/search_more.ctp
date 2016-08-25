@@ -5,11 +5,6 @@
     </div>
   </div>
 </div>
-<?php
-echo pr($check_likes);
-echo pr($param);
- ?>
-
 <div class="col-md-12 text-center animate-box" style="background-color:#000; padding:0px;">
   <div class="col-md-12 col-sm-12 col-sm-push-0 col-xs-push-0 more-search-bar">
     <div class="good-search">こだわり検索</div>

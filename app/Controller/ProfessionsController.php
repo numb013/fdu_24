@@ -37,17 +37,30 @@ class ProfessionsController extends AppController {
 
 	public function index($para = null) {
 
-		//echo pr($this->request->data);
+		//echo pr($this->request->query);
 		//exit();
-		$param = (!empty($_SERVER['QUERY_STRING'])) ? '?' . $_SERVER['QUERY_STRING'] : '';
-		$params = $this->Prg->exclude($this->params['url'], array());
+		$param = (!empty($_SERVER['QUERY_STRING'])) ? '?'.$_SERVER['QUERY_STRING'] : '';
+
+		//echo pr($param);
+		if (!empty($this->request->query['param'])) {
+			$replaceText = str_replace("?", "", $this->request->query['param']);
+			$array1 = array();
+			parse_str($replaceText,  $array1);
+			//echo pr($array1);
+			if (!empty($array1['personal_check'])) {
+				foreach ($array1['personal_check'] as $key => $value) {
+					$this->request->query['personal_check'][$key] = $value;
+				}
+			}
+		}
+
     // レイアウト関係
 		$this->Prg->commonProcess();
 		$this->paginate['conditions'] = $this->Profession->parseCriteria($this->passedArgs);
 
-		echo pr($params);
 		//echo pr($params);
-		echo pr($this->paginate['conditions']);
+		//echo pr($params);
+		//echo pr($this->paginate['conditions']);
 		//exit();
 
 		if (!empty($this->request->data)) {
@@ -72,7 +85,7 @@ class ProfessionsController extends AppController {
 		}
 
 		$datas = $this->paginate();
-		echo pr($this->Profession->getDataSource()->getLog());
+		//echo pr($this->Profession->getDataSource()->getLog());
 		//exit();
 		//echo pr($datas);
 		$this->_getCheckParameter();
