@@ -11,7 +11,7 @@
     <?php echo $this->Form->create('Profession', array('type' => 'file', 'url' =>  'index')); ?>
     <div class="fh5co-services" style="padding:0px;">
 
-      <?php foreach ($check_likes as $key => $data): ?>
+      <?php foreach ($like_checks as $key => $data): ?>
         <div class="col-md-4 text-center wrap_search">
           <div class="search-title"><?php echo $like_genre[$key] ;?></div>
           <div class="list_search">

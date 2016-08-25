@@ -956,24 +956,30 @@ public function admin_edit($id = null){
 				$check_personals[$personal['CheckPersonal']['id']] = $personal['CheckPersonal']['name'];
 			}
 
+
+			foreach ($likes as $key => $like) {
+					$check_likes[$like['CheckLike']['id']] = $like['CheckLike']['name'];
+				}
+
+
 			foreach ($likes as $key => $like) {
         //echo pr($like);
         //exit();
         if ($like['CheckLike']['like_genre'] == '1') {
-          $check_likes['1'][$like['CheckLike']['id']] = $like['CheckLike']['name'];
+          $like_checks['1'][$like['CheckLike']['id']] = $like['CheckLike']['name'];
         } elseif($like['CheckLike']['like_genre'] == '2') {
-          $check_likes['2'][$like['CheckLike']['id']] = $like['CheckLike']['name'];
+          $like_checks['2'][$like['CheckLike']['id']] = $like['CheckLike']['name'];
         } elseif($like['CheckLike']['like_genre'] == '3') {
-          $check_likes['3'][$like['CheckLike']['id']] = $like['CheckLike']['name'];
+          $like_checks['3'][$like['CheckLike']['id']] = $like['CheckLike']['name'];
         } elseif($like['CheckLike']['like_genre'] == '4') {
-          $check_likes['4'][$like['CheckLike']['id']] = $like['CheckLike']['name'];
+          $like_checks['4'][$like['CheckLike']['id']] = $like['CheckLike']['name'];
         } elseif($like['CheckLike']['like_genre'] == '5') {
-          $check_likes['5'][$like['CheckLike']['id']] = $like['CheckLike']['name'];
+          $like_checks['5'][$like['CheckLike']['id']] = $like['CheckLike']['name'];
         }
 				//$check_likes[$like['CheckLike']['id']] = $like['CheckLike']['name'];
 			}
 
-			$this->set(compact("check_likes", "check_personals", "check_sex", "genre", "like_genre"));
+			$this->set(compact("check_likes", "check_personals", "check_sex", "genre", "like_genre", "like_checks"));
 			return;
 		}
 
