@@ -352,7 +352,7 @@ h6 {
 
 .more-search {
   background: #fff;
-  padding: 5px 0 5px 0;
+  padding: 3px 0 3px 0;
   width: 65%;
   margin: 0 auto;
   border-radius: 2px;
@@ -1640,7 +1640,7 @@ h6 {
 }
 
 #fh5co-footer {
-  padding: 7em 0;
+  padding: 1em 0;
   float: left;
   width: 100%;
   position: relative;
@@ -1648,7 +1648,7 @@ h6 {
 }
 @media screen and (max-width: 768px) {
   #fh5co-footer {
-    padding: 3em 0;
+    padding: 1em 0;
   }
 }
 #fh5co-footer h2, #fh5co-footer h3, #fh5co-footer h4 {

@@ -100,6 +100,55 @@ class ProfessionsController extends AppController {
 
 }
 
+public function detail($id = null) {
+	// レイアウト関係
+	$this->layout = "default";
+	if (isset($id)) {
+		$status = array(
+		'conditions' =>
+			array(
+				'Profession.id' => $id,
+				'Profession.delete_flag' => 0
+			)
+		);
+		// 以下がデータベース関係
+		$datas = $this->Profession->find('first', $status);
+		if ($datas['Profession']['image_flag']) {
+			$id = $datas['Profession']['id'];
+			$status = array(
+				'conditions' =>
+				array(
+					'partner_id' => $id,
+					'partner_name' => 'Profession',
+					'delete_flag' => '0'
+				)
+			);
+			$datas['Image'] = $this->Image->find('all', $status);
+		}
+
+		if ($datas['Profession']['movie_flag']) {
+			$id = $datas['Profession']['id'];
+			$status = array(
+				'conditions' =>
+				array(
+					'partner_id' => $id,
+					'partner_name' => 'Profession',
+					'delete_flag' => '0'
+				)
+			);
+			$datas['Movie'] = $this->Movie->find('all', $status);
+		}
+
+		$datas['Profession']['check_sex'] = explode(",", $datas['Profession']['check_sex']);
+		$datas['Profession']['check_personal'] = explode(",", $datas['Profession']['check_personal']);
+		$datas['Profession']['check_like'] = explode(",", $datas['Profession']['check_like']);
+		$this->_getCheckParameter();
+
+		$this->set('datas',$datas);
+	}
+}
+
+
 
 
   public function admin_index() {

@@ -49,7 +49,7 @@
   <div class="col-md-offset-0 text-center fh5co-heading animate-box job-box" style="clear: both;">
     <?php foreach ($datas as $data): ?>
       <div class="job-memu">
-        <a href="products.html">
+        <a href="/fdu24/professions/detail/<?php echo $data['Profession']['id']; ?>">
           <div class="photo-cut">
             <?php echo $this->Html->image($data['Image'][0]['url'] ,array('width' => '100%' )); ?>
           </div>
@@ -57,6 +57,7 @@
           <p>メジャー度:<?php echo $data['Profession']['core_status'] ;?></p>
         </a>
       </div>
+
     <?php endforeach; ?>
   </div>
   <div class="col-md-offset-0 text-center fh5co-heading animate-box job-box" style="clear: both; background:#000;">
