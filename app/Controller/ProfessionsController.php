@@ -981,11 +981,12 @@ public function admin_edit($id = null){
 		);
 
     $like_genre = array(
-			'1' => '性格（part１）',
-			'2' => '性格（part２）',
-			'3' => '性格（part３）',
-			'4' => '興味があること',
-			'5' => 'エンタテインメント',
+			'1' => '性格（part-1）',
+			'2' => '性格（part-2）',
+			'3' => '性格（part-3）',
+			'4' => '性格（part-4）',
+			'5' => '性格（part-5）',
+			'6' => '性格（part-6）',
 		);
 		$this->set('like_genre',$like_genre);
 
@@ -1027,6 +1028,8 @@ public function admin_edit($id = null){
           $like_checks['4'][$like['CheckLike']['id']] = $like['CheckLike']['name'];
         } elseif($like['CheckLike']['like_genre'] == '5') {
           $like_checks['5'][$like['CheckLike']['id']] = $like['CheckLike']['name'];
+        } elseif($like['CheckLike']['like_genre'] == '6') {
+          $like_checks['6'][$like['CheckLike']['id']] = $like['CheckLike']['name'];
         }
 				//$check_likes[$like['CheckLike']['id']] = $like['CheckLike']['name'];
 			}

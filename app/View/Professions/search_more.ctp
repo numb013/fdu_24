@@ -23,7 +23,6 @@
                     'multiple' => 'checkbox',
                     'legend' => false,
                     'options' => $data,
-
                     'hiddenField' => false,
                     'label' => false,
                     ));
