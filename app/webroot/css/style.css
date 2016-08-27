@@ -534,6 +534,16 @@ h6 {
 
 }
 
+.btn_submit{
+  padding: 15px 120px;
+  background: #369840;
+  text-transform:uppercase;
+  color:#fff;
+  cursor:pointer;
+  border-style: none;
+  border-radius: 5px;
+}
+
 .set-btn a{
   padding: 15px 120px;
   color: #fff;
@@ -544,7 +554,6 @@ h6 {
   background: #000;
   height: 28px;
 }
-
 
 
 
@@ -635,6 +644,16 @@ h6 {
     font-size: 20px;
     font-weight: bold;
   }
+  .btn_submit{
+    padding: 25px 280px;
+    background: #369840;
+    text-transform:uppercase;
+    font-weight:bold;
+    color:#fff;
+    cursor:pointer;
+    border-style: none;
+    border-radius: 5px;
+  }
   .set-btn a{
     padding: 25px 280px;
     color: #fff;
@@ -714,6 +733,16 @@ h6 {
     font-weight: bold;
   }
 
+  .btn_submit{
+    padding: 25px 280px;
+    background: #369840;
+    text-transform:uppercase;
+    color:#fff;
+    cursor:pointer;
+    border-style: none;
+    border-radius: 5px;
+  }
+
   .set-btn a{
     padding: 25px 280px;
     color: #fff;
@@ -785,6 +814,7 @@ h6 {
     width: 100%;
     z-index: 10000;
 }
+
 
 
 @media screen and (max-width: 768px) {
@@ -1177,9 +1207,7 @@ h6 {
   margin-bottom: 0;
 }
 
-
-
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 768px) {
   .col-xs-push-0 {
     margin-top: 0px;
   }
@@ -1188,7 +1216,6 @@ h6 {
 .col-top-mar {
   margin-top: 55px;
 }
-
 .fh5co-heading h2 {
   margin-bottom: 1px;
 }
@@ -1751,6 +1778,7 @@ h6 {
   width: 275px;
   padding: 30px;
 }
+
 @media screen and (max-width: 768px) {
   #fh5co-offcanvas {
     display: block;

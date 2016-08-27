@@ -44,7 +44,8 @@ class ProfessionsController extends AppController {
 		//echo pr($param);
 		if (!empty($this->request->query['param'])) {
 			$replaceText = str_replace("?", "", $this->request->query['param']);
-			$array1 = array();
+
+	$array1 = array();
 			parse_str($replaceText,  $array1);
 			//echo pr($array1);
 			if (!empty($array1['personal_check'])) {
@@ -70,6 +71,7 @@ class ProfessionsController extends AppController {
 				'order' => array(
 					'created' => 'DESC',
 				),
+			'limit' => 8,
 			);
 		} else {
 			// 初期表示時
@@ -80,6 +82,7 @@ class ProfessionsController extends AppController {
 				'order' => array(
 					'created' => 'DESC',
 				),
+				'limit' => 8,
 			);
 			$this->set('flag', '1');
 		}
@@ -88,10 +91,11 @@ class ProfessionsController extends AppController {
 		//echo pr($this->Profession->getDataSource()->getLog());
 		//exit();
 		//echo pr($datas);
+		$count = count($datas);
 		$this->_getCheckParameter();
-    $this->set(compact('datas', 'para', 'param'));
-	}
+    $this->set(compact('datas', 'para', 'param', 'count'));
 
+	}
 
   public function search_more($para = null) {
     $param = (!empty($_SERVER['QUERY_STRING'])) ? '?' . $_SERVER['QUERY_STRING'] : '';
@@ -99,6 +103,8 @@ class ProfessionsController extends AppController {
     $this->set(compact('datas', 'para', 'param'));
 
 }
+
+
 
 public function detail($id = null) {
 	// レイアウト関係
@@ -147,7 +153,6 @@ public function detail($id = null) {
 		$this->set('datas',$datas);
 	}
 }
-
 
 
 
@@ -1001,15 +1006,13 @@ public function admin_edit($id = null){
 				)
 		);
 
-		foreach ($personals as $key => $personal) {
-				$check_personals[$personal['CheckPersonal']['id']] = $personal['CheckPersonal']['name'];
+		foreach ($likes as $key => $like) {
+				$check_likes[$like['CheckLike']['id']] = $like['CheckLike']['name'];
 			}
 
-
-			foreach ($likes as $key => $like) {
-					$check_likes[$like['CheckLike']['id']] = $like['CheckLike']['name'];
-				}
-
+			foreach ($personals as $key => $personal) {
+				$check_personals[$personal['CheckPersonal']['id']] = $personal['CheckPersonal']['name'];
+			}
 
 			foreach ($likes as $key => $like) {
         //echo pr($like);

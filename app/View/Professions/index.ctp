@@ -19,10 +19,9 @@
           </div>
         </div>
         <div class="set-btn animated fadeInUp">
-          <a href="services.html">診断する</a>
+          <?php echo $this->Form->input('診断する', array('type' => 'submit', 'label' => false, 'div' => false, 'class' => 'btn_submit')); ?>
+          <?php echo $this->Form->end(); ?>
         </div>
-        <?php //echo $this->Form->hidden('para', array('value' => $para)); ?>
-        <?php echo $this->Form->end('検索', array('class' => 'set-btn animated fadeInUp')); ?>
       </div>
     </div>
   </div>
@@ -42,8 +41,19 @@
       </div>
     </div>
     <div class="col-md-offset-0 text-center fh5co-heading animate-box job-box" style="clear: both;">
-      <div class="job-count"><p>向いてる職業が2件ヒット</p></div>
-      <div class="job-page"><p>1.2.3.4.5.6</p></div>
+      <div class="job-count">
+        <?php echo $this->Paginator->counter(array(
+          'format' => '<p>全{:count}件中/{:start}-{:end}件ヒット</p>'
+        ));?>
+      </div>
+      <div class="job-page">
+        <?php
+          echo $this->Paginator->first('<< ');
+          echo $this->Paginator->numbers(
+            array('separator' => '/','modulus'=>2));
+          echo $this->Paginator->last(' >>');
+        ?>
+      </div>
     </div>
   </div>
   <div class="col-md-offset-0 text-center fh5co-heading animate-box job-box" style="clear: both;">
@@ -57,12 +67,22 @@
           <p>メジャー度:<?php echo $data['Profession']['core_status'] ;?></p>
         </a>
       </div>
-
     <?php endforeach; ?>
   </div>
   <div class="col-md-offset-0 text-center fh5co-heading animate-box job-box" style="clear: both; background:#000;">
-    <div class="job-count"><p>向いてる職業が2件ヒット</p></div>
-    <div class="job-page"><p>1.2.3.4.5.6</p></div>
+    <div class="job-count">
+      <?php echo $this->Paginator->counter(array(
+        'format' => '<p>全{:count}件中/{:start}-{:end}件ヒット</p>'
+      ));?>
+    </div>
+    <div class="job-page">
+      <?php
+        echo $this->Paginator->first('<< ');
+        echo $this->Paginator->numbers(
+          array('separator' => '/','modulus'=>2));
+        echo $this->Paginator->last(' >>');
+      ?>
+    </div>
   </div>
 </div>
 
