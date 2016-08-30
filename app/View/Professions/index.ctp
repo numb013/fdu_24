@@ -64,7 +64,14 @@
             <?php echo $this->Html->image($data['Image'][0]['url'] ,array('width' => '100%' )); ?>
           </div>
           <p><?php echo $data['Profession']['profession_name'] ;?></p>
-          <p>メジャー度:<?php echo $data['Profession']['core_status'] ;?></p>
+          <p>
+            メジャー度:
+            <?php
+            for ($i = 1; $i < $data['Profession']['core_status']; $i++) {
+              echo '★';
+            };
+            ?>
+          </p>
         </a>
       </div>
     <?php endforeach; ?>

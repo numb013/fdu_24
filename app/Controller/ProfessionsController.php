@@ -154,10 +154,60 @@ public function detail($id = null) {
 		$datas['Profession']['check_personal'] = explode(",", $datas['Profession']['check_personal']);
 		$datas['Profession']['check_like'] = explode(",", $datas['Profession']['check_like']);
 		$this->_getCheckParameter();
-
-		$this->set('datas',$datas);
+		$know_flag = 1;
+		$this->set(compact('datas', 'know_flag'));
 	}
 }
+
+/**
+ * star method
+ * お気に入りを追加/削除する
+ *
+ * @throws NotFoundException
+ * @return void
+ */
+	public function know_count() {
+		echo 'ssss';
+		exit();
+		if (!$this->request->is('ajax')) {
+			throw new NotFoundException('お探しのページは見つかりませんでした。');
+		}
+
+		Configure::write('debug', 0);
+		$this->autoRender = false;
+
+		$data = array();
+		$data['meta_key'] = $this->request->data['Profession']['key'];
+		$data['id'] = preg_replace('/^:f/', '', $this->request->data['Profession']['value']);
+		$data['class'] = $this->request->data['Profession']['class'];
+
+
+
+			$knowCount = $this->AccountsCompany->find('first', array(
+				'fields' => array(
+					'Profession.know_count',
+				),
+				'conditions' => array(
+					'Profession.id' => $data['id'],
+				),
+			));
+
+			if ($this->request->data['Profession']['class'] == 'star plus') {
+			        $action = 'plus';
+					$knowCount = $knowCount + 1;
+			} else {
+		        	$action = 'minus';
+					$knowCount = $knowCount - 1;
+			}
+
+
+			if ($this->Favorite->save($data)) {
+				$status = true;
+			}
+		$data['action'] = $action;
+		$data['status'] = $status;
+		echo json_encode($data);
+	}
 
 
 

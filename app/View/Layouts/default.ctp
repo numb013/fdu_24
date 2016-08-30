@@ -37,28 +37,26 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
 
 		echo $this->Html->css('animate');
-		echo $this->Html->css('icomoon');
-
+		//echo $this->Html->css('icomoon');
 		echo $this->Html->css('bootstrap');
 		echo $this->Html->css('flexslider');
 		echo $this->Html->css('style');
 
 
-		echo $this->Html->script('modernizr-2.6.2.min');
 
 
 		echo $this->Html->script('jquery.min.js');
+		echo $this->Html->script('main');
 		echo $this->Html->script('jquery.easing.1.3');
-
-
-		echo $this->Html->script('bootstrap.min');
 		echo $this->Html->script('jquery.waypoints.min');
 		echo $this->Html->script('jquery.flexslider-min');
+		echo $this->Html->script('bootstrap.min');
+		echo $this->Html->script('modernizr-2.6.2.min');
 
 
 
 
-		echo $this->Html->script('main');
+
 
 
 
@@ -85,6 +83,7 @@ var nav    = $('#fixedBox'),
 	});
 });
 </script>
+
 <body>
 	<?php echo $this->element('head'); ?>
 	<?php echo $this->Flash->render(); ?>
