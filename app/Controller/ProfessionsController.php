@@ -65,6 +65,8 @@ class ProfessionsController extends AppController {
 		//exit();
 
 		if (!empty($this->request->data)) {
+			$back_flag = 1;
+			$this->set('back_flag', $back_flag);
 			$this->paginate['conditions']['Profession.delete_flag'] = '0';
 			$this->paginate = array(
 				'conditions' =>  $this->paginate['conditions'],
@@ -84,7 +86,9 @@ class ProfessionsController extends AppController {
 				),
 				'limit' => 8,
 			);
-			$this->set('flag', '1');
+			$back_flag = 1;
+			$flag = 1;
+			$this->set(compact('flag', 'back_flag'));
 		}
 
 		$datas = $this->paginate();
@@ -100,7 +104,8 @@ class ProfessionsController extends AppController {
   public function search_more($para = null) {
     $param = (!empty($_SERVER['QUERY_STRING'])) ? '?' . $_SERVER['QUERY_STRING'] : '';
 		$this->_getCheckParameter();
-    $this->set(compact('datas', 'para', 'param'));
+		$back_flag = 1;
+    $this->set(compact('datas', 'para', 'param', 'back_flag'));
 
 }
 

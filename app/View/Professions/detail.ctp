@@ -22,15 +22,15 @@
   <div class="fh5co-services" style="padding:10px 0;">
     <div class="container">
         <div class="col-md-4 col-sm-4 text-center item-block animate-box">
-          <h6>STEP1</h6>
+          <h6>STEP 1</h6>
           <p><?php echo $datas['Profession']['job_step1']; ?></p>
         </div>
         <div class="col-md-4 col-sm-4 text-center item-block animate-box">
-          <h6>STEP2</h6>
+          <h6>STEP 2</h6>
           <p><?php echo $datas['Profession']['job_step2']; ?></p>
         </div>
         <div class="col-md-4 col-sm-4 text-center item-block animate-box">
-          <h6>STEP3</h6>
+          <h6>STEP 3</h6>
           <p><?php echo $datas['Profession']['job_step3']; ?></p>
         </div>
     </div>

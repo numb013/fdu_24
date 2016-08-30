@@ -65,8 +65,9 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
 	?>
 </head>
-<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-<link href='https://fonts.googleapis.com/css?family=Squada+One' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/css?family=Denk+One" rel="stylesheet">
+
+
 <script type="text/javascript">
 jQuery(function($) {
 var nav    = $('#fixedBox'),
