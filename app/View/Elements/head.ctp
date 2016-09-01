@@ -13,13 +13,15 @@
       </div>
     <?php elseif(!empty($know_flag)): ?>
 
+      <div class="aaaa">
 
-        <a href="javascript:void(0);" class="know_count" id=":f<?php echo $datas['Profession']['id'];?>">
+        <a href="javascript:void(0);"  class='know_count' id=":f<?php echo $datas['Profession']['id'];?>">
           この職業知ってた : <?php echo $datas['Profession']['know_count']; ?>
         </a>
+      </div>
+
     <?php endif; ?>
   </div>
-  <input type="button" value="Yahoo!Japanへリンク" onClick="kakunin()">
 </header>
 
 
@@ -27,6 +29,45 @@
 
 <script type="text/javascript">
 
+  $('.know_count').click(function() {
+    var aaa = 'wwwww';
+    alert(aaa);
+    var href = $('.aaaa').find('a').attr('class');
+    alert(href);
+
+    console.log(JSON.stringify(href));
+
+    var data = { Profession: { key: 'Profession', id: $('.aaaa').find('a').attr('id'), class: $('.aaaa').find('a').attr('class')} };
+
+console.log(JSON.stringify(data));
+$.ajax({
+				type: 'POST',
+				url: '/Profession/know_count',
+				data: data,
+			
+	dataType: 'json',
+				cache: false,
+				success: function(data) {
+					var parentTag = $this.parent("p");
+					if (data.status) {
+
+	if (data.action === 'plus') {
+							.count.p(kbow_count - 1);
+							$('.star').addClass('star minus');
+						} else {
+							.count.p(kbow_count + 1);
+							$('.star').addClass('star plus');
+						}
+						parentTag.toggleClass("gray-b ");
+					}
+				},
+
+	error: function(XMLHttpRequest, textStatus, errorThrown) {
+				}
+			});
+			return false;
+		});
+  });
 
 
 </script>
