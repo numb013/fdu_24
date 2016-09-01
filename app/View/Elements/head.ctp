@@ -13,10 +13,9 @@
       </div>
     <?php elseif(!empty($know_flag)): ?>
 
-      <div class="aaaa">
-
-        <a href="javascript:void(0);"  class='know_count' id=":f<?php echo $datas['Profession']['id'];?>">
-          この職業知ってた : <?php echo $datas['Profession']['know_count']; ?>
+      <div class="job_know">
+        <a href="javascript:void(0);" class='know_count plus' id="<?php echo $datas['Profession']['id'];?>">
+          この職業知ってた : <span class="count"><?php echo $datas['Profession']['know_count']; ?></span>
         </a>
       </div>
 
@@ -30,44 +29,41 @@
 <script type="text/javascript">
 
   $('.know_count').click(function() {
-    var aaa = 'wwwww';
-    alert(aaa);
-    var href = $('.aaaa').find('a').attr('class');
-    alert(href);
+    var data = { Profession: { id: $('.job_know').find('a').attr('id'), class: $('.job_know').find('a').attr('class')} };
+    console.log(JSON.stringify(data));
+    $.ajax({
+      type: 'POST',
+      url: '/fdu24/professions/know_count',
+      data: data,
+      dataType: 'json',
+      cache: false,
+      success: function(data) {
+        if (data.status) {
+          if (data.action === 'plus') {
+            var know = parseInt($('span.count').text());
+            var knowCount = know + 1;
+            $('.count').text(knowCount);
+            $('div').find('.know_count').attr('class','know_count minus');
+            $('.know_count').css('color','#fff');
+            $('.know_count').css('background-color','#369840');
+          } else {
+            var know = parseInt($('span.count').text());
+            var knowCount = know - 1;
+            $('.count').text(knowCount);
+            $('div').find('.know_count').attr('class','know_count plus');
+            $('.know_count').css('color','#369840');
+            $('.know_count').css('background-color','#fff');
 
-    console.log(JSON.stringify(href));
+          }
+        }
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+      }
+    });
+    return false;
 
-    var data = { Profession: { key: 'Profession', id: $('.aaaa').find('a').attr('id'), class: $('.aaaa').find('a').attr('class')} };
-
-console.log(JSON.stringify(data));
-$.ajax({
-				type: 'POST',
-				url: '/Profession/know_count',
-				data: data,
-			
-	dataType: 'json',
-				cache: false,
-				success: function(data) {
-					var parentTag = $this.parent("p");
-					if (data.status) {
-
-	if (data.action === 'plus') {
-							.count.p(kbow_count - 1);
-							$('.star').addClass('star minus');
-						} else {
-							.count.p(kbow_count + 1);
-							$('.star').addClass('star plus');
-						}
-						parentTag.toggleClass("gray-b ");
-					}
-				},
-
-	error: function(XMLHttpRequest, textStatus, errorThrown) {
-				}
-			});
-			return false;
 		});
-  });
+
 
 
 </script>
