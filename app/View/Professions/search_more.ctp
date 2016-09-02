@@ -35,7 +35,7 @@
       <?php endforeach; ?>
     </div>
   </div>
-  <div class="col-md-12 text-center" style="padding:0px;">
+  <div class="col-md-12 text-center" style="padding:0px; position: static;">
     <div class="set-btn">
       <?php echo $this->Form->input('診断する', array('type' => 'submit', 'label' => false, 'div' => false, 'class' => 'btn_submit')); ?>
       <?php echo $this->Form->hidden('param', array('value' => $param)); ?>
