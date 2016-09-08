@@ -6,10 +6,10 @@
       <div class="col-md-12 text-center js-fullheight" style="padding:0px;">
         <div class="slider-checkbox-inner">
           <div class="checkbox-title">当てはまる項目を3つ以上チェックしてください</div>
-          <?php echo $this->Form->create('Profession', array('type' => 'file', 'url' =>  'index')); ?>
+          <?php echo $this->Form->create('Jobs', array('type' => 'file', 'url' =>  'index')); ?>
           <div class="check-group clearfix ">
             <?php
-              echo $this->Form->input('Profession.personal_check', array(
+              echo $this->Form->input('Jobs.personal_check', array(
                   'type' => 'select',
                   'label' => false,
                   'multiple'=> 'checkbox',
@@ -35,7 +35,7 @@
     <div class="serch-frame">
       <div class="sort-search"><?php echo $this->Paginator->sort('core_status', '知名度順');?></div>
       <div class="more-search">
-        <?php echo $this->Form->create('Profession', array('url' => array( 'controller' => 'Professions', 'action' => 'search_more' . $param),'type' => 'post')); ?>
+        <?php echo $this->Form->create('Jobs', array('url' => array( 'controller' => 'Jobs', 'action' => 'search_more' . $param),'type' => 'post')); ?>
     		<?php echo $this->Form->submit('さらに絞り込む▼', array('div' => false, 'class' => 'more-search')); ?>
     		<?php echo $this->Form->end(); ?>
       </div>

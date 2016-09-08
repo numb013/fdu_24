@@ -120,48 +120,14 @@ class CheckPersonalsController extends AppController {
 
 
 	public function _getCheckParameter() {
-		$check_sex = array(
-			'1' => 'MAN',
-			'5' => 'GIRL'
-		);
+		$check_personals = $this->Master->getCheckPersonals();
+		$check_likes = $this->Master->getCheckLikes();
+		$like_checks = $this->Master->getlikeGenre();
+		$check_sex = $this->Master->getCheckSex();
+		$genre = $this->Master->getGenre();
+		$like_genre = $this->Master->getlikeGenre();
 
-		$genre = array(
-			'1' => 'デザイン・アート系職業',
-			'2' => 'ものつくり・製造系職業',
-			'3' => 'IT系職業',
-			'4' => 'マスコミ・芸能系職業',
-			'5' => '食べ物・フード系職業',
-			'6' => '教育系職業',
-			'7' => '建築・現場系職業',
-			'8' => 'スポーツ系職業',
-		);
-
-
-		$personals = $this->CheckPersonal->find('all',
-				array(
-					'fields' => array('*'),
-					'conditions' => array('delete_flag' => 0),
-					'order' => array('id' => 'asc'),
-				)
-		);
-
-
-		$likes = $this->CheckLike->find('all',
-				array(
-					'fields' => array('*'),
-					'conditions' => array('delete_flag' => 0),
-					'order' => array('id' => 'asc'),
-				)
-		);
-
-		foreach ($personals as $key => $personal) {
-			$check_personals[$personal['CheckPersonal']['id']] = $personal['CheckPersonal']['name'];
-		}
-
-		foreach ($likes as $key => $like) {
-			$check_likes[$like['CheckLike']['id']] = $like['CheckLike']['name'];
-		}
-		$this->set(compact("check_likes", "check_personals", "check_sex", "genre"));
-			return;
-		}
+		$this->set(compact("check_likes", "check_personals", "check_sex", "genre", "like_genre", "like_checks"));
+		return;
+	}
 }

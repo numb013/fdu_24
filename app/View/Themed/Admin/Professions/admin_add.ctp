@@ -126,7 +126,13 @@
         <td>
           <?php
             echo $this->Form->input('core_status', array(
-                'options' => array(1, 2, 3, 4, 5),
+                'options' => array(
+                  '1' => '1',
+                  '2' => '2',
+                  '3' => '3',
+                  '4' => '4',
+                  '5' => 'a'
+                ),
                 'label' => false,
                 'div' => false,
                 'empty' => '選択してください'

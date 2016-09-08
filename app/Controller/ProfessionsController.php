@@ -30,7 +30,7 @@ App::uses('AppController', 'Controller');
  */
 class ProfessionsController extends AppController {
 	public $uses = array('Profession', 'Image', 'Movie' ,'CheckLike', 'CheckPersonal');
-	public $components = array('Search.Prg', 'Session');
+	public $components = array('Search.Prg', 'Session', 'Master');
 	public $presetVars = true;
 	public $paginate = array();
 
@@ -38,6 +38,7 @@ class ProfessionsController extends AppController {
 	public function index($para = null) {
 
 		//echo pr($this->request->query);
+		//echo pr($this->request->data);
 		//exit();
 		$param = (!empty($_SERVER['QUERY_STRING'])) ? '?'.$_SERVER['QUERY_STRING'] : '';
 
@@ -45,7 +46,7 @@ class ProfessionsController extends AppController {
 		if (!empty($this->request->query['param'])) {
 			$replaceText = str_replace("?", "", $this->request->query['param']);
 
-	$array1 = array();
+			$array1 = array();
 			parse_str($replaceText,  $array1);
 			//echo pr($array1);
 			if (!empty($array1['personal_check'])) {
@@ -59,22 +60,40 @@ class ProfessionsController extends AppController {
 		$this->Prg->commonProcess();
 		$this->paginate['conditions'] = $this->Profession->parseCriteria($this->passedArgs);
 
-		//echo pr($params);
-		//echo pr($params);
-		//echo pr($this->paginate['conditions']);
-		//exit();
+echo pr($this->paginate['conditions']);
 
 		if (!empty($this->request->data)) {
 			$back_flag = 1;
 			$this->set('back_flag', $back_flag);
-			$this->paginate['conditions']['Profession.delete_flag'] = '0';
+			$this->paginate['conditions']['profession.delete_flag'] = '0';
 			$this->paginate = array(
-				'conditions' =>  $this->paginate['conditions'],
+				'conditions' => $this->paginate['conditions'],
 				'order' => array(
 					'created' => 'DESC',
 				),
-			'limit' => 8,
+				'limit' => 8,
 			);
+
+			//$personalCheck = '';
+			//foreach ($this->request->data['Profession']['personal_check'] as $key => $value) {
+			//	if ($key == 0) {
+			//		$Check[$key] = ' select * from professions T1 where T1.check_personal like "%,' . $value . ',%" or T1.check_personal like "'. $value . ',%" or T1.check_personal like "%,'. $value .'" AND T1.delete_flag = 0';
+			//	} else {
+			//		$Check[$key] = ' UNION ALL select * from professions T1 where T1.check_personal like "%,' . $value . ',%" or T1.check_personal like "'. $value . ',%" or T1.check_personal like "%,'. $value .'" AND T1.delete_flag = 0';
+			//	}
+			//	$personalCheck = $personalCheck . $Check[$key];
+			//};
+//
+			//$sql = "select Profession.*, Image.url from
+			//(select v_hit.*, COUNT('X') as cnt
+			//from
+			// (".$personalCheck.") as v_hit GROUP BY v_hit.id ) As Profession
+			//	LEFT JOIN images As Image
+			//	ON (Profession.id = Image.partner_id)
+			// where Profession.cnt >= 3 AND Image.delete_flag = 0 GROUP BY Profession.id";
+//
+			//$this->paginate = $sql; //$sqlの中身は生SQL
+
 		} else {
 			// 初期表示時
 			$this->paginate = array(
@@ -91,14 +110,20 @@ class ProfessionsController extends AppController {
 			$this->set(compact('flag', 'back_flag'));
 		}
 
-		$datas = $this->paginate();
-		//echo pr($this->Profession->getDataSource()->getLog());
-		//exit();
-		//echo pr($datas);
+		$datas = $this->paginate('Profession');
 		$count = count($datas);
+
+
+		//$datas = $this->paginate();
+		//$count = count($datas);
+
+		echo pr($this->Profession->getDataSource()->getLog());
+		exit();
+		//echo pr($datas);
+		//exit();
+
 		$this->_getCheckParameter();
     $this->set(compact('datas', 'para', 'param', 'count'));
-
 	}
 
   public function search_more($para = null) {
@@ -106,8 +131,7 @@ class ProfessionsController extends AppController {
 		$this->_getCheckParameter();
 		$back_flag = 1;
     $this->set(compact('datas', 'para', 'param', 'back_flag'));
-
-}
+	}
 
 
 
@@ -235,14 +259,12 @@ public function detail($id = null) {
 		//echo pr($this->paginate['conditions']);
 		//exit();
 
-
 		$datas = $this->paginate();
 		foreach ($datas as $key => $data) {
 			$datas[$key]['Profession']['check_sex'] = explode(",", $data['Profession']['check_sex']);
 			$datas[$key]['Profession']['check_personal'] = explode(",", $data['Profession']['check_personal']);
 			$datas[$key]['Profession']['check_like'] = explode(",", $data['Profession']['check_like']);
 		}
-
 		$this->_getCheckParameter();
 		$this->set('datas',$datas);
   }
@@ -543,6 +565,7 @@ public function detail($id = null) {
 /*
 /**/
 public function admin_edit($id = null){
+	//exit();
   // レイアウト関係
 	$this->layout = "default";
   if ($this->request->is(array('post', 'put'))) {
@@ -822,8 +845,6 @@ public function admin_edit($id = null){
           $this->Session->write('Image', $this->request->data['Image']);
         }
 
-
-
         if (!empty($this->request->data['Movie'])) {
           $this->Session->write('Movie', $this->request->data['Movie']);
           $num = 1;
@@ -836,6 +857,8 @@ public function admin_edit($id = null){
         }
         $this->request->data['Movie'][0] = '';
         $this->request->data['Movie'] = $this->request->data['Movie'];
+				$this->_getCheckParameter();
+
         $this->render('/Professions/admin_edit');
 			} elseif (isset($this->request->data['regist'])) {
         $data = $this->request->data;
@@ -1013,82 +1036,14 @@ public function admin_edit($id = null){
     return $this->redirect( array('controller' => 'Professions', 'action' => 'admin_index'));
   }
 
-
 	public function _getCheckParameter() {
-		$check_sex = array(
-			'1' => 'MAN',
-			'5' => 'GIRL'
-		);
-
-		$genre = array(
-			'1' => 'デザイン・アート系職業',
-			'2' => 'ものつくり・製造系職業',
-			'3' => 'IT系職業',
-			'4' => 'マスコミ・芸能系職業',
-			'5' => '食べ物・フード系職業',
-			'6' => '教育系職業',
-			'7' => '建築・現場系職業',
-			'8' => 'スポーツ系職業',
-		);
-
-    $like_genre = array(
-			'1' => '性格（part-1）',
-			'2' => '性格（part-2）',
-			'3' => '性格（part-3）',
-			'4' => '性格（part-4）',
-			'5' => '性格（part-5）',
-			'6' => '性格（part-6）',
-		);
-		$this->set('like_genre',$like_genre);
-
-		$personals = $this->CheckPersonal->find('all',
-				array(
-					'fields' => array('*'),
-					'conditions' => array('delete_flag' => 0),
-					'order' => array('id' => 'asc'),
-				)
-		);
-
-
-		$likes = $this->CheckLike->find('all',
-				array(
-					'fields' => array('*'),
-					'conditions' => array('delete_flag' => 0),
-					'order' => array('id' => 'asc'),
-				)
-		);
-
-		foreach ($likes as $key => $like) {
-				$check_likes[$like['CheckLike']['id']] = $like['CheckLike']['name'];
-			}
-
-			foreach ($personals as $key => $personal) {
-				$check_personals[$personal['CheckPersonal']['id']] = $personal['CheckPersonal']['name'];
-			}
-
-			foreach ($likes as $key => $like) {
-        //echo pr($like);
-        //exit();
-        if ($like['CheckLike']['like_genre'] == '1') {
-          $like_checks['1'][$like['CheckLike']['id']] = $like['CheckLike']['name'];
-        } elseif($like['CheckLike']['like_genre'] == '2') {
-          $like_checks['2'][$like['CheckLike']['id']] = $like['CheckLike']['name'];
-        } elseif($like['CheckLike']['like_genre'] == '3') {
-          $like_checks['3'][$like['CheckLike']['id']] = $like['CheckLike']['name'];
-        } elseif($like['CheckLike']['like_genre'] == '4') {
-          $like_checks['4'][$like['CheckLike']['id']] = $like['CheckLike']['name'];
-        } elseif($like['CheckLike']['like_genre'] == '5') {
-          $like_checks['5'][$like['CheckLike']['id']] = $like['CheckLike']['name'];
-        } elseif($like['CheckLike']['like_genre'] == '6') {
-          $like_checks['6'][$like['CheckLike']['id']] = $like['CheckLike']['name'];
-        }
-				//$check_likes[$like['CheckLike']['id']] = $like['CheckLike']['name'];
-			}
-
-			$this->set(compact("check_likes", "check_personals", "check_sex", "genre", "like_genre", "like_checks"));
-			return;
-		}
-
-
-
+		$check_personals = $this->Master->getCheckPersonals();
+		$check_likes = $this->Master->getCheckLikes();
+		$like_checks = $this->Master->getLikeChecks();
+		$check_sex = $this->Master->getCheckSex();
+		$genre = $this->Master->getGenre();
+		$like_genre = $this->Master->getlikeGenre();
+		$this->set(compact("check_likes", "check_personals", "check_sex", "genre", "like_genre", "like_checks"));
+		return;
+	}
 }

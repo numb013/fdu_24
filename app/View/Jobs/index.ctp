@@ -6,7 +6,7 @@
       <div class="col-md-12 text-center js-fullheight" style="padding:0px;">
         <div class="slider-checkbox-inner">
           <div class="checkbox-title">当てはまる項目を3つ以上チェックしてください</div>
-          <?php echo $this->Form->create('Profession', array('type' => 'file', 'url' =>  'index')); ?>
+          <?php echo $this->Form->create('jobs', array('type' => 'file', 'url' =>  'index')); ?>
           <div class="check-group clearfix ">
             <?php
               echo $this->Form->input('Profession.personal_check', array(
@@ -18,6 +18,8 @@
             ?>
           </div>
         </div>
+        <?php echo $this->Form->hidden('like_checks', array('value' => $para)); ?>
+
         <div class="set-btn animated fadeInUp">
           <?php echo $this->Form->input('診断する', array('type' => 'submit', 'label' => false, 'div' => false, 'class' => 'btn_submit')); ?>
           <?php echo $this->Form->end(); ?>
@@ -35,7 +37,7 @@
     <div class="serch-frame">
       <div class="sort-search"><?php echo $this->Paginator->sort('core_status', '知名度順');?></div>
       <div class="more-search">
-        <?php echo $this->Form->create('Profession', array('url' => array( 'controller' => 'Professions', 'action' => 'search_more' . $param),'type' => 'post')); ?>
+        <?php echo $this->Form->create('jobs', array('url' => array( 'controller' => 'jobs', 'action' => 'search_more' . $param),'type' => 'post')); ?>
     		<?php echo $this->Form->submit('さらに絞り込む▼', array('div' => false, 'class' => 'more-search')); ?>
     		<?php echo $this->Form->end(); ?>
       </div>
@@ -63,7 +65,7 @@
       <div class="job-memu">
         <a href="/fdu24/professions/detail/<?php echo $data['Profession']['id']; ?>">
           <div class="photo-cut">
-            <?php echo $this->Html->image($data['Image'][0]['url'] ,array('width' => '100%' )); ?>
+            <?php echo $this->Html->image($data['Image']['url'] ,array('width' => '100%' )); ?>
           </div>
           <p><?php echo $data['Profession']['profession_name'] ;?></p>
           <p>

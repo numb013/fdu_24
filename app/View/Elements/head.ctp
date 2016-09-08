@@ -18,7 +18,6 @@
           この職業知ってた : <span class="count"><?php echo $datas['Profession']['know_count']; ?></span>
         </a>
       </div>
-
     <?php endif; ?>
   </div>
 </header>

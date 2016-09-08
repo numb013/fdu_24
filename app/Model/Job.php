@@ -1,49 +1,17 @@
 <?php
 App::uses('AppModel', 'Model');
 
-class Profession extends AppModel {
+class Job extends AppModel {
 
   public $actsAs = array(
       'Search.Searchable'
   );
 
-  public $hasMany = array(
-    'Movie' => array(
-        'className' => 'Movie',
-        'conditions'=>array(
-          'delete_flag'=>0,
-          'partner_name'=> 'Profession',
-            ),
-        'order' => '',
-        'foreignKey' => 'partner_id',
-        'dependent' => '',
-        'exclusive' => '',
-        'finderQuery' => '',
-        'limit' => '',
-      ),
-      'Image' => array(
-          'className' => 'Image',
-          'conditions'=>array(
-            'delete_flag'=>0,
-            'partner_name'=> 'Profession',
-              ),
-          'order' => '',
-          'foreignKey' => 'partner_id',
-          'dependent' => '',
-          'exclusive' => '',
-          'finderQuery' => '',
-          'limit' => '',
-        ),
-    );
-
-    //function paginate($data = null) {
-    //  $this->log($data, LOG_DEBUG);
-    //  if(empty($data)) {
-    //    $extra = func_get_arg(6);
-    //  	//$extra['type']に生SQLが格納されている。
-    //  	return $this->query($extra['type']);
-    //  }
-    //}
+  function paginate() {
+    $extra = func_get_arg(6);
+  	//$extra['type']に生SQLが格納されている。
+  	return $this->query($extra['type']);
+  }
 
 
   public $validate = array(
@@ -51,45 +19,8 @@ class Profession extends AppModel {
           'between' => array(
               'allowEmpty' => true,
               'rule' => array('between', 1, 50),
-              'message' => 'タイトルは50文字以内'
+              'message' => '3つ以上選択してください'
           )
-      ),
-      '	job_content' => array(
-        'between' => array(
-            'rule' => array('between', 1, 1000),
-            'message' => '本文は1000文字以内'
-        )
-      ),
-      'job_step1' => array(
-        'between' => array(
-            'rule' => array('between', 1, 1000),
-            'message' => '本文は1000文字以内'
-        )
-      ),
-      'job_step2' => array(
-        'between' => array(
-            'rule' => array('between', 1, 1000),
-            'message' => '本文は1000文字以内'
-        )
-      ),
-      'job_step3' => array(
-        'between' => array(
-            'rule' => array('between', 1, 1000),
-            'message' => '本文は1000文字以内'
-        )
-      ),
-      'job_url' => array(
-        'between' => array(
-            'rule' => array('between', 1, 1000),
-            'message' => '本文は1000文字以内'
-        )
-      ),
-      'core_status' => array(
-        'between' => array(
-            'allowEmpty' => true,
-            'rule' => array('between', 1, 1000),
-            'message' => '本文は1000文字以内'
-        )
       ),
   );
 
