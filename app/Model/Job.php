@@ -7,11 +7,40 @@ class Job extends AppModel {
       'Search.Searchable'
   );
 
+  //function paginate() {
+  //  $extra = func_get_arg(6);
+  //	//$extra['type']に生SQLが格納されている。
+  //	return $this->query($extra['type']);
+  //}
+
+
   function paginate() {
-    $extra = func_get_arg(6);
-  	//$extra['type']に生SQLが格納されている。
-  	return $this->query($extra['type']);
+      $extra = func_get_arg(6);
+      $limit = func_get_arg(3);
+      $page = func_get_arg(4);
+
+//die(pr($limit));
+
+      $sql = $extra['type'];
+      $sql .= ' LIMIT ' . $limit;
+      if ($page > 1){
+          $sql .= ' OFFSET ' . ($limit * ($page - 1));
+      }
+
+      return $this->query($sql);
   }
+
+  function paginateCount() {
+      $extra = func_get_arg(2);
+      return count($this->query(
+          preg_replace(
+              '/LIMIT \d+ OFFSET \d+$/u',
+              '',
+              $extra['type']
+          )
+      ));
+  }
+
 
 
   public $validate = array(

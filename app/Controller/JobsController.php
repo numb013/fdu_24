@@ -62,7 +62,7 @@ class JobsController extends AppController {
 
     // レイアウト関係
 		$this->Prg->commonProcess();
-		$this->paginate['conditions'] = $this->Job->parseCriteria($this->passedArgs);
+		//$this->paginate['conditions'] = $this->Job->parseCriteria($this->passedArgs);
 
 		//echo pr($this->request->data['Profession']['like_checks']);
 //exit();
@@ -125,12 +125,18 @@ class JobsController extends AppController {
 			 where Profession.cnt >= 3
 			 AND Image.delete_flag = 0
 			 " . $likeCheck . "
-			 GROUP BY Profession.id";
+			 GROUP BY Profession.id
+			 ORDER BY Profession.core_status ASC
+			 ";
 
+			$this->paginate = array(
+				'limit' => 8,
+			);
 			$this->paginate = $sql; //$sqlの中身は生SQL
 			$datas = $this->paginate('Job');
 			$count = count($datas);
-			$this->set(compact('datas', 'para', 'param', 'count'));
+			$back_flag = 1;
+			$this->set(compact('datas', 'para', 'param', 'count', 'back_flag'));
 
 		} else {
 			// 初期表示時
