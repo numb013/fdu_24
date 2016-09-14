@@ -29,7 +29,7 @@ App::uses('AppController', 'Controller');
  * @link http://book.cakephp.org/2.0/en/controllers/pages-controller.html
  */
 class CheckLikesController extends AppController {
-
+	public $components = array('Search.Prg', 'Session', 'Master');
 
 	public function admin_index() {
 		$this->layout = "default";
@@ -108,15 +108,8 @@ class CheckLikesController extends AppController {
 	}
 
 	public function _getCheckGenre() {
-		$like_genre = array(
-			'1' => '性格（part-1）',
-			'2' => '性格（part-2）',
-			'3' => '性格（part-3）',
-			'4' => '性格（part-4）',
-			'5' => '性格（part-5）',
-			'6' => '性格（part-6）',
-		);
-		$this->set('like_genre',$like_genre);
+		$like_genre = $this->Master->getlikeGenre();
+		$this->set(compact("like_genre"));
 	}
 
 }

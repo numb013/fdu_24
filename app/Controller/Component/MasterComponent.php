@@ -110,12 +110,12 @@ class MasterComponent extends Component {
  */
 	public function getlikeGenre() {
 		return array(
-			'1' => '性格（part-1）',
-			'2' => '性格（part-2）',
-			'3' => '性格（part-3）',
-			'4' => '性格（part-4）',
-			'5' => '性格（part-5）',
-			'6' => '性格（part-6）',
+			'1' => '得意な事',
+			'2' => '好きな事',
+			'3' => 'タイプ',
+			'4' => '好きな教科',
+			'5' => 'その他',
+			'6' => 'その他',
 		);
 	}
 

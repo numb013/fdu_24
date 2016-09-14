@@ -118,7 +118,7 @@ echo pr($this->paginate['conditions']);
 		//$count = count($datas);
 
 		echo pr($this->Profession->getDataSource()->getLog());
-		exit();
+		//exit();
 		//echo pr($datas);
 		//exit();
 

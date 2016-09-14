@@ -7,8 +7,8 @@
 
     <?php
 
-    echo pr($this->request->data);
-    exit();
+    //echo pr($this->request->data);
+    //exit();
 
      ?>
 
