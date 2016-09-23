@@ -343,6 +343,11 @@ h6 {
   margin-left: 5px;
 }
 
+.sort-search a {
+  padding: 10px 10px;
+  border: 1px solid #000;
+}
+
 .more-search {
   background: #fff;
   padding: 3px 0 3px 0;

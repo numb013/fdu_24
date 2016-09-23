@@ -37,16 +37,16 @@ class JobsController extends AppController {
 
 	public function index($para = null) {
 
-
 		//echo pr($para);
-		//echo pr($this->request->query);
-		//echo pr($this->request->data);
+		echo pr($this->request->query);
+		echo pr($this->request->data);
 		//echo pr($this->request->data['jobs']['param']);
 
 		//exit();
 		$param = (!empty($_SERVER['QUERY_STRING'])) ? '?'.$_SERVER['QUERY_STRING'] : '';
 
-		//echo pr($param);
+		echo pr($param);
+		//exit();
 		if (!empty($this->request->query['param'])) {
 			$replaceText = str_replace("?", "", $this->request->query['param']);
 
@@ -166,8 +166,10 @@ class JobsController extends AppController {
     $this->set(compact('para', 'param', 'count'));
 	}
 
+
   public function search_more($para = null) {
     $param = (!empty($_SERVER['QUERY_STRING'])) ? '?' . $_SERVER['QUERY_STRING'] : '';
+		echo pr($param);
 		$this->_getCheckParameter();
 		$back_flag = 1;
     $this->set(compact('datas', 'para', 'param', 'back_flag'));

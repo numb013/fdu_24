@@ -30,17 +30,24 @@ App::uses('AppController', 'Controller');
  */
 class CheckLikesController extends AppController {
 	public $components = array('Search.Prg', 'Session', 'Master');
+	public $paginate = array();
 
 	public function admin_index() {
 		$this->layout = "default";
-    $datas = $this->CheckLike->find('all',array(
-        'conditions' => array(
-          'CheckLike.delete_flag' => '0'
-        ),
-        'order' => array(
-          'created DESC'
-        ),
-    ));
+
+		$this->Prg->commonProcess();
+		//$this->paginate['conditions'] = $this->CheckLike->parseCriteria($this->passedArgs);
+		$this->paginate = array(
+			'conditions' => array(
+				 'CheckLike.delete_flag' => '0'
+			 ),
+			'order' => array(
+				'created' => 'DESC',
+			),
+			'limit' => '40'
+		);
+		$datas = $this->paginate();
+
 		$this->_getCheckGenre();
     $this->set('datas',$datas);
   }
