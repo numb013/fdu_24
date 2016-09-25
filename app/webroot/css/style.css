@@ -344,8 +344,8 @@ h6 {
 }
 
 .sort-search a {
-  padding: 10px 10px;
-  border: 1px solid #000;
+  width: 95%;
+  display: inline-block;
 }
 
 .more-search {
@@ -594,7 +594,7 @@ h6 {
     overflow: hidden;
   }
   .sort-search {
-    padding: 5px;
+    border-radius: 2px;
     width: 32%;
   }
   .more-search {

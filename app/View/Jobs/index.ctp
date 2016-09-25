@@ -19,7 +19,6 @@
           </div>
         </div>
         <?php echo $this->Form->hidden('like_checks', array('value' => $para)); ?>
-
         <div class="set-btn animated fadeInUp">
           <?php echo $this->Form->input('診断する', array('type' => 'submit', 'label' => false, 'div' => false, 'class' => 'btn_submit')); ?>
           <?php echo $this->Form->end(); ?>
@@ -37,8 +36,9 @@
     <div class="serch-frame">
       <div class="sort-search"><?php echo $this->Paginator->sort('core_status', '知名度順');?></div>
       <div class="more-search">
-        <?php echo $this->Form->create('jobs', array('url' => array( 'controller' => 'jobs', 'action' => 'search_more' . $param),'type' => 'post')); ?>
-    		<?php echo $this->Form->submit('さらに絞り込む▼', array('div' => false, 'class' => 'more-search')); ?>
+        <?php echo $this->Form->create('jobs', array('url' => array( 'controller' => 'jobs', 'action' => 'search_more'),'type' => 'post')); ?>
+        <?php echo $this->Form->hidden('param', array('value' => $param)); ?>
+    		<?php echo $this->Form->submit('さらに絞り込む▼', array('div' => false, 'class' => 'more-search', 'style' => 'width: 97%;')); ?>
     		<?php echo $this->Form->end(); ?>
       </div>
     </div>
@@ -60,6 +60,9 @@
   </div>
 
   <div class="col-md-offset-0 text-center fh5co-heading animate-box job-box" style="clear: both;">
+
+
+
 
     <?php foreach ($datas as $data): ?>
       <div class="job-memu">

@@ -16,10 +16,10 @@ class Job extends AppModel {
 
   function paginate() {
       $extra = func_get_arg(6);
-      $limit = func_get_arg(3);
+      $limit = 4;
       $page = func_get_arg(4);
 
-//die(pr($limit));
+//die(pr());
 
       $sql = $extra['type'];
       $sql .= ' LIMIT ' . $limit;
