@@ -56,6 +56,14 @@
           echo $this->Paginator->last(' >>');
         ?>
       </div>
+      <div class="job-page">
+  <?php
+    echo $this->Paginator->first('<< ');
+    echo $this->Paginator->prev('< ');
+    echo $this->Paginator->next(' >');
+    echo $this->Paginator->last(' >>');
+  ?>
+</div>
     </div>
   </div>
 
