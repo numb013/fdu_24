@@ -1,9 +1,8 @@
 
 <?php if(!empty($flag)): ?>
 <aside id="fh5co-hero" clsas="js-fullheight">
-  <div class="flexslider js-fullheight">
     <div>
-      <div class="col-md-12 text-center js-fullheight" style="padding:0px;">
+      <div class="col-md-12 text-center" style="padding:0px;background:#000;">
         <div class="slider-checkbox-inner">
           <div class="checkbox-title">当てはまる項目を3つ以上チェックしてください</div>
           <?php echo $this->Form->create('jobs', array('type' => 'file', 'url' =>  'index')); ?>
@@ -25,7 +24,6 @@
         </div>
       </div>
     </div>
-  </div>
 </aside>
 
 
@@ -56,24 +54,28 @@
           echo $this->Paginator->last(' >>');
         ?>
       </div>
-      <div class="job-page">
-  <?php
-    echo $this->Paginator->first('<< ');
-    echo $this->Paginator->prev('< ');
-    echo $this->Paginator->next(' >');
-    echo $this->Paginator->last(' >>');
-  ?>
-</div>
     </div>
   </div>
 
   <div class="col-md-offset-0 text-center fh5co-heading animate-box job-box" style="clear: both;">
 
 
+<?php
 
+//echo pr(count($datas));
+
+
+ ?>
+
+
+  <?php if (count($datas) == 0): ?>
+    <div class="job-memu">
+      <p>データございません</p>
+    </div>
+  <?php else: ?>
 
     <?php foreach ($datas as $data): ?>
-      <div class="job-memu">
+      <div class="job-memu animate-box">
         <a href="/fdu24/professions/detail/<?php echo $data['Profession']['id']; ?>">
           <div class="photo-cut">
             <?php echo $this->Html->image($data['Image']['url'] ,array('width' => '100%' )); ?>
@@ -90,6 +92,10 @@
         </a>
       </div>
     <?php endforeach; ?>
+
+  <?php endif; ?>
+
+
   </div>
   <div class="col-md-offset-0 text-center fh5co-heading animate-box job-box" style="clear: both; background:#000;">
     <div class="job-count">

@@ -3,6 +3,16 @@
     <title>Index Page</title>
   </head>
   <body>
+
+
+
+<?php
+
+//echo pr($this->request->data);
+
+ ?>
+
+
     <p>MySampleData Edit Form.</p>
     <?php echo $this->Form->create('Profession', array('type' => 'file', 'url' => 'edit')); ?>
     <?php echo $this->Form->input('id'); ?>

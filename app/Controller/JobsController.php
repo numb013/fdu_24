@@ -19,7 +19,6 @@
  */
 
 App::uses('AppController', 'Controller');
-
 /**
  * Static content controller
  *
@@ -35,7 +34,10 @@ class JobsController extends AppController {
 	public $paginate = array();
 
 
+
 	public function index($para = null) {
+
+
 
 		//echo pr($para);
 		//echo pr($this->request->query);
@@ -103,9 +105,12 @@ class JobsController extends AppController {
 					ON (Profession.id = Image.partner_id)
 				 where Profession.cnt >= 3
 				 AND Image.delete_flag = 0
+				 AND Profession.delete_flag = 0
 				 " . $likeCheck . "
 				 GROUP BY Profession.id
 				 ORDER BY Profession.core_status " . $sort;
+
+
 
 				$this->paginate = $sql; //$sqlの中身は生SQL
 				$datas = $this->paginate('Job');
@@ -139,7 +144,7 @@ class JobsController extends AppController {
 		//$count = count($datas);
 
 		//echo pr($this->Job->getDataSource()->getLog());
-	//	exit();
+		//exit();
 		//echo pr($datas);
 		//exit();
 

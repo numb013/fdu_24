@@ -16,7 +16,8 @@ class Job extends AppModel {
 
   function paginate() {
       $extra = func_get_arg(6);
-      $limit = 8;
+      //$limit = 8;
+      $limit = 20;
       $page = func_get_arg(4);
 
 //die(pr());

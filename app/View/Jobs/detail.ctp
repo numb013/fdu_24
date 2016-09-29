@@ -33,10 +33,3 @@
         </div>
     </div>
   </div>
-  <div id="fh5co-blog" class="animate-box">
-    <div class="container">
-      <div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
-        <?php echo '<iframe width="200" height="120" src='.'https://www.youtube.com/embed/'.$datas['Movie'][0]['Movie']['movie_url'].' frameborder="0" allowfullscreen></iframe>' ?>
-      </div>
-    </div>
-  </div>

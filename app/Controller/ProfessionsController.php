@@ -146,9 +146,15 @@ public function detail($id = null) {
 				'Profession.delete_flag' => 0
 			)
 		);
+
+
+//echo pr($status);
+
 		// 以下がデータベース関係
 		$datas = $this->Profession->find('first', $status);
-		if ($datas['Profession']['image_flag']) {
+		//echo pr($datas);
+
+		if (!empty($datas['Profession']['image_flag'])) {
 			$id = $datas['Profession']['id'];
 			$status = array(
 				'conditions' =>
@@ -161,7 +167,7 @@ public function detail($id = null) {
 			$datas['Image'] = $this->Image->find('all', $status);
 		}
 
-		if ($datas['Profession']['movie_flag']) {
+		if (!empty($datas['Profession']['movie_flag'])) {
 			$id = $datas['Profession']['id'];
 			$status = array(
 				'conditions' =>
@@ -173,6 +179,7 @@ public function detail($id = null) {
 			);
 			$datas['Movie'] = $this->Movie->find('all', $status);
 		}
+
 
 		$datas['Profession']['check_sex'] = explode(",", $datas['Profession']['check_sex']);
 		$datas['Profession']['check_personal'] = explode(",", $datas['Profession']['check_personal']);
@@ -565,6 +572,8 @@ public function detail($id = null) {
 /*
 /**/
 public function admin_edit($id = null){
+	$this->_getCheckParameter();
+
 	//exit();
   // レイアウト関係
 	$this->layout = "default";
@@ -811,17 +820,15 @@ public function admin_edit($id = null){
         );
         // 以下がデータベース関係
         $this->request->data = $this->Profession->find('first', $status);
+				$this->request->data['Profession']['check_sex'] = explode(",", $this->request->data['Profession']['check_sex']);
+				$this->request->data['Profession']['check_personal'] = explode(",", $this->request->data['Profession']['check_personal']);
+				$this->request->data['Profession']['check_like'] = explode(",", $this->request->data['Profession']['check_like']);
+
         if (!empty($this->request->data['Movie'])) {
           foreach ($this->request->data['Movie'] as $key => $MovieValue) {
             $this->request->data['Movie'][$key + 1] = $MovieValue;
           }
           $this->request->data['Movie'][0] = '';
-					$this->request->data['Profession']['check_sex'] = explode(",", $this->request->data['Profession']['check_sex']);
-					$this->request->data['Profession']['check_personal'] = explode(",", $this->request->data['Profession']['check_personal']);
-					$this->request->data['Profession']['check_like'] = explode(",", $this->request->data['Profession']['check_like']);
-
-					$this->_getCheckParameter();
-
           $this->Session->write('Movie', $this->request->data['Movie']);
           $this->Session->write('image', $this->request->data['Image']);
         }

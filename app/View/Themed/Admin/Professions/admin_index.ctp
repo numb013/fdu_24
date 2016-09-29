@@ -82,13 +82,14 @@
   </tr>
 </table>
     <?php echo $this->Html->link('新規作成', array('controller' => 'Professions', 'action' => 'add')); ?>
-    <div>
+    <?php echo $this->Paginator->counter(array(
+      'format' => '<p>全{:count}件中/{:start}-{:end}件ヒット</p>'
+    ));?>
+    <div class="job-page">
       <?php
         echo $this->Paginator->first('<< ');
-        echo $this->Paginator->prev('< ');
         echo $this->Paginator->numbers(
-        array('modulus'=>2));
-        echo $this->Paginator->next(' >');
+          array('separator' => '/','modulus'=>2));
         echo $this->Paginator->last(' >>');
       ?>
     </div>
@@ -145,13 +146,12 @@
         </tr>
       <?php endforeach; ?>
     </table>
-    <div>
+    <div class="job-page">
       <?php
         echo $this->Paginator->first('<< ');
-        echo $this->Paginator->prev('< ');
         echo $this->Paginator->numbers(
-            array('separator' => '/','modulus'=>2));
-        echo $this->Paginator->next(' >');
+          array('separator' => '/','modulus'=>2));
         echo $this->Paginator->last(' >>');
       ?>
     </div>
+    <div class="job-page">
