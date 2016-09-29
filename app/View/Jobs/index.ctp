@@ -60,12 +60,7 @@
   <div class="col-md-offset-0 text-center fh5co-heading animate-box job-box" style="clear: both;">
 
 
-<?php
 
-//echo pr(count($datas));
-
-
- ?>
 
 
   <?php if (count($datas) == 0): ?>
@@ -80,15 +75,27 @@
           <div class="photo-cut">
             <?php echo $this->Html->image($data['Image']['url'] ,array('width' => '100%' )); ?>
           </div>
-          <p><?php echo $data['Profession']['profession_name'] ;?></p>
-          <p>
-            マニアック度:
-            <?php
-            for ($i = 0; $i < $data['Profession']['core_status']; $i++) {
-              echo '★';
-            };
-            ?>
-          </p>
+
+
+            <ul class="core_list">
+              <li class="core_text"><h2><?php echo $data['Profession']['profession_name'] ;?></h2></li>
+              <li class="core_text">
+                <?php echo $genre[$data['Profession']['genre']] ;?>
+              </li>
+              <li class="core_text">
+                コア度:<span class="core_status">
+                <?php
+                for ($i = 0; $i < $data['Profession']['core_status']; $i++) {
+                  echo '★';
+                };
+                ?>
+                </span>
+              </li>
+            </ul>
+
+
+
+
         </a>
       </div>
     <?php endforeach; ?>

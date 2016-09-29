@@ -92,9 +92,11 @@ class JobsController extends AppController {
 				}
 
 				//変なソートの仕方
-				if(strpos($_SERVER['HTTP_REFERER'],'sort:core_status/direction:desc') !== false){
+				if(strpos($_SERVER['HTTP_REFERER'],'sort:core_status/direction:desc') !== false) {
+$this->log('多いのが上',LOG_DEBUG);
 				  $sort = 'DESC';
 				} else {
+$this->log('少ないのが上ｑ',LOG_DEBUG);
 					$sort = 'ASC';
 				}
 				$sql = "select Profession.*, Image.url from
