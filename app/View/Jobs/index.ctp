@@ -76,9 +76,8 @@
             <?php echo $this->Html->image($data['Image']['url'] ,array('width' => '100%' )); ?>
           </div>
 
-
+            <h2  class="professions_title"><?php echo $data['Profession']['profession_name'] ;?></h2>
             <ul class="core_list">
-              <li class="core_text"><h2><?php echo $data['Profession']['profession_name'] ;?></h2></li>
               <li class="core_text">
                 <?php echo $genre[$data['Profession']['genre']] ;?>
               </li>

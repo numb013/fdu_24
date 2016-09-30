@@ -62,6 +62,50 @@ ul {
 li {
   list-style:none;
 }
+
+.sns_box {
+  padding: 20px 0;
+}
+
+div ul.sns_list{
+  display: inline-block;
+  width: 100%;
+  margin: 0px;
+}
+
+li.sns_button{
+  color: #fff;
+  float: left;;
+  width: 32%;
+  background: #ff0;
+  margin: 0 2px;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+h2.professions_title {
+  font-size: 18px;
+  font-weight: bold;
+  font-family: 'Century Gothic';
+  margin: 2px;
+}
+
+.fh5co-cta p.occupation_diagnosis {
+  font-size: 20px;
+  color: #000;
+  font-family: 'Denk One', sans-serif;
+}
+
+a.occupation_link {
+  padding: 10px 50px;
+  border: 1px solid #000;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.job_step {
+  padding: 0 4px 4px 4px;
+}
 .core_status{
   color:#f16200;
   font-size:19px;
@@ -441,7 +485,7 @@ li {
 
 
 .check-group input {
-    display: none;
+  display: none;
 }
 
 
@@ -458,8 +502,8 @@ li {
 }
 
 .check-group input:checked+label {
-    color: #fff;
-    background: #2b7f2b;
+  color: #fff;
+  background: #2b7f2b;
 }
 
 #fh5co-header .header-inner p.title-back-text{
@@ -486,8 +530,6 @@ li {
   background: #fff;
   border-radius: 3px;
 }
-
-
 
 ul.core_list{
   margin-top: -1px;
@@ -558,8 +600,23 @@ li.core_text {
 
 
 @media screen and (max-width: 425px) {
+  h2.professions_title {
+    font-size: 14px;
+  }
+  li.sns_button{
+    margin: 0 1px;
+    font-size: 10px;
+    width: 32%;
+  }
+  .core_status{
+    color:#f16200;
+    font-size:15px;
+  }
+  li.core_text h2 {
+    font-size: 14px;
+}
   ul.core_list{
-    margin-top: 8px;
+    margin-top: 1px;
   }
 
   li.core_text {
@@ -641,7 +698,7 @@ li.core_text {
 
 @media screen and (min-width: 425px) {
   ul.core_list{
-    margin-top: 15px;
+    margin-top: 1px;
   }
 
   li.core_text {
@@ -677,7 +734,7 @@ li.core_text {
   .photo-cut{
     position: relative;
     width: 100%;
-    height: 130px;
+    height: 140px;
     overflow: hidden;
   }
   .sort-search {
@@ -691,8 +748,11 @@ li.core_text {
 }
 
 @media screen and (min-width: 768px) {
+  h2.professions_title{
+    margin-top: 5px;
+  }
   ul.core_list{
-    margin-top: 15px;
+    margin-top: 1px;
   }
   li.core_text {
     font-size: 15px;
@@ -871,8 +931,17 @@ li.core_text {
 
 
 @media (min-width: 992px) {
+  li.sns_button{
+    width:32%;
+    margin: 0 5px;
+  }
+  .profession_title {
+    padding-top: 0px;
+    font-size: 25px;
+
+  }
   ul.core_list{
-    margin-top: 10px;
+    margin-top: -1px;
   }
 
   li.core_text {
@@ -958,11 +1027,15 @@ li.core_text {
     text-align: center;
     border: 4px solid #000;
   }
+  div ul.sns_list{
+    display: inline-block;
+    width: 80%;
+  }
 }
 
 @media screen and (min-width: 1280px) {
   ul.core_list{
-    margin-top: 12px;
+    margin-top: 2px;
   }
 
   li.core_text {
@@ -1407,13 +1480,17 @@ li.core_text {
   }
   .profession_title {
         padding-top: 0px ;
-    font-size: 35px;
+    font-size: 30px;
     color: white;
     text-align: center;
   }
   .rofession_text {
     width: 80%;
     margin: 0 auto;
+  }
+  li.sns_button{
+    width:32%;
+    margin: 0 5px;
   }
 }
 
@@ -1442,12 +1519,7 @@ li.core_text {
 
 
 #fh5co-why-us, .fh5co-services {
-  padding: 10em 0;
-}
-@media screen and (max-width: 768px) {
-  #fh5co-why-us, .fh5co-services {
-    padding: 50px 0 0 0;
-  }
+  padding: 3em 0;
 }
 
 #fh5co-why-us .item-block .icon, .fh5co-services .item-block .icon {
@@ -1894,12 +1966,12 @@ li.core_text {
   background-size: cover;
   background-position: center center;
   background-attachment: fixed;
-  padding: 7em 0;
+  padding: 3em 0;
   position: relative;
 }
 @media screen and (max-width: 768px) {
   .fh5co-cta {
-    padding: 3em 0;
+    padding: 2em 0;
   }
 }
 .fh5co-cta .overlay {
