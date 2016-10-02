@@ -33,12 +33,7 @@ class JobsController extends AppController {
 	public $presetVars = true;
 	public $paginate = array();
 
-
-
 	public function index($para = null) {
-
-
-
 		//echo pr($para);
 		//echo pr($this->request->query);
 		//echo pr($this->request->data);
@@ -47,11 +42,15 @@ class JobsController extends AppController {
 		//exit();
 		$param = (!empty($_SERVER['QUERY_STRING'])) ? $_SERVER['QUERY_STRING'] : '';
 
+
 		//exit();
 		if (!empty($this->request->query['param'])) {
 			$replaceText = str_replace("?", "", $this->request->query['param']);
 			$array1 = array();
 			parse_str($replaceText,  $array1);
+
+echo pr($array1);
+
 			if (!empty($array1['personal_check'])) {
 				foreach ($array1['personal_check'] as $key => $value) {
 					$this->request->query['personal_check'][$key] = $value;
@@ -68,6 +67,10 @@ class JobsController extends AppController {
     // レイアウト関係
 		$this->Prg->commonProcess();
 		if (!empty($this->request->data)) {
+
+			echo pr($this->request->data);
+
+
 			if (count($this->request->data['Profession']['personal_check']) > 2) {
 				$personalCheck = '';
 				foreach ($this->request->data['Profession']['personal_check'] as $key => $value) {
@@ -93,15 +96,9 @@ class JobsController extends AppController {
 
 				//変なソートの仕方
 				if(strpos($_SERVER["REQUEST_URI"],'sort:core_status/direction:asc') !== false) {
-					$this->log($_SERVER["REQUEST_URI"],LOG_DEBUG);
-					$this->log('多いのが上',LOG_DEBUG);
 					$sort = 'ASC';
-
 				} else {
-					$this->log($_SERVER["REQUEST_URI"],LOG_DEBUG);
-					$this->log('少ないのが上ｑ',LOG_DEBUG);
 					$sort = 'DESC';
-
 				}
 				$sql = "select Profession.*, Image.url from
 				(select v_hit.*, COUNT('X') as cnt
