@@ -14,7 +14,7 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
+$cakeDescription = __d('cake_dev', 'FDU-24');
 $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 ?>
 <!DOCTYPE html>
@@ -64,8 +64,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	?>
 </head>
 <link href="https://fonts.googleapis.com/css?family=Denk+One" rel="stylesheet">
-
-
+<meta name="viewport" content="width=device-width">
 <script type="text/javascript">
 jQuery(function($) {
 var nav    = $('#fixedBox'),

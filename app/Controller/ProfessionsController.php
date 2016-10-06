@@ -60,7 +60,6 @@ class ProfessionsController extends AppController {
 		$this->Prg->commonProcess();
 		$this->paginate['conditions'] = $this->Profession->parseCriteria($this->passedArgs);
 
-echo pr($this->paginate['conditions']);
 
 		if (!empty($this->request->data)) {
 			$back_flag = 1;
@@ -136,6 +135,8 @@ echo pr($this->paginate['conditions']);
 
 
 public function detail($id = null) {
+	//exit();
+	//echo pr($id);
 	// レイアウト関係
 	$this->layout = "default";
 	if (isset($id)) {
@@ -179,8 +180,7 @@ public function detail($id = null) {
 			);
 			$datas['Movie'] = $this->Movie->find('all', $status);
 		}
-
-
+		$this->set('title_for_layout', $datas['Profession']['profession_name'].'のお仕事詳細');
 		$datas['Profession']['check_sex'] = explode(",", $datas['Profession']['check_sex']);
 		$datas['Profession']['check_personal'] = explode(",", $datas['Profession']['check_personal']);
 		$datas['Profession']['check_like'] = explode(",", $datas['Profession']['check_like']);
@@ -356,10 +356,11 @@ public function detail($id = null) {
         if($mime!="image") $err[] = "ファイル{$key} は画像を選択してください";
         if($mime!="image") unset($files[$key]);
         if($mime!="image") continue;
+				$imgFiles = Configure::read('ImgFiles');
         // 仮ディレクトリへファイルをアップロード
-        copy($val["tmp_name"],"{$_SERVER['DOCUMENT_ROOT']}/fdu24/app/webroot/files/updir/tmp/{$now}_{$key}.{$ext}");
-        $this->request->data['Image'][$key]["tmp_name"] = "{$_SERVER['DOCUMENT_ROOT']}/fdu24/app/webroot/files/updir/tmp/{$now}_{$key}.{$ext}";
-        $this->request->data['Image'][$key]["url"] = "http://{$_SERVER['SERVER_NAME']}/fdu24/app/webroot/files/updir/tmp/{$now}_{$key}.{$ext}";
+        copy($val["tmp_name"],"{$_SERVER['DOCUMENT_ROOT']}" . $imgFiles . "{$now}_{$key}.{$ext}");
+        $this->request->data['Image'][$key]["tmp_name"] = "{$_SERVER['DOCUMENT_ROOT']}" . $imgFiles . "{$now}_{$key}.{$ext}";
+        $this->request->data['Image'][$key]["url"] = "http://{$_SERVER['SERVER_NAME']}" . $imgFiles . "{$now}_{$key}.{$ext}";
       }
       finfo_close($finfo);
 
@@ -528,12 +529,11 @@ public function detail($id = null) {
         if ($this->Profession->validates()) {
           $this->Profession->save($data['Profession']);
             $partner_id = $this->Profession->getLastInsertID();
-
-
+						$imgFiles = Configure::read('ImgFiles');
             if (!empty($data['Image'])) {
               foreach($data['Image'] as $key => $val){
-                rename($val["tmp_name"],"{$_SERVER['DOCUMENT_ROOT']}/fdu24/app/webroot/files/updir/".basename($val["tmp_name"]));
-                $data['Image'][$key]["url"] = "http://{$_SERVER['SERVER_NAME']}/fdu24/app/webroot/files/updir/".basename($val["tmp_name"]);
+                rename($val["tmp_name"],"{$_SERVER['DOCUMENT_ROOT']}" . $imgFiles . basename($val["tmp_name"]));
+                $data['Image'][$key]["url"] = "http://{$_SERVER['SERVER_NAME']}" . $imgFiles . basename($val["tmp_name"]);
                 $data['Image'][$key]["partner_id"] = $partner_id;
               }
 
@@ -642,10 +642,11 @@ public function admin_edit($id = null){
         if($mime!="image") $err[] = "ファイル{$key} は画像を選択してください";
         if($mime!="image") unset($files[$key]);
         if($mime!="image") continue;
+				$imgFiles = Configure::read('ImgFiles');
         // 仮ディレクトリへファイルをアップロード
-        copy($val["tmp_name"],"{$_SERVER['DOCUMENT_ROOT']}/fdu24/app/webroot/files/updir/tmp/{$now}_{$key}.{$ext}");
-        $this->request->data['Image'][$key]["tmp_name"] = "{$_SERVER['DOCUMENT_ROOT']}/fdu24/app/webroot/files/updir/tmp/{$now}_{$key}.{$ext}";
-        $this->request->data['Image'][$key]["url"] = "http://{$_SERVER['SERVER_NAME']}/fdu24/app/webroot/files/updir/tmp/{$now}_{$key}.{$ext}";
+        copy($val["tmp_name"],"{$_SERVER['DOCUMENT_ROOT']}" . $imgFiles . "{$now}_{$key}.{$ext}");
+        $this->request->data['Image'][$key]["tmp_name"] = "{$_SERVER['DOCUMENT_ROOT']}" . $imgFiles . "{$now}_{$key}.{$ext}";
+        $this->request->data['Image'][$key]["url"] = "http://{$_SERVER['SERVER_NAME']}" . $imgFiles . "{$now}_{$key}.{$ext}";
       }
       finfo_close($finfo);
 
@@ -938,8 +939,9 @@ public function admin_edit($id = null){
 
             if (!empty($data['Image'])) {
               foreach($data['Image'] as $key => $val){
-                  rename($val['Image']["tmp_name"],"{$_SERVER['DOCUMENT_ROOT']}/fdu24/app/webroot/files/updir/".basename($val['Image']["tmp_name"]));
-                  $data['Image'][$key]['Image']["url"] = "http://{$_SERVER['SERVER_NAME']}/fdu24/app/webroot/files/updir/".basename($val['Image']["tmp_name"]);
+									$imgFiles = Configure::read('ImgFiles');
+                  rename($val['Image']["tmp_name"],"{$_SERVER['DOCUMENT_ROOT']}" . $imgFiles . basename($val['Image']["tmp_name"]));
+                  $data['Image'][$key]['Image']["url"] = "http://{$_SERVER['SERVER_NAME']}" . $imgFiles . basename($val['Image']["tmp_name"]);
                   $data['Image'][$key]['Image']["partner_id"] = $partner_id;
                 }
               foreach ($data['Image'] as $key => $value) {

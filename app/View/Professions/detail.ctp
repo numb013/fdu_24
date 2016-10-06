@@ -88,6 +88,6 @@
   <div class="animate-box fh5co-cta">
     <div class="text-center container fh5co-heading">
       <h3 style="color:#369840; margin-top:0px;">You to suits profession found</h3>
-      <a href="/fdu24/" class="occupation_link">職業診断</a>
+      <a href="/" class="occupation_link">職業診断</a>
     </div>
   </div>

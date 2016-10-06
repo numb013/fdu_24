@@ -38,6 +38,7 @@ class PagesController extends AppController {
 	public $uses = array();
 
 	public function beforeFilter() {
+		$this->set('title_for_layout', 'ページタイトル');
 	 parent::beforeFilter();
 	 $this->Auth->allow('add', 'index', 'home', 'search', 'check_box', 'display');
 	}
@@ -50,6 +51,7 @@ class PagesController extends AppController {
 	 *	or MissingViewException in debug mode.
 	 */
 		public function display() {
+			$this->set('title_for_layout', 'あなたの為の職業診断CHECK');
 			$this->layout = "default";
 			$this->render('home');
 

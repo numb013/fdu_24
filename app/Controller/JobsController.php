@@ -34,6 +34,8 @@ class JobsController extends AppController {
 	public $paginate = array();
 
 	public function index($para = null) {
+		$this->set('title_for_layout', 'あなたの為の職業診断CHECK');
+
 		//echo pr($para);
 		//echo pr($this->request->query);
 		//echo pr($this->request->data);
@@ -48,9 +50,6 @@ class JobsController extends AppController {
 			$replaceText = str_replace("?", "", $this->request->query['param']);
 			$array1 = array();
 			parse_str($replaceText,  $array1);
-
-echo pr($array1);
-
 			if (!empty($array1['personal_check'])) {
 				foreach ($array1['personal_check'] as $key => $value) {
 					$this->request->query['personal_check'][$key] = $value;
@@ -67,10 +66,6 @@ echo pr($array1);
     // レイアウト関係
 		$this->Prg->commonProcess();
 		if (!empty($this->request->data)) {
-
-			echo pr($this->request->data);
-
-
 			if (count($this->request->data['Profession']['personal_check']) > 2) {
 				$personalCheck = '';
 				foreach ($this->request->data['Profession']['personal_check'] as $key => $value) {
@@ -157,6 +152,8 @@ echo pr($array1);
 
 
   public function search_more($para = null) {
+		$this->set('title_for_layout', 'さらに絞り込み検索');
+
 		//echo pr($this->request->query);
 		//echo pr($this->request->data);
 

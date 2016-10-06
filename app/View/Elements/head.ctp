@@ -2,7 +2,7 @@
 <header id="fh5co-header" role="banner">
   <div class="container">
     <div class="header-inner">
-      <h1><a href="/fdu24/">FDU<span>-</span>24</a></h1>
+      <h1><a href="/">FDU<span>-</span>24</a></h1>
       <?php if(empty($know_flag)): ?>
         <p class="title-small-text">あなたの為の<br>職業診断CHECK</p>
       <?php endif; ?>
@@ -32,7 +32,7 @@
     console.log(JSON.stringify(data));
     $.ajax({
       type: 'POST',
-      url: '/fdu24/professions/know_count',
+      url: '/professions/know_count',
       data: data,
       dataType: 'json',
       cache: false,
