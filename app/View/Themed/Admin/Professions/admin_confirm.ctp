@@ -95,6 +95,21 @@
             </td>
           </tr>
 
+          <tr>
+            <th>関連職業</th>
+            <td>
+              <?php if(!empty($data['Profession']['related_profession'])):?>
+                <?php $count = 0; ?>
+                <?php foreach ($data['Profession']['related_profession'] as $key => $related): ?>
+                  <?php if ($count == '0') {  echo ''; } else { echo '/'; } ; ?>
+                  <?php echo $relatedNmae[$related]; ?>
+                  <?php $count++ ; ?>
+                  <?php echo $this->Form->hidden('related_profession][]', array('value' => $related)); ?>
+                <?php endforeach; ?>
+              <?php endif; ?>
+            </td>
+          </tr>
+
 
           <tr>
             <th>リンク</th>

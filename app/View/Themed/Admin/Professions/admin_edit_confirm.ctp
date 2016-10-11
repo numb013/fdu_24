@@ -103,7 +103,25 @@
               <?php endif; ?>
             </td>
           </tr>
+<?php
+//echo pr($check_likes);
 
+ ?>
+
+          <tr>
+            <th>関連職業</th>
+            <td>
+              <?php if(!empty($data['Profession']['related_profession'])):?>
+                <?php $count = 0; ?>
+                <?php foreach ($data['Profession']['related_profession'] as $key => $related): ?>
+                  <?php if ($count == '0') {  echo ''; } else { echo '/'; } ; ?>
+                  <?php echo $relatedNmae[$related]; ?>
+                  <?php $count++ ; ?>
+                  <?php echo $this->Form->hidden('related_profession][]', array('value' => $related)); ?>
+                <?php endforeach; ?>
+              <?php endif; ?>
+            </td>
+          </tr>
           <tr>
             <td>リンク</td>
             <td><?php echo $data['Profession']['job_url']; ?></td>

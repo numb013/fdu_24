@@ -180,13 +180,57 @@ public function detail($id = null) {
 			);
 			$datas['Movie'] = $this->Movie->find('all', $status);
 		}
+
+//echo pr($datas);
+//exit();
+
+
+
+
+
+
+
+
+
 		$this->set('title_for_layout', $datas['Profession']['profession_name'].'のお仕事詳細');
 		$datas['Profession']['check_sex'] = explode(",", $datas['Profession']['check_sex']);
 		$datas['Profession']['check_personal'] = explode(",", $datas['Profession']['check_personal']);
 		$datas['Profession']['check_like'] = explode(",", $datas['Profession']['check_like']);
+		$datas['Profession']['related_profession'] = explode(",", $datas['Profession']['related_profession']);
+
+
+
+		$status = array(
+			'fields' => array(
+				'Profession.id', 'Profession.profession_name'
+			),
+			'conditions' =>
+			array(
+				'Profession.id' => $datas['Profession']['related_profession'],
+				'delete_flag' => 0
+			),
+			'recursive'  => -1
+		);
+		$related = $this->Profession->find('all', $status);
+
+//echo pr($this->Profession->getDataSource()->getLog());
+//exit();
+//echo pr($datas);
+//
+//
+//echo pr($related);
+//exit();
+
+
+
+
+
+
+
+
 		$this->_getCheckParameter();
 		$know_flag = 1;
-		$this->set(compact('datas', 'know_flag'));
+		$this->set(compact('datas', 'know_flag', 'related'));
 	}
 }
 
@@ -416,6 +460,30 @@ public function detail($id = null) {
 
 				$this->_getCheckParameter();
 
+
+				$options = array(
+					'fields' => array(
+						'Profession.id','Profession.profession_name'
+					),
+					'conditions' =>
+					array(
+						'delete_flag' => '0'
+					),
+					'recursive'  => -1
+				);
+
+				$relatedProfessions = $this->Profession->find('all', $options);
+
+				foreach ($relatedProfessions as $key => $relatedProfession) {
+					$relatedNmae[$relatedProfession['Profession']['id']] = $relatedProfession['Profession']['profession_name'];
+				}
+				$this->set('relatedNmae', $relatedNmae);
+
+
+
+
+
+
         $this->set('data',$this->request->data);
         $this->render('/Professions/admin_confirm');
 
@@ -462,7 +530,23 @@ public function detail($id = null) {
       }
     }
 
+		$options = array(
+			'fields' => array(
+				'Profession.id','Profession.profession_name'
+			),
+			'conditions' =>
+			array(
+				'delete_flag' => '0'
+			),
+			'recursive'  => -1
+		);
 
+		$relatedProfessions = $this->Profession->find('all', $options);
+
+		foreach ($relatedProfessions as $key => $relatedProfession) {
+			$related[$relatedProfession['Profession']['id']] = $relatedProfession['Profession']['profession_name'];
+		}
+		$this->set('related', $related);
 		$this->_getCheckParameter();
 
 
@@ -506,6 +590,7 @@ public function detail($id = null) {
 				$this->request->data['Profession']['check_sex'] = implode(",", $this->request->data['Profession']['check_sex']);
 				$this->request->data['Profession']['check_personal'] = implode(",", $this->request->data['Profession']['check_personal']);
 				$this->request->data['Profession']['check_like'] = implode(",", $this->request->data['Profession']['check_like']);
+				$this->request->data['Profession']['related_profession'] = implode(",", $this->request->data['Profession']['related_profession']);
 
 
         $data = $this->request->data;
@@ -573,6 +658,24 @@ public function detail($id = null) {
 /**/
 public function admin_edit($id = null){
 	$this->_getCheckParameter();
+
+	$options = array(
+		'fields' => array(
+			'Profession.id','Profession.profession_name'
+		),
+		'conditions' =>
+		array(
+			'delete_flag' => '0'
+		),
+		'recursive'  => -1
+	);
+
+	$relatedProfessions = $this->Profession->find('all', $options);
+
+	foreach ($relatedProfessions as $key => $relatedProfession) {
+		$related[$relatedProfession['Profession']['id']] = $relatedProfession['Profession']['profession_name'];
+	}
+	$this->set('related', $related);
 
 	//exit();
   // レイアウト関係
@@ -756,6 +859,28 @@ public function admin_edit($id = null){
 				$this->_getCheckParameter();
 
 
+				$options = array(
+					'fields' => array(
+						'Profession.id','Profession.profession_name'
+					),
+					'conditions' =>
+					array(
+						'delete_flag' => '0'
+					),
+					'recursive'  => -1
+				);
+
+				$relatedProfessions = $this->Profession->find('all', $options);
+
+				foreach ($relatedProfessions as $key => $relatedProfession) {
+					$relatedNmae[$relatedProfession['Profession']['id']] = $relatedProfession['Profession']['profession_name'];
+				}
+				$this->set('relatedNmae', $relatedNmae);
+
+
+
+
+
         $this->set('data',$this->request->data);
         $this->render('/Professions/admin_edit_confirm');
 
@@ -821,9 +946,11 @@ public function admin_edit($id = null){
         );
         // 以下がデータベース関係
         $this->request->data = $this->Profession->find('first', $status);
+
 				$this->request->data['Profession']['check_sex'] = explode(",", $this->request->data['Profession']['check_sex']);
 				$this->request->data['Profession']['check_personal'] = explode(",", $this->request->data['Profession']['check_personal']);
 				$this->request->data['Profession']['check_like'] = explode(",", $this->request->data['Profession']['check_like']);
+				$this->request->data['Profession']['related_profession'] = explode(",", $this->request->data['Profession']['related_profession']);
 
         if (!empty($this->request->data['Movie'])) {
           foreach ($this->request->data['Movie'] as $key => $MovieValue) {
@@ -874,6 +1001,7 @@ public function admin_edit($id = null){
 				$data['Profession']['check_sex'] = implode(",", $data['Profession']['check_sex']);
 				$data['Profession']['check_personal'] = implode(",",$data['Profession']['check_personal']);
 				$data['Profession']['check_like'] = implode(",", $data['Profession']['check_like']);
+				$data['Profession']['related_profession'] = implode(",", $data['Profession']['related_profession']);
 
 
 
@@ -1019,6 +1147,9 @@ public function admin_edit($id = null){
 			$datas['Profession']['check_sex'] = explode(",", $datas['Profession']['check_sex']);
 			$datas['Profession']['check_personal'] = explode(",", $datas['Profession']['check_personal']);
 			$datas['Profession']['check_like'] = explode(",", $datas['Profession']['check_like']);
+
+
+
 			$this->_getCheckParameter();
 
       $this->set('data',$datas);

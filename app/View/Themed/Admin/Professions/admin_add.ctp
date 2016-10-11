@@ -5,6 +5,13 @@
     <link href="jquery.rateyo.min.css" rel="stylesheet" type="text/css">
   </head>
   <body>
+    <?php
+
+//echo pr($related);
+//echo pr($check_personals);
+
+
+     ?>
     <h1>Add Page</h1>
     <?php echo $this->Form->create('Profession', array('type' => 'file', 'url' => 'add')); ?>
     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -117,6 +124,23 @@
           ?>
         </td>
       </tr>
+
+      <tr>
+        <th>関連職業</th>
+        <td>
+          <?php
+            echo $this->Form->input('Profession.related_profession', array(
+                'type' => 'select',
+                'label' => false,
+                'div' => false,
+                'multiple'=> 'checkbox',
+                'options' => $related,
+            ));
+          ?>
+        </td>
+      </tr>
+
+
       <tr>
         <th> リンク</th>
         <td><?php echo $this->Form->input('job_url', array('type' => 'text', 'label' => false, 'div' => false)); ?></td>

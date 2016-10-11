@@ -47,21 +47,30 @@
     </div>
   </div>
 
+<?php
+//cho pr($related);
+ ?>
+
   <div id="fh5co-blog" class="animate-box">
     <div class="container">
 
+<?php if(!empty($related)): ?>
       <div class="col-md-6" style="text-align:center;">
         <div class="Advertisement">
           <h3>この職業に興味がある方にオススメ</h3>
           <ul class="sns_list">
-            <li>グラフィックデザイナー</li>
-            <li>グラフィックデザイナー</li>
-            <li>グラフィックデザイナー</li>
+            <?php foreach ($related as $key => $value): ?>
+              <li>
+                <a href="<?php echo $value['Profession']['id']; ?>">
+                <?php echo $value['Profession']['profession_name']; ?>
+                </a>
+              </li>
+            <?php endforeach; ?>
           </ul>
-
-
         </div>
       </div>
+
+<?php endif; ?>
 
       <div class="col-md-6" style="text-align:center; margin-top:20px;">
         <div class="Advertisement">

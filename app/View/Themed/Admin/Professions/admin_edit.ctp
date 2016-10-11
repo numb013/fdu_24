@@ -3,16 +3,6 @@
     <title>Index Page</title>
   </head>
   <body>
-
-
-
-<?php
-
-//echo pr($this->request->data);
-
- ?>
-
-
     <p>MySampleData Edit Form.</p>
     <?php echo $this->Form->create('Profession', array('type' => 'file', 'url' => 'edit')); ?>
     <?php echo $this->Form->input('id'); ?>
@@ -123,6 +113,20 @@
                   'div' => false,
                   'multiple'=> 'checkbox',
                   'options' => $check_likes,
+              ));
+            ?>
+          </td>
+        </tr>
+        <tr>
+          <th>関連職業</th>
+          <td>
+            <?php
+              echo $this->Form->input('Profession.related_profession', array(
+                  'type' => 'select',
+                  'label' => false,
+                  'div' => false,
+                  'multiple'=> 'checkbox',
+                  'options' => $related,
               ));
             ?>
           </td>
