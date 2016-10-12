@@ -12,10 +12,10 @@
         <?php echo $this->Html->image($datas['Image'][0]['Image']['url'] ,array('class' => "yoko")); ?>
       </div>
       <div class="fh5co-copy col-md-12  text-center" style="padding:15px 0;">
-        <h3>仕事内容</h3>
+        <h3>仕事内容・詳細</h3>
         <div class="rofession_text">
           <p>
-            <?php echo $datas['Profession']['job_content']; ?>
+            <?php echo nl2br($datas['Profession']['job_content']); ?>
           </p>
         </div>
       </div>
@@ -34,15 +34,15 @@
     <div class="container">
         <div class="col-md-4 col-sm-4 text-center item-block animate-box">
           <h6>-STEP1-</h6>
-          <p class="job_step"><?php echo $datas['Profession']['job_step1']; ?></p>
+          <p class="job_step"><?php echo nl2br($datas['Profession']['job_step1']); ?></p>
         </div>
         <div class="col-md-4 col-sm-4 text-center item-block animate-box">
           <h6>-STEP2-</h6>
-          <p class="job_step"><?php echo $datas['Profession']['job_step2']; ?></p>
+          <p class="job_step"><?php echo nl2br($datas['Profession']['job_step2']); ?></p>
         </div>
         <div class="col-md-4 col-sm-4 text-center item-block animate-box">
           <h6>-STEP3-</h6>
-          <p class="job_step"><?php echo $datas['Profession']['job_step3']; ?></p>
+          <p class="job_step"><?php echo nl2br($datas['Profession']['job_step3']); ?></p>
         </div>
     </div>
   </div>
