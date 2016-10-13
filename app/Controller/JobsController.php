@@ -210,7 +210,6 @@ class JobsController extends AppController {
 				$datas['Movie'] = $this->Movie->find('all', $status);
 			}
 
-			$datas['Profession']['check_sex'] = explode(",", $datas['Profession']['check_sex']);
 			$datas['Profession']['check_personal'] = explode(",", $datas['Profession']['check_personal']);
 			$datas['Profession']['check_like'] = explode(",", $datas['Profession']['check_like']);
 			$this->_getCheckParameter();
@@ -270,10 +269,9 @@ class JobsController extends AppController {
 		$check_personals = $this->Master->getCheckPersonals();
 		$check_likes = $this->Master->getCheckLikes();
 		$like_checks = $this->Master->getLikeChecks();
-		$check_sex = $this->Master->getCheckSex();
 		$genre = $this->Master->getGenre();
 		$like_genre = $this->Master->getlikeGenre();
-		$this->set(compact("check_likes", "check_personals", "check_sex", "genre", "like_genre", "like_checks"));
+		$this->set(compact("check_likes", "check_personals", "genre", "like_genre", "like_checks"));
 		return;
 	}
 }

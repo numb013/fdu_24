@@ -45,30 +45,19 @@
             <?php echo $this->Form->hidden('Profession.job_content', array('value' => $data['Profession']['job_content'])); ?>
           </tr>
           <tr>
-            <th>ステップ1</th>
-            <td><?php echo $data['Profession']['job_step1']; ?></td>
-            <?php echo $this->Form->hidden('Profession.job_step1', array('value' => $data['Profession']['job_step1'])); ?>
+            <th>なりかた</th>
+            <td><?php echo $data['Profession']['job_step']; ?></td>
+            <?php echo $this->Form->hidden('Profession.job_step', array('value' => $data['Profession']['job_step'])); ?>
           </tr>
           <tr>
-            <th>ステップ2</th>
-            <td><?php echo $data['Profession']['job_step2']; ?></td>
-            <?php echo $this->Form->hidden('Profession.job_step2', array('value' => $data['Profession']['job_step2'])); ?>
+            <th>向いてる性格</th>
+            <td><?php echo $data['Profession']['personality']; ?></td>
+            <?php echo $this->Form->hidden('Profession.personality', array('value' => $data['Profession']['personality'])); ?>
           </tr>
           <tr>
-            <th>ステップ3</th>
-            <td><?php echo $data['Profession']['job_step3']; ?></td>
-            <?php echo $this->Form->hidden('Profession.job_step3', array('value' => $data['Profession']['job_step3'])); ?>
-          </tr>
-          <tr>
-            <th>性別</th>
-            <td>
-              <?php if(!empty($data['Profession']['check_sex'])):?>
-                <?php foreach ($data['Profession']['check_sex'] as $key => $sex): ?>
-                  <?php echo $check_sex[$sex]; ?>
-                  <?php echo $this->Form->hidden('check_sex][]', array('value' => $sex)); ?>
-                <?php endforeach; ?>
-              <?php endif; ?>
-            </td>
+            <th>給料</th>
+            <td><?php echo $data['Profession']['job_salary']; ?></td>
+            <?php echo $this->Form->hidden('Profession.job_salary', array('value' => $data['Profession']['job_salary'])); ?>
           </tr>
           <tr>
             <th>性格</th>
@@ -94,7 +83,6 @@
               <?php endif; ?>
             </td>
           </tr>
-
           <tr>
             <th>関連職業</th>
             <td>
@@ -108,13 +96,6 @@
                 <?php endforeach; ?>
               <?php endif; ?>
             </td>
-          </tr>
-
-
-          <tr>
-            <th>リンク</th>
-            <td><?php echo $data['Profession']['job_url']; ?></td>
-            <?php echo $this->Form->hidden('Profession.job_url', array('value' => $data['Profession']['job_url'])); ?>
           </tr>
           <tr>
             <th>コアステータス</th>

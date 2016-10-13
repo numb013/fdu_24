@@ -61,33 +61,20 @@
         <?php endif;?>
         </tr>
         <tr>
-          <td> 職業内容</td>
+          <td>職業内容</td>
           <td><?php echo $this->Form->textarea('job_content', array('type' => 'text', 'label' => false, 'div' => false)); ?></td>
         </tr>
         <tr>
-          <td> ステップ1</td>
-          <td><?php echo $this->Form->textarea('job_step1', array('type' => 'text', 'label' => false, 'div' => false)); ?></td>
+          <td>なりかた</td>
+          <td><?php echo $this->Form->textarea('job_step', array('type' => 'text', 'label' => false, 'div' => false)); ?></td>
         </tr>
         <tr>
-          <td> ステップ2</td>
-          <td><?php echo $this->Form->textarea('job_step2', array('type' => 'text', 'label' => false, 'div' => false)); ?></td>
+          <td>向いてる性格</td>
+          <td><?php echo $this->Form->textarea('personality', array('type' => 'text', 'label' => false, 'div' => false)); ?></td>
         </tr>
         <tr>
-          <td> ステップ3</td>
-          <td><?php echo $this->Form->textarea('job_step3', array('type' => 'text', 'label' => false, 'div' => false)); ?></td>
-        </tr>
-        <tr>
-          <td>性別</td>
-          <td>
-            <?php
-              echo $this->Form->input('Profession.check_sex', array(
-                  'type' => 'select',
-                  'label' => false,
-                  'multiple'=> 'checkbox',
-                  'options' => $check_sex,
-              ));
-            ?>
-          </td>
+          <td>給料</td>
+          <td><?php echo $this->Form->textarea('job_salary', array('type' => 'text', 'label' => false, 'div' => false)); ?></td>
         </tr>
         <tr>
           <td> 性格など</td>
@@ -130,10 +117,6 @@
               ));
             ?>
           </td>
-        </tr>
-        <tr>
-          <td> リンク</td>
-          <td><?php echo $this->Form->input('job_url', array('type' => 'text', 'label' => false, 'div' => false)); ?></td>
         </tr>
         <tr>
           <td>コアステータス</td>

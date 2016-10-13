@@ -64,7 +64,7 @@
   <?php else: ?>
     <?php foreach ($datas as $data): ?>
       <div class="job-memu animate-box">
-        <a href="/professions/<?php echo $data['Profession']['id']; ?>">
+        <a href="professions/detail/<?php echo $data['Profession']['id']; ?>">
           <div class="photo-cut">
             <?php echo $this->Html->image($data['Image']['url'] ,array('width' => '100%' )); ?>
           </div>

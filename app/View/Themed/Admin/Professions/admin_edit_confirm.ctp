@@ -47,19 +47,19 @@
             <?php echo $this->Form->hidden('Profession.job_content', array('value' => $data['Profession']['job_content'])); ?>
           </tr>
           <tr>
-            <td>ステップ1</td>
-            <td><?php echo $data['Profession']['job_step1']; ?></td>
-            <?php echo $this->Form->hidden('Profession.job_step1', array('value' => $data['Profession']['job_step1'])); ?>
+            <td>なりかた</td>
+            <td><?php echo $data['Profession']['job_step']; ?></td>
+            <?php echo $this->Form->hidden('Profession.job_step', array('value' => $data['Profession']['job_step'])); ?>
           </tr>
           <tr>
-            <td>ステップ2</td>
-            <td><?php echo $data['Profession']['job_step2']; ?></td>
-            <?php echo $this->Form->hidden('Profession.job_step2', array('value' => $data['Profession']['job_step2'])); ?>
+            <td>向いてる性格</td>
+            <td><?php echo $data['Profession']['personality']; ?></td>
+            <?php echo $this->Form->hidden('Profession.personality', array('value' => $data['Profession']['personality'])); ?>
           </tr>
           <tr>
-            <td>ステップ3</td>
-            <td><?php echo $data['Profession']['job_step3']; ?></td>
-            <?php echo $this->Form->hidden('Profession.job_step3', array('value' => $data['Profession']['job_step3'])); ?>
+            <td>給料</td>
+            <td><?php echo $data['Profession']['job_salary']; ?></td>
+            <?php echo $this->Form->hidden('Profession.job_salary', array('value' => $data['Profession']['job_salary'])); ?>
           </tr>
           <tr>
             <td>性別</td>
@@ -103,11 +103,6 @@
               <?php endif; ?>
             </td>
           </tr>
-<?php
-//echo pr($check_likes);
-
- ?>
-
           <tr>
             <th>関連職業</th>
             <td>
@@ -123,17 +118,10 @@
             </td>
           </tr>
           <tr>
-            <td>リンク</td>
-            <td><?php echo $data['Profession']['job_url']; ?></td>
-            <?php echo $this->Form->hidden('Profession.job_url', array('value' => $data['Profession']['job_url'])); ?>
-          </tr>
-
-          <tr>
             <td>コアステータス</td>
             <td><?php echo $data['Profession']['core_status']; ?></td>
             <?php echo $this->Form->hidden('Profession.core_status', array('value' => $data['Profession']['core_status'])); ?>
           </tr>
-
           <tr>
             <td>動画</td>
             <td>

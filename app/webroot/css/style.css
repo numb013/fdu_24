@@ -77,11 +77,12 @@ div ul.sns_list{
 li.sns_button{
   color: #fff;
   float: left;;
-  width: 32%;
+  width: 30%;
   background: #ff0;
   margin: 0 2px;
   padding: 10px 20px;
   border-radius: 5px;
+  font-size: 10px;
 }
 
 h2.professions_title {
@@ -105,7 +106,7 @@ a.occupation_link {
 }
 
 .job_step {
-  padding: 0 4px 4px 4px;
+  padding: 0px 4px 15px 4px;
 }
 .core_status{
   color:#f16200;
@@ -629,6 +630,12 @@ li.core_text {
   border-bottom: 3px solid #aaa;
 }
 
+.item-block {
+  margin-bottom: 20px;
+}
+.fh5co-services {
+  padding: 0px 0px 20px 0px;
+}
 @media screen and (max-width: 323px) {
   #fh5co-header .header-inner ul {
     margin-top: -15px;
@@ -642,6 +649,7 @@ li.core_text {
     line-height: 16px;
     color: #000;
   }
+
 }
 
 @media screen and (min-width: 445px) {
@@ -805,6 +813,12 @@ li.core_text {
   .col-xs-push-0 {
     margin-top: 55px;
   }
+
+.detail_tex {
+  padding: 20px 0;
+}
+
+
 }
 
 @media (min-width: 992px) {
@@ -896,6 +910,11 @@ li.core_text {
     text-align: center;
     margin: 0 auto;
   }
+
+  .detail_tex {
+    padding: 30px 0;
+  }
+
 }
 
 @media screen and (min-width: 1024px) {
@@ -926,6 +945,7 @@ li.core_text {
   .rofession_text {
     width: 80%;
     margin: 0 auto;
+    padding-top: 10px;
   }
   li.sns_button{
     width:32%;
@@ -1324,14 +1344,12 @@ li.core_text {
 
 @media screen and (min-width: 1280px) {
   .rofession_text {
-    width: 70%;
+    width: 60%;
     margin: 0 auto;
   }
 }
 
-#fh5co-why-us, .fh5co-services {
-  padding: 3em 0;
-}
+
 
 #fh5co-why-us .item-block .icon, .fh5co-services .item-block .icon {
   display: block;
@@ -1423,7 +1441,7 @@ li.core_text {
   }
 }
 #fh5co-testimonial .item-block {
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
 #fh5co-testimonial .item-block blockquote {
   margin-bottom: 70px;

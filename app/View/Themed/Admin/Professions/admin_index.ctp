@@ -14,26 +14,13 @@
     </td>
   </tr>
   <tr>
-    <td> 職業名</td>
+    <td>職業名</td>
     <td>
       <?php echo $this->Form->input('profession_name', array('label' => false, 'div' => false)); ?>
     </td>
   </tr>
   <tr>
-    <td>性別</td>
-    <td>
-      <?php
-        echo $this->Form->input('Profession.check_sex', array(
-          'type' => 'select',
-          'label' => false,
-          'multiple'=> 'checkbox',
-          'options' => $check_sex,
-        ));
-      ?>
-    </td>
-  </tr>
-  <tr>
-    <td> 性格など</td>
+    <td>性格など</td>
     <td>
       <?php
         echo $this->Form->input('Profession.check_personal', array(
@@ -47,7 +34,7 @@
     </td>
   </tr>
   <tr>
-    <td> 好きなこと</td>
+    <td>好きなこと</td>
     <td>
       <?php
         echo $this->Form->input('Profession.check_like', array(

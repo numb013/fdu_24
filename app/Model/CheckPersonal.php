@@ -73,10 +73,6 @@
        'core_status' => array(
          'type' => 'value'
        ),
-       'check_sex' => array(
-         'type' => 'query',
-         'method' => 'CheckSex',
-       ),
        'CheckPersonal' => array(
          'type' => 'query',
          'method' => 'CheckPers',
@@ -86,22 +82,6 @@
          'method' => 'CheckLike',
        ),
      );
-
-     public function CheckSex($data = array()) {
-   		$conditions = array();
-   		// 案件カテゴリー
-   		if (!empty($data['check_sex'])) {
-   			$r = array();
-   			foreach ($data['check_sex'] as $val) {
-   				if (!empty($val)) {
-   					$r[] = 'FIND_IN_SET(\'' . $val . '\', Profession.check_sex)';
-   				}
-   			}
-   			$r[] = 'check_sex IS NULL ';
-   			$conditions[]['OR'] = $r;
-   		}
-   		return $conditions;
-   	}
 
      public function CheckPers($data = array()) {
    		$conditions = array();

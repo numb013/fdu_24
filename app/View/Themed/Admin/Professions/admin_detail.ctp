@@ -42,61 +42,43 @@
           <td><?php echo $data['Profession']['job_content']; ?></td>
         </tr>
         <tr>
-          <td>STEP１</td>
-          <td><?php echo $data['Profession']['job_step1']; ?></td>
+          <td>なりかた</td>
+          <td><?php echo $data['Profession']['job_step']; ?></td>
         </tr>
         <tr>
-          <td>STEP2</td>
-          <td><?php echo $data['Profession']['job_step2']; ?></td>
+          <td>向いてる性格</td>
+          <td><?php echo $data['Profession']['personality']; ?></td>
         </tr>
         <tr>
-          <td>STEP3</td>
-          <td><?php echo $data['Profession']['job_step3']; ?></td>
+          <td>給料</td>
+          <td><?php echo $data['Profession']['job_salary']; ?></td>
         </tr>
-
         <tr>
-          <td>性別</td>
-        <td>
-          <?php if(!empty($data['Profession']['check_sex'])):?>
-            <?php $count = 0; ?>
-            <?php foreach ($data['Profession']['check_sex'] as $key => $sex): ?>
-            <?php if ($count == '0') {  echo ''; } else { echo '/'; } ; ?>
-            <?php echo $check_sex[$sex]; ?>
-            <?php $count++ ; ?>
-            <?php endforeach; ?>
-          <?php endif; ?>
-        </td>
-      </tr>
-
-      <tr>
-        <td>性格</td>
-        <td>
-          <?php if(!empty($data['Profession']['check_personal'])):?>
-            <?php $count = 0; ?>
-            <?php foreach ($data['Profession']['check_personal'] as $key => $personal): ?>
-            <?php if ($count == '0') {  echo ''; } else { echo '/'; } ; ?>
-            <?php echo $check_personals[$personal]; ?>
-            <?php $count++ ; ?>
-            <?php endforeach; ?>
-          <?php endif; ?>
-        </td>
-      </tr>
-
-      <tr>
-        <td>好きなこと</td>
-        <td>
-          <?php if(!empty($data['Profession']['check_like'])):?>
-            <?php $count = 0; ?>
-            <?php foreach ($data['Profession']['check_like'] as $key => $like): ?>
+          <td>性格</td>
+          <td>
+            <?php if(!empty($data['Profession']['check_personal'])):?>
+              <?php $count = 0; ?>
+              <?php foreach ($data['Profession']['check_personal'] as $key => $personal): ?>
               <?php if ($count == '0') {  echo ''; } else { echo '/'; } ; ?>
-              <?php echo $check_likes[$like]; ?>
+              <?php echo $check_personals[$personal]; ?>
               <?php $count++ ; ?>
-            <?php endforeach; ?>
-          <?php endif; ?>
-        </td>
-      </tr>
-
-
+              <?php endforeach; ?>
+            <?php endif; ?>
+          </td>
+        </tr>
+        <tr>
+          <td>好きなこと</td>
+          <td>
+            <?php if(!empty($data['Profession']['check_like'])):?>
+              <?php $count = 0; ?>
+              <?php foreach ($data['Profession']['check_like'] as $key => $like): ?>
+                <?php if ($count == '0') {  echo ''; } else { echo '/'; } ; ?>
+                <?php echo $check_likes[$like]; ?>
+                <?php $count++ ; ?>
+              <?php endforeach; ?>
+            <?php endif; ?>
+          </td>
+        </tr>
         <tr>
           <td>動画</td>
           <td>
@@ -112,11 +94,6 @@
               なし
             <?php endif; ?>
           </td>
-        </tr>
-
-        <tr>
-          <td>URL</td>
-          <td><?php echo $data['Profession']['job_url']; ?></td>
         </tr>
         <tr>
           <td>コア度</td>

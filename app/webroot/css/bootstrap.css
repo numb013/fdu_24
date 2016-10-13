@@ -414,7 +414,7 @@ img {
 
 @media screen and (min-width: 1280px) {
   .yoko {
-    width: 70%;
+    width: 60%;
   }
 
 }
@@ -943,7 +943,7 @@ pre code {
 }
 @media (min-width: 1200px) {
   .container {
-    width: 70%;
+    width: 60%;
   }
 }
 
