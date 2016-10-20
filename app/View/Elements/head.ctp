@@ -2,10 +2,17 @@
 <header id="fh5co-header" role="banner">
   <div class="container">
     <div class="header-inner">
-      <h1><a href="/">FDU<span>-</span>24</a></h1>
-      <?php if(empty($know_flag)): ?>
-        <p class="title-small-text">あなたの為の<br>職業診断CHECK</p>
-      <?php endif; ?>
+      <h1>
+
+          <?php if ($_SERVER['DOCUMENT_ROOT'] == 'C:/xampp/htdocs'): ?>
+            <a href="/fdu24/">
+          <?php else: ?>
+            <a href="/">
+          <?php endif; ?>
+          FDU<span>-</span>24
+        </a>
+      </h1>
+        <p class="title-small-text">どこよりも簡単な<br>職業診断チェック</p>
     </div>
     <?php if(!empty($back_flag)): ?>
       <div class="history_back">
@@ -15,7 +22,7 @@
 
       <div class="job_know">
         <a href="javascript:void(0);" class='know_count plus' id="<?php echo $datas['Profession']['id'];?>">
-          この職業知ってた : <span class="count"><?php echo $datas['Profession']['know_count']; ?></span>
+          知ってた職業 : <span class="count"><?php echo $datas['Profession']['know_count']; ?></span>
         </a>
       </div>
     <?php endif; ?>

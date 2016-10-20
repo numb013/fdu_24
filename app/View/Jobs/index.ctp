@@ -1,9 +1,27 @@
+
 <?php if(!empty($flag)): ?>
 <aside id="fh5co-hero" clsas="js-fullheight">
+  <?php
+  //echo '<br>';
+  //echo '<br>';
+  //echo '<br>';
+  //echo '<br>';
+  //echo '<br>';
+  //echo '<br>';
+  //echo '<br>';
+  //echo pr($this->request->data);
+  //echo pr($data);
+//$this->request->data['Profession']['personal_check'] = '1'
+   ?>
     <div>
       <div class="col-md-12 text-center" style="padding:0px;background:#000;">
         <div class="slider-checkbox-inner">
+          <?php if(empty($error)): ?>
           <div class="checkbox-title">当てはまる項目を3つ以上チェックしてください</div>
+        <?php else: ?>
+          <div class="checkbox-title error_text">当てはまる項目を3つ以上チェックしてください</div>
+        <?php endif; ?>
+
           <?php echo $this->Form->create('jobs', array('type' => 'file', 'url' =>  'index')); ?>
           <div class="check-group clearfix ">
             <?php
@@ -24,7 +42,6 @@
       </div>
     </div>
 </aside>
-
 
 <?php elseif(!empty($datas)): ?>
 
@@ -47,24 +64,35 @@
       </div>
       <div class="job-page">
         <?php
-          echo $this->Paginator->first('<< ');
+          echo $this->Paginator->first('<<');
           echo $this->Paginator->numbers(
-            array('separator' => '/','modulus'=>2));
-          echo $this->Paginator->last(' >>');
+            array('separator' => '','modulus'=>2));
+          echo $this->Paginator->last('>>');
         ?>
       </div>
     </div>
   </div>
 
   <div class="col-md-offset-0 text-center fh5co-heading animate-box job-box" style="clear: both;">
-  <?php if (count($datas) == 0): ?>
-    <div class="job-memu">
-      <p>データございません</p>
+
+
+
+  <?php if ($datas == 'notdata'): ?>
+    <div class="job-notdata">
+      <p>該当する職業がございません</p>
+      <?php echo $this->Html->image("gomen.jpg", array('width'=> '100%', 'alt' => 'ごめん猫')); ?>
     </div>
   <?php else: ?>
     <?php foreach ($datas as $data): ?>
-      <div class="job-memu animate-box">
-        <a href="/professions/<?php echo $data['Profession']['id']; ?>">
+      <div class="job-memu animate-box sss">
+
+        <?php if ($_SERVER['DOCUMENT_ROOT'] == 'C:/xampp/htdocs'): ?>
+          <a href="/fdu24/professions/detail/<?php echo $data['Profession']['id']; ?>">
+        <?php else: ?>
+          <a href="/professions/detail/<?php echo $data['Profession']['id']; ?>">
+        <?php endif; ?>
+
+
           <div class="photo-cut">
             <?php echo $this->Html->image($data['Image']['url'] ,array('width' => '100%' )); ?>
           </div>
@@ -96,10 +124,10 @@
     </div>
     <div class="job-page">
       <?php
-        echo $this->Paginator->first('<< ');
+        echo $this->Paginator->first('<<');
         echo $this->Paginator->numbers(
-          array('separator' => '/','modulus'=>2));
-        echo $this->Paginator->last(' >>');
+          array('separator' => '','modulus'=>2));
+        echo $this->Paginator->last('>>');
       ?>
     </div>
   </div>

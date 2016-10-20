@@ -12,7 +12,7 @@
         <?php echo $this->Html->image($datas['Image'][0]['Image']['url'] ,array('class' => "yoko")); ?>
       </div>
       <div class="fh5co-copy col-md-12  text-center detail_tex">
-        <h3>仕事内容・詳細</h3>
+        <h3 class="detail_title">仕事内容・詳細</h3>
         <div class="rofession_text">
           <p>
             <?php echo nl2br($datas['Profession']['job_content']); ?>
@@ -22,7 +22,7 @@
   </div>
 
   <div class="fh5co-copy col-md-12  text-center detail_tex">
-    <h3><?php echo $datas['Profession']['profession_name']; ?>になる為には</h3>
+    <h3 class="detail_title"><?php echo $datas['Profession']['profession_name']; ?>になる為には</h3>
     <div class="rofession_text">
       <p>
         <?php echo nl2br($datas['Profession']['job_step']); ?>
@@ -33,19 +33,19 @@
   <div id ='fh5co-why-us' class="fh5co-services">
     <div class="container">
         <div class="col-md-4 col-sm-4 text-center item-block animate-box">
-          <h3>この職業に向いてる性格</h3>
+          <h3 class="detail_title"><?php echo $datas['Profession']['profession_name']; ?>に向いてる性格</h3>
           <p class="job_step">
             <?php echo nl2br($datas['Profession']['personality']); ?>
           </p>
         </div>
         <div class="col-md-4 col-sm-4 text-center item-block animate-box">
-          <h3>この職業の年収・収入・給料</h3>
+          <h3 class="detail_title"><?php echo $datas['Profession']['profession_name']; ?>のお給料</h3>
           <p class="job_step">
             <?php echo nl2br($datas['Profession']['job_salary']); ?>
           </p>
         </div>
         <div class="col-md-4 col-sm-4 text-center item-block animate-box">
-          <h3>この職業に興味がある方にオススメ</h3>
+          <h3 class="detail_title">その他のオススメ職業</h3>
             <?php foreach ($related as $key => $value): ?>
               <li>
                 <a href="<?php echo $value['Profession']['id']; ?>">
@@ -61,7 +61,7 @@
   <div id ='fh5co-why-us' class="fh5co-services">
     <div class="container">
         <div class="col-md-4 col-sm-4 text-center item-block animate-box">
-          <h3>関連動画</h3>
+          <h3 class="detail_title">関連動画</h3>
           <?php echo '<iframe width="230" height="140" src='.'https://www.youtube.com/embed/'.$datas['Movie'][0]['Movie']['movie_url'].' frameborder="0" allowfullscreen></iframe>' ?>
         </div>
         <div class="col-md-4 col-sm-4 text-center item-block animate-box">

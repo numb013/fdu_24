@@ -36,6 +36,7 @@ class JobsController extends AppController {
 	public function index($para = null) {
 		$this->set('title_for_layout', 'あなたの為の職業診断CHECK');
 
+
 		//echo pr($para);
 		//echo pr($this->request->query);
 		//echo pr($this->request->data);
@@ -112,21 +113,24 @@ class JobsController extends AppController {
 
 				$this->paginate = $sql; //$sqlの中身は生SQL
 				$datas = $this->paginate('Job');
-				$count = count($datas);
+
+				if (empty($datas)) {
+					$datas = 'notdata';
+				}
+
 				$back_flag = 1;
-				$this->set(compact('datas', 'para', 'param', 'count', 'back_flag'));
+				$this->set(compact('datas', 'para', 'param', 'back_flag'));
 			} else {
-				$data = $this->request->data['Profession']['personal_check'];
-				return $this->redirect(array('action' => 'index'));
-				//return false;
+				$flag = 1;
+				$error = 'error_text';
+				$this->set(compact('flag', 'para', 'error'));
 			}
 		} else {
 			// 初期表示時
 			$this->Session->delete('personal_check');
-
 			$this->paginate = array(
 				'conditions' => array(
-				   'delete_flag' => '0'
+					 'delete_flag' => '0'
 				 ),
 				'order' => array(
 					'created' => 'DESC',
@@ -148,6 +152,7 @@ class JobsController extends AppController {
 
 		$this->_getCheckParameter();
     //$this->set(compact('para', 'param', 'count'));
+
 	}
 
 
