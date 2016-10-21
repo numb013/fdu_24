@@ -64,10 +64,10 @@
       </div>
       <div class="job-page">
         <?php
-          echo $this->Paginator->first('<<');
+          echo $this->Paginator->first('◂');
           echo $this->Paginator->numbers(
             array('separator' => '','modulus'=>2));
-          echo $this->Paginator->last('>>');
+          echo $this->Paginator->last('▸');
         ?>
       </div>
     </div>
@@ -124,10 +124,10 @@
     </div>
     <div class="job-page">
       <?php
-        echo $this->Paginator->first('<<');
+        echo $this->Paginator->first('◂');
         echo $this->Paginator->numbers(
           array('separator' => '','modulus'=>2));
-        echo $this->Paginator->last('>>');
+        echo $this->Paginator->last('▸');
       ?>
     </div>
   </div>

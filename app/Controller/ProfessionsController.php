@@ -168,6 +168,10 @@ public function detail($id = null) {
 			$datas['Image'] = $this->Image->find('all', $status);
 		}
 
+//echo pr($datas['Image']);
+//exit();
+
+
 		if (!empty($datas['Profession']['movie_flag'])) {
 			$id = $datas['Profession']['id'];
 			$status = array(

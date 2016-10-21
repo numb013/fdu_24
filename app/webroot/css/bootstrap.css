@@ -383,6 +383,9 @@ img {
   .yoko {
       display: none;
   }
+  .yoko_img {
+      display: none;
+  }
 }
 
 @media screen and (min-width: 415px) {
@@ -392,6 +395,10 @@ img {
   .yoko {
     width: 100%;
   }
+  .yoko_img {
+    width: 100%;
+  }
+
 }
 
 
@@ -416,7 +423,6 @@ img {
   .yoko {
     width: 60%;
   }
-
 }
 
 

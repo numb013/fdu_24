@@ -5,6 +5,7 @@
   //exit();
 
    ?>
+
   <div class="job-img">
       <div class="fh5co-copy col-md-12 img-responsive">
           <h1 class="profession_title"><?php echo $datas['Profession']['profession_name']; ?></h1>
@@ -15,7 +16,7 @@
         <h3 class="detail_title">仕事内容・詳細</h3>
         <div class="rofession_text">
           <p>
-            <?php echo nl2br($datas['Profession']['job_content']); ?>
+            <?php echo $datas['Profession']['job_content']; ?>
           </p>
         </div>
       </div>
@@ -25,17 +26,29 @@
     <h3 class="detail_title"><?php echo $datas['Profession']['profession_name']; ?>になる為には</h3>
     <div class="rofession_text">
       <p>
-        <?php echo nl2br($datas['Profession']['job_step']); ?>
+        <?php echo $datas['Profession']['job_step']; ?>
       </p>
     </div>
   </div>
+
+<?php if(!empty($datas['Image'][1])): ?>
+  <div class="fh5co-copy col-md-12  text-center detail_tex">
+    <div class="rofession_text">
+      <div class="fh5co-copy col-md-12">
+        <?php echo $this->Html->image($datas['Image'][1]['Image']['url'] ,array('width' => '100%', 'class' => "work-img")); ?>
+        <?php echo $this->Html->image($datas['Image'][1]['Image']['url'] ,array('class' => "yoko_img")); ?>
+      </div>
+    </div>
+  </div>
+<?php endif; ?>
+
 
   <div id ='fh5co-why-us' class="fh5co-services">
     <div class="container">
         <div class="col-md-4 col-sm-4 text-center item-block animate-box">
           <h3 class="detail_title"><?php echo $datas['Profession']['profession_name']; ?>に向いてる性格</h3>
           <p class="job_step">
-            <?php echo nl2br($datas['Profession']['personality']); ?>
+            <?php echo $datas['Profession']['personality']; ?>
           </p>
         </div>
         <div class="col-md-4 col-sm-4 text-center item-block animate-box">
