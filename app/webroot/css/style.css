@@ -121,6 +121,11 @@ a.occupation_link {
   padding: 0 15px 20px 15px;
 }
 
+div.buttom_edit {
+  float: left;
+  margin-right: 50px;
+}
+
 .profession_title {
   padding-top: 10px ;
   font-size: 20px;

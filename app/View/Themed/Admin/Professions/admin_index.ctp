@@ -19,6 +19,10 @@
       <?php echo $this->Form->input('profession_name', array('label' => false, 'div' => false)); ?>
     </td>
   </tr>
+
+
+
+<!--
   <tr>
     <td>性格など</td>
     <td>
@@ -60,6 +64,10 @@
        ?>
     </td>
   </tr>
+-->
+
+
+
   <tr>
   <td>
     <?php echo $this->Form->end('検索'); ;?>

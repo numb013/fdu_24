@@ -69,22 +69,22 @@
        <?php endif;?>
       <tr>
         <th> 職業内容</th>
-        <td><?php echo $this->Form->textarea('job_content', array('type' => 'text', 'cols' => 80, 'rows' => 10, 'label' => false, 'div' => false)); ?></td>
+        <td><?php echo $this->Form->textarea('job_content', array('type' => 'text', 'label' => false, 'div' => false, 'rows' => 10, 'style' => 'width:100%')); ?></td>
       </tr>
       <tr>
         <th>なり方</th>
-        <td><?php echo $this->Form->textarea('job_step', array('type' => 'text', 'cols' => 80, 'rows' => 10, 'label' => false, 'div' => false)); ?></td>
+        <td><?php echo $this->Form->textarea('job_step', array('type' => 'text', 'label' => false, 'div' => false, 'rows' => 10, 'style' => 'width:100%')); ?></td>
       </tr>
       <tr>
         <th>向いてる性格</th>
-        <td><?php echo $this->Form->textarea('Profession.personality', array('type' => 'text', 'cols' => 60, 'rows' => 5, 'label' => false, 'div' => false)); ?></td>
+        <td><?php echo $this->Form->textarea('Profession.personality', array('type' => 'text', 'label' => false, 'div' => false, 'rows' => 5, 'style' => 'width:100%')); ?></td>
       </tr>
       <tr>
         <th>給料</th>
-        <td><?php echo $this->Form->textarea('Profession.job_salary', array('type' => 'text', 'cols' => 60, 'rows' => 5, 'label' => false, 'div' => false)); ?></td>
+        <td><?php echo $this->Form->textarea('Profession.job_salary', array('type' => 'text', 'label' => false, 'div' => false, 'rows' => 10, 'style' => 'width:100%')); ?></td>
       </tr>
       <tr>
-        <th> 性格など</th>
+        <th> 性格など</th>  
         <td>
           <?php
             echo $this->Form->input('Profession.check_personal', array(

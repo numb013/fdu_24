@@ -303,7 +303,7 @@ public function detail($id = null) {
 				   'delete_flag' => '0'
 				 ),
 				'order' => array(
-					'created' => 'DESC',
+					'modified' => 'DESC',
 				),
 			);
 		} else {

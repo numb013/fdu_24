@@ -62,19 +62,19 @@
         </tr>
         <tr>
           <td>職業内容</td>
-          <td><?php echo $this->Form->textarea('job_content', array('type' => 'text', 'cols' => 80, 'rows' => 10, 'label' => false, 'div' => false)); ?></td>
+          <td><?php echo $this->Form->textarea('job_content', array('type' => 'text', 'label' => false, 'div' => false, 'rows' => 10, 'style' => 'width:100%')); ?></td>
         </tr>
         <tr>
           <td>なりかた</td>
-          <td><?php echo $this->Form->textarea('job_step', array('type' => 'text', 'cols' => 80, 'rows' => 10, 'label' => false, 'div' => false)); ?></td>
+          <td><?php echo $this->Form->textarea('job_step', array('type' => 'text', 'label' => false, 'div' => false, 'rows' => 10, 'style' => 'width:100%')); ?></td>
         </tr>
         <tr>
           <td>向いてる性格</td>
-          <td><?php echo $this->Form->textarea('personality', array('type' => 'text', 'cols' => 60, 'rows' => 5, 'label' => false, 'div' => false)); ?></td>
+          <td><?php echo $this->Form->textarea('personality', array('type' => 'text', 'label' => false, 'div' => false, 'rows' => 5, 'style' => 'width:100%')); ?></td>
         </tr>
         <tr>
           <td>給料</td>
-          <td><?php echo $this->Form->textarea('job_salary', array('type' => 'text', 'cols' => 60, 'rows' => 5, 'label' => false, 'div' => false)); ?></td>
+          <td><?php echo $this->Form->textarea('job_salary', array('type' => 'text', 'label' => false, 'div' => false, 'rows' => 5, 'style' => 'width:100%')); ?></td>
         </tr>
         <tr>
           <td> 性格など</td>
@@ -200,9 +200,13 @@
       }
     }
     ?>
-    <?php echo $this->Form->end('submit'); ;?>
-    <?php echo $this->Html->link('戻る', array('controller' => 'Professions', 'action' => 'index')); ?>
 
+    <div class="buttom_edit" style="float:left; margin-right:50px;">
+
+      <?php echo $this->Form->end('submit') ;?>
+    </div>
+
+          <?php echo $this->Html->link('戻る', array('controller' => 'Professions', 'action' => 'index')); ?>
     <script type="text/javascript">
       function photodelete(chkID){
         Myid=document.getElementById(chkID);
