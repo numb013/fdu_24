@@ -36,123 +36,125 @@ class JobsController extends AppController {
 	public function index($para = null) {
 		$this->set('title_for_layout', 'あなたの為の職業診断CHECK');
 
-
-		//echo pr($para);
-		//echo pr($this->request->query);
-		//echo pr($this->request->data);
-		//echo pr($this->request->data['jobs']['param']);
-
-		//exit();
-		$param = (!empty($_SERVER['QUERY_STRING'])) ? $_SERVER['QUERY_STRING'] : '';
-
-
-		//exit();
-		if (!empty($this->request->query['param'])) {
-			$replaceText = str_replace("?", "", $this->request->query['param']);
-			$array1 = array();
-			parse_str($replaceText,  $array1);
-			if (!empty($array1['personal_check'])) {
-				foreach ($array1['personal_check'] as $key => $value) {
-					$this->request->query['personal_check'][$key] = $value;
-				}
-				$this->Session->write('personal_check', $this->request->query['personal_check']);
-			} elseif (!empty($array1['like_checks'])) {
-				$personalCheck = $this->Session->read('personal_check');
-				foreach ($personalCheck as $key => $value) {
-					$this->request->query['personal_check'][$key] = $value;
+		if (empty($this->request->data['back'])) {
+			$param = (!empty($_SERVER['QUERY_STRING'])) ? $_SERVER['QUERY_STRING'] : '';
+			if (!empty($this->request->query['param'])) {
+				$replaceText = str_replace("?", "", $this->request->query['param']);
+				$array1 = array();
+				parse_str($replaceText,  $array1);
+				if (!empty($array1['personal_check'])) {
+					foreach ($array1['personal_check'] as $key => $value) {
+						$this->request->query['personal_check'][$key] = $value;
+					}
+					$this->Session->write('personal_check', $this->request->query['personal_check']);
+				} elseif (!empty($array1['like_checks'])) {
+					$personalCheck = $this->Session->read('personal_check');
+					foreach ($personalCheck as $key => $value) {
+						$this->request->query['personal_check'][$key] = $value;
+					}
 				}
 			}
-		}
 
-    // レイアウト関係
-		$this->Prg->commonProcess();
-		if (!empty($this->request->data)) {
-			if (count($this->request->data['Profession']['personal_check']) > 2) {
-				$personalCheck = '';
-				foreach ($this->request->data['Profession']['personal_check'] as $key => $value) {
-					if ($key == 0) {
-						$Check[$key] = ' select * from professions T1 where T1.check_personal like "%,' . $value . ',%" or T1.check_personal like "'. $value . ',%" or T1.check_personal like "%,'. $value .'" AND T1.delete_flag = 0';
-					} else {
-						$Check[$key] = ' UNION ALL select * from professions T1 where T1.check_personal like "%,' . $value . ',%" or T1.check_personal like "'. $value . ',%" or T1.check_personal like "%,'. $value .'" AND T1.delete_flag = 0';
-					}
-					$personalCheck = $personalCheck . $Check[$key];
-				};
-				$likeCheck = '';
-				if (!empty($this->request->data['Profession']['like_checks'])) {
-					foreach ($this->request->data['Profession']['like_checks'] as $key => $value) {
+
+	    // レイアウト関係
+			$this->Prg->commonProcess();
+
+
+			if (!empty($this->request->data)) {
+
+
+
+				if (count($this->request->data['Profession']['personal_check']) > 2) {
+					$personalCheck = '';
+					foreach ($this->request->data['Profession']['personal_check'] as $key => $value) {
 						if ($key == 0) {
-							$Check[$key] = ' (FIND_IN_SET('. $value .', `Profession`.`check_like`))';
+							$Check[$key] = ' select * from professions T1 where T1.check_personal like "%,' . $value . ',%" or T1.check_personal like "'. $value . ',%" or T1.check_personal like "%,'. $value .'" AND T1.delete_flag = 0';
 						} else {
-							$Check[$key] = ' AND (FIND_IN_SET('. $value .', `Profession`.`check_like`))';
+							$Check[$key] = ' UNION ALL select * from professions T1 where T1.check_personal like "%,' . $value . ',%" or T1.check_personal like "'. $value . ',%" or T1.check_personal like "%,'. $value .'" AND T1.delete_flag = 0';
 						}
-						$likeCheck = $likeCheck . $Check[$key];
+						$personalCheck = $personalCheck . $Check[$key];
+					};
+					$likeCheck = '';
+					if (!empty($this->request->data['Profession']['like_checks'])) {
+						foreach ($this->request->data['Profession']['like_checks'] as $key => $value) {
+							if ($key == 0) {
+								$Check[$key] = ' (FIND_IN_SET('. $value .', `Profession`.`check_like`))';
+							} else {
+								$Check[$key] = ' AND (FIND_IN_SET('. $value .', `Profession`.`check_like`))';
+							}
+							$likeCheck = $likeCheck . $Check[$key];
+						}
+						$likeCheck = 'AND ('.$likeCheck.' )';
 					}
-					$likeCheck = 'AND ('.$likeCheck.' )';
-				}
 
-				//変なソートの仕方
-				if(strpos($_SERVER["REQUEST_URI"],'sort:core_status/direction:asc') !== false) {
-					$sort = 'ASC';
+					//変なソートの仕方
+					if(strpos($_SERVER["REQUEST_URI"],'sort:core_status/direction:asc') !== false) {
+						$sort = 'ASC';
+					} else {
+						$sort = 'DESC';
+					}
+					$sql = "select Profession.*, Image.url from
+					(select v_hit.*, COUNT('X') as cnt
+					from
+					 (".$personalCheck.") as v_hit GROUP BY v_hit.id ) As Profession
+						LEFT JOIN images As Image
+						ON (Profession.id = Image.partner_id)
+					 where Profession.cnt >= 3
+					 AND Image.delete_flag = 0
+					 AND Profession.delete_flag = 0
+					 " . $likeCheck . "
+					 GROUP BY Profession.id
+					 ORDER BY Profession.core_status " . $sort;
+
+
+
+					$this->paginate = $sql; //$sqlの中身は生SQL
+					$datas = $this->paginate('Job');
+
+					if (empty($datas)) {
+						$datas = 'notdata';
+					}
+					$personalChecks = $this->request->data['Profession']['personal_check'];
+					$list_flag = 1;
+					$this->set(compact('datas', 'para', 'param', 'list_flag', 'personalChecks'));
 				} else {
-					$sort = 'DESC';
+					$flag = 1;
+					$error = 'error_text';
+					$this->set(compact('flag', 'para', 'error'));
 				}
-				$sql = "select Profession.*, Image.url from
-				(select v_hit.*, COUNT('X') as cnt
-				from
-				 (".$personalCheck.") as v_hit GROUP BY v_hit.id ) As Profession
-					LEFT JOIN images As Image
-					ON (Profession.id = Image.partner_id)
-				 where Profession.cnt >= 3
-				 AND Image.delete_flag = 0
-				 AND Profession.delete_flag = 0
-				 " . $likeCheck . "
-				 GROUP BY Profession.id
-				 ORDER BY Profession.core_status " . $sort;
-
-
-
-				$this->paginate = $sql; //$sqlの中身は生SQL
-				$datas = $this->paginate('Job');
-
-				if (empty($datas)) {
-					$datas = 'notdata';
-				}
-
-				$back_flag = 1;
-				$this->set(compact('datas', 'para', 'param', 'back_flag'));
 			} else {
+				// 初期表示時
+				$this->Session->delete('personal_check');
+				$this->paginate = array(
+					'conditions' => array(
+						 'delete_flag' => '0'
+					 ),
+					'order' => array(
+						'created' => 'DESC',
+					),
+					'limit' => 8,
+				);
+				$back_flag = 1;
 				$flag = 1;
-				$error = 'error_text';
-				$this->set(compact('flag', 'para', 'error'));
+				$this->set(compact('flag', 'back_flag', 'para'));
 			}
-		} else {
-			// 初期表示時
-			$this->Session->delete('personal_check');
-			$this->paginate = array(
-				'conditions' => array(
-					 'delete_flag' => '0'
-				 ),
-				'order' => array(
-					'created' => 'DESC',
-				),
-				'limit' => 8,
-			);
-			$back_flag = 1;
-			$flag = 1;
-			$this->set(compact('flag', 'back_flag', 'para'));
-		}
 
-		//$datas = $this->paginate();
-		//$count = count($datas);
+			//$datas = $this->paginate();
+			//$count = count($datas);
 
-		//echo pr($this->Job->getDataSource()->getLog());
-		//exit();
-		//echo pr($datas);
-		//exit();
+			//echo pr($this->Job->getDataSource()->getLog());
+			//exit();
+			//echo pr($datas);
+			//exit();
 
-		$this->_getCheckParameter();
+			$this->_getCheckParameter();
     //$this->set(compact('para', 'param', 'count'));
-
+		} else {
+			$this->_getCheckParameter();
+			$this->request->data['Profession']['personal_check'] = $this->request->data['personal_checks'];
+			$flag = 1;
+			$this->set(compact('flag', 'para'));
+		}
 	}
 
 
@@ -172,8 +174,8 @@ class JobsController extends AppController {
 			}
 		}
 		$this->_getCheckParameter();
-		$back_flag = 1;
-    $this->set(compact('datas', 'para', 'param', 'back_flag'));
+		$search_flag = 1;
+    $this->set(compact('datas', 'para', 'param', 'search_flag'));
 	}
 
 	public function detail($id = null) {

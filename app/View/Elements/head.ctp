@@ -15,11 +15,27 @@
         <p class="title-small-text">どこよりも簡単な<br>職業診断チェック</p>
     </div>
     <?php if(!empty($back_flag)): ?>
+      <?php if ($_SERVER['DOCUMENT_ROOT'] == 'C:/xampp/htdocs'): ?>
+        <div class="history_back">
+          <a href="/fdu24/">BACK</a>
+        </div>
+      <?php else: ?>
+        <div class="history_back">
+          <a href="/">BACK</a>
+        </div>
+      <?php endif; ?>
+    <?php elseif(!empty($list_flag)): ?>
+      <?php echo $this->Form->create('jobs', array('url' => 'index', 'type' => 'post')); ?>
+        <?php foreach ($personalChecks as $key => $value): ?>
+          <?php echo $this->Form->hidden('personal_checks.'.$key, array('value' => $value)); ?>
+        <?php endforeach; ?>
+      <?php echo $this->Form->input('BACK', array('type' => 'submit', 'label' => false, 'div' => false, 'class' => 'history_back', 'name' => 'back')); ?>
+      <?php echo $this->Form->end(); ?>
+    <?php elseif(!empty($search_flag)): ?>
       <div class="history_back">
         <a href="javascript:history.back();">BACK</a>
       </div>
     <?php elseif(!empty($know_flag)): ?>
-
       <div class="job_know">
         <a href="javascript:void(0);" class='know_count plus' id="<?php echo $datas['Profession']['id'];?>">
           知ってた職業 : <span class="count"><?php echo $datas['Profession']['know_count']; ?></span>

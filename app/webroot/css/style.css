@@ -1174,6 +1174,7 @@ li.core_text {
   border-radius: 2px;
   display: inline;
   margin-top: 15px;
+  background: black;
 }
 .history_back a {
   color: #fff;
