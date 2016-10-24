@@ -73,7 +73,11 @@ div ul.sns_list{
   width: 100%;
   margin: 0px;
 }
-
+.sns_button {
+    margin-right: 5px;
+    width: 15px;
+    margin-bottom: 1px;
+}
 li.sns_button{
   color: #fff;
   float: left;;

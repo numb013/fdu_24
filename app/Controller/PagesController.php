@@ -92,4 +92,18 @@ class PagesController extends AppController {
 			throw new NotFoundException();
 		}
 	}
+
+/**
+ * Displays a view
+ *
+ * @return void
+ * @throws NotFoundException When the view file could not be found
+ *	or MissingViewException in debug mode.
+ */
+	public function content() {
+		$this->set('title_for_layout', 'あなたの為の職業診断CHECK');
+		$this->layout = "default";
+		$this->render('content');
+	}
+
 }

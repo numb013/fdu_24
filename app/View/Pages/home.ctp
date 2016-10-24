@@ -63,8 +63,10 @@
 	<div class="overlay"></div>
 	<div class="container">
 		<div class="col-md-12 text-center animate-box">
-			<h3>We Try To Update The Site Everyday</h3>
-			<p><a href="#" class="btn btn-primary btn-outline with-arrow">Get started now! <i class="icon-arrow-right"></i></a></p>
+			<h3 style="color:#fff; font-size:26px;">What is FDU-24 !?</h3>
+			<p>
+				<?php echo $this->Html->link('Get started now!!', array('controller' => 'Pages','action' => 'content'), array('class' => 'btn btn-primary btn-outline with-arrow'));?>
+			</p>
 		</div>
 	</div>
 </div>

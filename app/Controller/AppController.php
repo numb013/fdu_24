@@ -17,7 +17,7 @@
 
      public function beforeFilter() {
       parent::beforeFilter();
-      $this->Auth->allow('add', 'index', 'home', 'search', 'check_box', 'search_more', 'detail', 'know_count');
+      $this->Auth->allow('add', 'index', 'home', 'search', 'check_box', 'search_more', 'detail', 'know_count', 'content');
       $url = $_SERVER["REQUEST_URI"];
       if(strpos($url,'admin') !== false) {
         $this->theme = 'admin';
