@@ -63,6 +63,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
 	?>
 </head>
+<script type="text/javascript"src="//webfonts.sakura.ne.jp/js/sakura.js"></script> 
 <link href="https://fonts.googleapis.com/css?family=Denk+One" rel="stylesheet">
 <meta name="viewport" content="width=device-width">
 <script type="text/javascript">
