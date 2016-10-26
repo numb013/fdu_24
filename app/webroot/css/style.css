@@ -42,6 +42,7 @@ h1, h2, h3, h4, h5, figure {
   color: #000;
   font-family: 'Denk One', Quicksand, 游ゴシック体, "Yu Gothic", YuGothic, "ヒラギノ角ゴシック Pro", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
   font-weight: 400;
+  letter-spacing: -0.3px;
 }
 
 h6 {
@@ -499,7 +500,7 @@ div.buttom_edit {
 .photo-cut{
   position: relative;
   width: 100%;
-  height: 95px;
+  height: 55%;
   overflow: hidden;
 }
 
@@ -733,6 +734,7 @@ li.core_text {
   }
   .header-inner p.title-small-text {
       font-size: 12px;
+        letter-spacing: -0.5px;
   }
   .know_count {
       font-size: 12px;
@@ -1167,8 +1169,9 @@ li.core_text {
   margin-top: 17px;
   line-height: 14px;
   float: left;
-  margin-left: 7px;
+  margin-left: 4px;
   color: #fff;
+  letter-spacing: -0.5px;
 }
 
 .history_back {
@@ -1197,6 +1200,7 @@ li.core_text {
   display: inline;
   background-color: #fff;
   color: #369840;
+  letter-spacing: -0.5px;
 }
 
 
@@ -1211,6 +1215,7 @@ li.core_text {
 }
 #fh5co-header h1 a {
   color: white;
+  letter-spacing: -0.3px;
 }
 #fh5co-header h1 a > span {
   color: #00B906;
