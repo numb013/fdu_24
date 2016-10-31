@@ -394,5 +394,5 @@ Cache::config('_cake_model_', array(
 if ($_SERVER['DOCUMENT_ROOT'] == 'C:/xampp/htdocs') {
 	Configure::write('ImgFiles', '/fdu24/app/webroot/files/updir/');
 } else {
-	Configure::write('ImgFiles', '/app/webroot/files/updir/tmp/');
+	Configure::write('ImgFiles', '/fdu24.com/app/webroot/files/updir/tmp/');
 }

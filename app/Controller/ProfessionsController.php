@@ -406,7 +406,7 @@ public function detail($id = null) {
         // 仮ディレクトリへファイルをアップロード
         copy($val["tmp_name"],"{$_SERVER['DOCUMENT_ROOT']}" . $imgFiles . "{$now}_{$key}.{$ext}");
         $this->request->data['Image'][$key]["tmp_name"] = "{$_SERVER['DOCUMENT_ROOT']}" . $imgFiles . "{$now}_{$key}.{$ext}";
-        $this->request->data['Image'][$key]["url"] = "http://{$_SERVER['SERVER_NAME']}" . $imgFiles . "{$now}_{$key}.{$ext}";
+        $this->request->data['Image'][$key]["url"] = "http:/" . $imgFiles . "{$now}_{$key}.{$ext}";
       }
       finfo_close($finfo);
 
@@ -613,7 +613,7 @@ public function detail($id = null) {
             if (!empty($data['Image'])) {
               foreach($data['Image'] as $key => $val){
                 rename($val["tmp_name"],"{$_SERVER['DOCUMENT_ROOT']}" . $imgFiles . basename($val["tmp_name"]));
-                $data['Image'][$key]["url"] = "http://{$_SERVER['SERVER_NAME']}" . $imgFiles . basename($val["tmp_name"]);
+                $data['Image'][$key]["url"] = "http://" . $imgFiles . basename($val["tmp_name"]);
                 $data['Image'][$key]["partner_id"] = $partner_id;
               }
 
@@ -742,11 +742,26 @@ public function admin_edit($id = null){
         if($mime!="image") continue;
 				$imgFiles = Configure::read('ImgFiles');
         // 仮ディレクトリへファイルをアップロード
+
+				echo pr($_SERVER['DOCUMENT_ROOT']);
+				echo pr($imgFiles);
+				echo '<br>';
+				echo pr($_SERVER['SERVER_NAME']);
+				echo pr($imgFiles);
+//exit();
         copy($val["tmp_name"],"{$_SERVER['DOCUMENT_ROOT']}" . $imgFiles . "{$now}_{$key}.{$ext}");
         $this->request->data['Image'][$key]["tmp_name"] = "{$_SERVER['DOCUMENT_ROOT']}" . $imgFiles . "{$now}_{$key}.{$ext}";
-        $this->request->data['Image'][$key]["url"] = "http://{$_SERVER['SERVER_NAME']}" . $imgFiles . "{$now}_{$key}.{$ext}";
+				if (!empty(Configure::read('ImgFileUrl'))) {
+					$this->request->data['Image'][$key]["url"] = "http://localhost" . $imgFiles . "{$now}_{$key}.{$ext}";
+				} else {
+					$this->request->data['Image'][$key]["url"] = "http:/" . $imgFiles . "{$now}_{$key}.{$ext}";
+				}
+
       }
       finfo_close($finfo);
+
+
+
 
       foreach ($this->request->data['Movie'] as $key => $value) {
         if (!empty($value)) {
@@ -952,8 +967,12 @@ public function admin_edit($id = null){
           }
           $this->request->data['Movie'][0] = '';
           $this->Session->write('Movie', $this->request->data['Movie']);
-          $this->Session->write('image', $this->request->data['Image']);
         }
+
+				if (!empty($this->request->data['Image'])) {
+            $this->Session->write('image', $this->request->data['Image']);
+        }
+
       }
     }
   }
@@ -1080,7 +1099,7 @@ public function admin_edit($id = null){
               foreach($data['Image'] as $key => $val){
 									$imgFiles = Configure::read('ImgFiles');
                   rename($val['Image']["tmp_name"],"{$_SERVER['DOCUMENT_ROOT']}" . $imgFiles . basename($val['Image']["tmp_name"]));
-                  $data['Image'][$key]['Image']["url"] = "http://{$_SERVER['SERVER_NAME']}" . $imgFiles . basename($val['Image']["tmp_name"]);
+                  $data['Image'][$key]['Image']["url"] = "http://" . $imgFiles . basename($val['Image']["tmp_name"]);
                   $data['Image'][$key]['Image']["partner_id"] = $partner_id;
                 }
               foreach ($data['Image'] as $key => $value) {
