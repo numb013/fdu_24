@@ -19,7 +19,8 @@
  */
 
 App::uses('AppController', 'Controller');
-
+App::uses('Folder', 'Utility');
+App::uses('File', 'Utility');
 /**
  * Static content controller
  *
@@ -401,16 +402,12 @@ public function detail($id = null) {
         list($mime,$ext) = explode("/",finfo_file($finfo, $val["tmp_name"]));
         if($mime!="image") $err[] = "ファイル{$key} は画像を選択してください";
         if($mime!="image") unset($files[$key]);
-        if($mime!="image") continue;
-				$imgFiles = Configure::read('ImgFiles');
-        // 仮ディレクトリへファイルをアップロード
-        copy($val["tmp_name"],"{$_SERVER['DOCUMENT_ROOT']}" . $imgFiles . "{$now}_{$key}.{$ext}");
-        $this->request->data['Image'][$key]["tmp_name"] = "{$_SERVER['DOCUMENT_ROOT']}" . $imgFiles . "{$now}_{$key}.{$ext}";
-        $this->request->data['Image'][$key]["url"] = "http:/" . $imgFiles . "{$now}_{$key}.{$ext}";
+				if($mime!="image") continue;
+        copy($val["tmp_name"],"files/updir/tmp/" . "{$now}_{$key}.{$ext}");
+        $this->request->data['Image'][$key]["tmp_name"] = "{$now}_{$key}.{$ext}";
+				$this->request->data['Image'][$key]["url"] = "/files/updir/tmp/" ."{$now}_{$key}.{$ext}";
       }
       finfo_close($finfo);
-
-
 
 
       //動画url修正
@@ -586,12 +583,7 @@ public function detail($id = null) {
 				$this->request->data['Profession']['check_personal'] = implode(",", $this->request->data['Profession']['check_personal']);
 				$this->request->data['Profession']['check_like'] = implode(",", $this->request->data['Profession']['check_like']);
 				$this->request->data['Profession']['related_profession'] = implode(",", $this->request->data['Profession']['related_profession']);
-
-
         $data = $this->request->data;
-
-
-
         if (!empty($data['Image'])) {
           $data['Profession']['image_flag'] = 1;
           foreach ($data['Image'] as $key => $value) {
@@ -609,16 +601,21 @@ public function detail($id = null) {
         if ($this->Profession->validates()) {
           $this->Profession->save($data['Profession']);
             $partner_id = $this->Profession->getLastInsertID();
-						$imgFiles = Configure::read('ImgFiles');
-            if (!empty($data['Image'])) {
-              foreach($data['Image'] as $key => $val){
-                rename($val["tmp_name"],"{$_SERVER['DOCUMENT_ROOT']}" . $imgFiles . basename($val["tmp_name"]));
-                $data['Image'][$key]["url"] = "http://" . $imgFiles . basename($val["tmp_name"]);
-                $data['Image'][$key]["partner_id"] = $partner_id;
-              }
 
-//echo pr($data['Image']);
-//exit();
+
+            if (!empty($data['Image'])) {
+							foreach($data['Image'] as $key => $val){
+
+
+									$cut = 1;//カットしたい文字数
+									$val["url"] = substr( $val["url"] , $cut , strlen($val["url"])-$cut );
+									$file = new File(WWW_ROOT.$val["url"]);
+							    $file->copy(WWW_ROOT."/files/updir/" . $val["tmp_name"],true);
+									$file = new File(WWW_ROOT.$val["url"]);
+							    $file->delete();
+                  $data['Image'][$key]["url"] = "/files/updir/" . $val["tmp_name"];
+                  $data['Image'][$key]["partner_id"] = $partner_id;
+                }
               foreach ($data['Image'] as $key => $value) {
                 $this->Image->create(false);
                 $this->Image->save($value);
@@ -740,29 +737,12 @@ public function admin_edit($id = null){
         if($mime!="image") $err[] = "ファイル{$key} は画像を選択してください";
         if($mime!="image") unset($files[$key]);
         if($mime!="image") continue;
-				$imgFiles = Configure::read('ImgFiles');
         // 仮ディレクトリへファイルをアップロード
-
-				echo pr($_SERVER['DOCUMENT_ROOT']);
-				echo pr($imgFiles);
-				echo '<br>';
-				echo pr($_SERVER['SERVER_NAME']);
-				echo pr($imgFiles);
-//exit();
-        copy($val["tmp_name"],"{$_SERVER['DOCUMENT_ROOT']}" . $imgFiles . "{$now}_{$key}.{$ext}");
-        $this->request->data['Image'][$key]["tmp_name"] = "{$_SERVER['DOCUMENT_ROOT']}" . $imgFiles . "{$now}_{$key}.{$ext}";
-				if (!empty(Configure::read('ImgFileUrl'))) {
-					$this->request->data['Image'][$key]["url"] = "http://localhost" . $imgFiles . "{$now}_{$key}.{$ext}";
-				} else {
-					$this->request->data['Image'][$key]["url"] = "http:/" . $imgFiles . "{$now}_{$key}.{$ext}";
-				}
-
+        copy($val["tmp_name"],"files/updir/tmp/" . "{$now}_{$key}.{$ext}");
+        $this->request->data['Image'][$key]["tmp_name"] = "{$now}_{$key}.{$ext}";
+				$this->request->data['Image'][$key]["url"] = "/files/updir/tmp/" ."{$now}_{$key}.{$ext}";
       }
       finfo_close($finfo);
-
-
-
-
       foreach ($this->request->data['Movie'] as $key => $value) {
         if (!empty($value)) {
           if(preg_match('/youtube/', $value['movie_url'])){
@@ -1097,9 +1077,13 @@ public function admin_edit($id = null){
 
             if (!empty($data['Image'])) {
               foreach($data['Image'] as $key => $val){
-									$imgFiles = Configure::read('ImgFiles');
-                  rename($val['Image']["tmp_name"],"{$_SERVER['DOCUMENT_ROOT']}" . $imgFiles . basename($val['Image']["tmp_name"]));
-                  $data['Image'][$key]['Image']["url"] = "http://" . $imgFiles . basename($val['Image']["tmp_name"]);
+									$cut = 1;//カットしたい文字数
+									$val['Image']["url"] = substr( $val['Image']["url"] , $cut , strlen($val['Image']["url"])-$cut );
+									$file = new File(WWW_ROOT.$val['Image']["url"]);
+							    $file->copy(WWW_ROOT."/files/updir/" . $val['Image']["tmp_name"],true);
+									$file = new File(WWW_ROOT.$val['Image']["url"]);
+							    $file->delete();
+                  $data['Image'][$key]['Image']["url"] = "/files/updir/" . $val['Image']["tmp_name"];
                   $data['Image'][$key]['Image']["partner_id"] = $partner_id;
                 }
               foreach ($data['Image'] as $key => $value) {

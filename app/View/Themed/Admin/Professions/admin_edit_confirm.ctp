@@ -24,6 +24,7 @@
                 <?php foreach ($data['Image'] as $key => $photo): ?>
                   <?php if(!empty($photo)):?>
                     <?php echo $this->Html->image($photo['url'] ,array('width' => '15%' )); ?>
+                    <?php //echo $this->Html->image("top/comp25.jpg", array('width' => '15%')); ?>
                     <?php if (empty($photo['id'])):?>
                       <?php echo $this->Form->hidden('Image.'.$key.'.Image.name', array('value' => $photo['name'])); ?>
                       <?php echo $this->Form->hidden('Image.'.$key.'.Image.type', array('value' => $photo['type'])); ?>
