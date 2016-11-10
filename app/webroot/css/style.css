@@ -84,13 +84,19 @@ li.sns_button{
   color: #fff;
   float: left;;
   width: 31%;
-  background: #ff0;
   padding: 10px 0;
   margin: 0 2px;
   border-radius: 5px;
   font-size: 10px;
 }
 
+.face{
+    background: #4267b2;
+}
+li.sns_button .line{
+}
+li.sns_button .twitter{
+}
 
 h2.professions_title {
   font-size: 13px;
