@@ -96,7 +96,7 @@
           </td>
         </tr>
         <tr>
-          <td>コア度</td>
+          <td>コアレベル</td>
           <td><?php echo $data['Profession']['core_status']; ?></td>
         </tr>
 

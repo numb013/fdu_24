@@ -119,7 +119,7 @@
           </td>
         </tr>
         <tr>
-          <td>コアステータス</td>
+          <td>コアレベル</td>
           <td>
             <?php
             echo $this->Form->input('core_status', array(

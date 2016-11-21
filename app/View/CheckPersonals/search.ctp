@@ -2,7 +2,7 @@
 
   <div class="col-md-12 col-sm-12 col-sm-push-0 col-xs-12 col-xs-push-0 col-top-mar" style="padding:0px;">
     <div class="serch-frame">
-      <a href="about.html" style="color:#274b28;"><div class="sort-search">知名度順</div></a>
+      <a href="about.html" style="color:#274b28;"><div class="sort-search">コアレベル順</div></a>
       <a href="about.html" style="color:#274b28;"><div class="more-search">さらに絞り込む▼</div></a>
     </div>
     <div class="col-md-offset-0 text-center fh5co-heading animate-box job-box" style="clear: both;">

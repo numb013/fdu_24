@@ -33,7 +33,7 @@
 <div class="col-md-12 text-center animate-box" style="background-color:#000; padding:0px;">
   <div class="col-md-12 col-sm-12 col-sm-push-0 col-xs-12 col-xs-push-0 col-top-mar" style="padding:0px;">
     <div class="serch-frame">
-      <div class="sort-search"><?php echo $this->Paginator->sort('core_status', '知名度順');?></div>
+      <div class="sort-search"><?php echo $this->Paginator->sort('core_status', 'コアレベル順');?></div>
       <div class="more-search">
         <?php echo $this->Form->create('Profession', array('url' => array( 'controller' => 'Professions', 'action' => 'search_more' . $param),'type' => 'post')); ?>
     		<?php echo $this->Form->submit('さらに絞り込む▼', array('div' => false, 'class' => 'more-search')); ?>

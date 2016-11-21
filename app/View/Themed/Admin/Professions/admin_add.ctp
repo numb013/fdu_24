@@ -84,7 +84,7 @@
         <td><?php echo $this->Form->textarea('Profession.job_salary', array('type' => 'text', 'label' => false, 'div' => false, 'rows' => 10, 'style' => 'width:100%')); ?></td>
       </tr>
       <tr>
-        <th> 性格など</th>  
+        <th> 性格など</th>
         <td>
           <?php
             echo $this->Form->input('Profession.check_personal', array(
@@ -127,7 +127,7 @@
         </td>
       </tr>
       <tr>
-        <th> コアステータス</th>
+        <th> コアレベル</th>
         <td>
           <?php
             echo $this->Form->input('core_status', array(

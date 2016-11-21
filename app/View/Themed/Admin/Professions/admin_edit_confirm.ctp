@@ -119,7 +119,7 @@
             </td>
           </tr>
           <tr>
-            <td>コアステータス</td>
+            <td>コアレベル</td>
             <td><?php echo $data['Profession']['core_status']; ?></td>
             <?php echo $this->Form->hidden('Profession.core_status', array('value' => $data['Profession']['core_status'])); ?>
           </tr>

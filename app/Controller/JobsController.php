@@ -34,8 +34,7 @@ class JobsController extends AppController {
 	public $paginate = array();
 
 	public function index($para = null) {
-		$this->set('title_for_layout', 'あなたの為の職業診断CHECK');
-
+		$this->set('title_for_layout', 'どこよりも簡単な職業診断チェック');
 		if (empty($this->request->data['back'])) {
 			$param = (!empty($_SERVER['QUERY_STRING'])) ? $_SERVER['QUERY_STRING'] : '';
 			if (!empty($this->request->query['param'])) {

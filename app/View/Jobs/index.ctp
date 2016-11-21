@@ -48,7 +48,7 @@
 <div class="col-md-12 text-center animate-box" style="background-color:#000; padding:0px;">
   <div class="col-md-12 col-sm-12 col-sm-push-0 col-xs-12 col-xs-push-0 col-top-mar" style="padding:0px;">
     <div class="serch-frame">
-      <div class="sort-search"><?php echo $this->Paginator->sort('core_status', '知名度順');?></div>
+      <div class="sort-search" style="color:#274b28; letter-spacing:-2px;"><?php echo $this->Paginator->sort('core_status', 'コアレベル順');?></div>
       <div class="more-search">
         <?php echo $this->Form->create('jobs', array('url' => array( 'controller' => 'jobs', 'action' => 'search_more'),'type' => 'post')); ?>
         <?php echo $this->Form->hidden('param', array('value' => $param)); ?>
@@ -102,7 +102,7 @@
               <?php echo $genre[$data['Profession']['genre']] ;?>
             </li>
             <li class="core_text">
-              コア度:<span class="core_status">
+              コアレベル:<span class="core_status">
               <?php
               for ($i = 0; $i < $data['Profession']['core_status']; $i++) {
                 echo '★';

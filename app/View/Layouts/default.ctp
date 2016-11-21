@@ -28,20 +28,11 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	<?php
 		echo $this->Html->meta('icon');
 
-
-
-
-
-
-
 		echo $this->Html->css('animate');
 		//echo $this->Html->css('icomoon');
 		echo $this->Html->css('bootstrap');
 		echo $this->Html->css('flexslider');
 		echo $this->Html->css('style');
-
-
-
 
 		echo $this->Html->script('jquery.min.js');
 		echo $this->Html->script('main');
@@ -51,19 +42,23 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		echo $this->Html->script('bootstrap.min');
 		echo $this->Html->script('modernizr-2.6.2.min');
 
-
-
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
 
-
-
-
-
 	?>
+
+
+
+<link rel="shortcut icon" href="/img/favicon.ico">
+<link rel="apple-touch-icon-precomposed" href="/img/180.png">
+
+
+  <meta name="description" content="まだあなたが知らないだけで、この世界には色々な職業が存在します。「FDU-24:どこよりも簡単な職業診断チェック」はコアでマイナーな職業を紹介する職業診断を個性としています、もしかしたらあなたの能力が発揮できる職業が見つかるかもしれません。まずはトップ画面の２択のうち1つを選び診断スタートして下さい。
+">
+
 </head>
-<script type="text/javascript"src="//webfonts.sakura.ne.jp/js/sakura.js"></script> 
+<script type="text/javascript"src="//webfonts.sakura.ne.jp/js/sakura.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Denk+One" rel="stylesheet">
 <meta name="viewport" content="width=device-width">
 <script type="text/javascript">
