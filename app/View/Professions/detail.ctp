@@ -48,7 +48,7 @@
         <div class="col-md-4 col-sm-4 text-center item-block animate-box">
           <h3 class="detail_title"><?php echo $datas['Profession']['profession_name']; ?>に向いてる性格</h3>
           <p class="job_step">
-            <?php echo $datas['Profession']['personality']; ?>
+            <?php echo nl2br($datas['Profession']['personality']); ?>
           </p>
         </div>
         <div class="col-md-4 col-sm-4 text-center item-block animate-box">
