@@ -36,16 +36,37 @@
  */
 class EmailConfig {
 
+	public $contact = array(
+	    'transport' => 'Mail',
+	    'from' => array('numb013013@yahoo.co.jp' => 'My Site'),
+	    'to' => 'numb013013@yahoo.co.jp',
+	    'subject' => 'お問い合わせ'
+	);
+
+	public $gmail = array(
+	    'transport' => 'Smtp',
+	    'host' => 'ssl://smtp.gmail.com',
+	    'port' => 465,
+	    'username' => 'oneblow0701@gmail.com',
+	    'password' => 'atusi027027'
+	);
+
+	// public $default = array(
+	// 'transport' => 'Smtp',
+	// 'from' => array('oneblow0701@gmail.com' => '表示名'),
+	// 'host' => 'ssl://smtp.gmail.com',
+	// 'port' => 465,
+	// 'timeout' => 30,
+	// 'username' => 'oneblow0701@gmail.com',
+	// 'password' => 'atusi027027',
+	// 'log' => true//ここをtrueにするとtmp/debug.logにメールのログが書かれる。
+	// //'headerCharset' => 'utf-8',
+	// );
+
+
 	public $default = array(
-	'transport' => 'Smtp',
-	'from' => array('numb013013@yahoo.co.jp' => '表示名'),
-	'host' => 'ssl://smtp.gmail.com',
-	'port' => 465,
-	'timeout' => 30,
-	'username' => 'numb013013@yahoo.co.jp',
-	'password' => 'atusi027',
-	'log' => true//ここをtrueにするとtmp/debug.logにメールのログが書かれる。
-	//'headerCharset' => 'utf-8',
+	    'transport' => 'Mail',
+	    'from' => 'numb013013@yahoo.co.jp',
 	);
 
 

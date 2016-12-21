@@ -71,3 +71,10 @@
 		</div>
 	</div>
 </div>
+
+<div class="animate-box fh5co-cta">
+  <div class="text-center container fh5co-heading">
+    <h3 style="color:#323232; margin-top:0px; font-size:18px;">お問い合わせ</h3>
+		<?php echo $this->Html->link('お問い合わせ', array('controller' => 'Contacts', 'action' => 'index', 'class' => 'occupation_link')); ?>
+  </div>
+</div>
