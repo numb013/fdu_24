@@ -46,7 +46,7 @@
   <div id ='fh5co-why-us' class="fh5co-services">
     <div class="container">
         <div class="col-md-4 col-sm-4 text-center item-block animate-box">
-          <h3 class="detail_title"><?php echo $datas['Profession']['profession_name']; ?>に向いてる性格</h3>
+          <h3 class="detail_title">向いてる性格</h3>
           <p class="job_step">
             <?php echo nl2br($datas['Profession']['personality']); ?>
           </p>

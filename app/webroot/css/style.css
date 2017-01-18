@@ -40,6 +40,14 @@ p.parameter {
   margin-right: 10px;
 }
 
+.contact-btn-feeld {
+  margin: 0 auto;
+  text-align: center;
+  display: table;
+  width: 100%;
+}
+
+
 .parameter-frame a {
   font-family: 'Denk One', Quicksand, 游ゴシック体, "Yu Gothic", YuGothic, "ヒラギノ角ゴシック Pro", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
 }
@@ -143,6 +151,14 @@ a.occupation_link {
 div.buttom_edit {
   float: left;
   margin-right: 50px;
+}
+
+.contact_title {
+  font-size: 20px;
+  color: black;
+  text-align: center;
+  font-family: 'Denk One', Quicksand, 游ゴシック体, "Yu Gothic", YuGothic, "ヒラギノ角ゴシック Pro", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+  font-weight: bold;
 }
 
 .profession_title {
@@ -402,7 +418,9 @@ div.buttom_edit {
   text-align: left;
   width: 100%;
   float: left;
-}.profession_title
+}
+
+.profession_title
 .fh5co-feature .fh5co-icon {
   float: left;
   width: 10%;
@@ -610,6 +628,26 @@ li.core_text {
   color: #000;
 }
 
+.set-btn-contact {
+  background: #369840;
+  margin: 0 auto;
+  margin: 15px 5px 30px 0;
+  border-radius: 5px;
+  text-align: center;
+  display: inline-block;
+  float: left;
+  width: 48%;
+}
+
+.btn_submit_contact {
+  padding: 13px 50px;
+  background: #369840;
+  text-transform:uppercase;
+  color:#fff;
+  cursor:pointer;
+  border-style: none;
+  border-radius: 5px;
+}
 
 .set-btn {
   background: #369840;
@@ -618,7 +656,6 @@ li.core_text {
   border-radius: 5px;
   text-align: center;
   display: inline-block;
-
 }
 
 .btn_submit{
@@ -1018,7 +1055,7 @@ li.core_text {
     padding: 0 15px 35px 15px;
   }
   .profession_title {
-        padding-top: 0px ;
+    padding-top: 0px ;
     font-size: 30px;
     color: white;
     text-align: center;
@@ -1603,7 +1640,7 @@ li.core_text {
   .fh5co-about,
   .fh5co-team,
   .fh5co-contact {
-    padding: 3em 0 10px 0;
+    padding: 75px 0 10px 0;
   }
 }
 

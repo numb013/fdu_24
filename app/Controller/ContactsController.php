@@ -37,30 +37,65 @@ class ContactsController extends AppController {
  *	or MissingViewException in debug mode.
  */
  public function index() {
-     if ($this->request->is('post')) {
-     $this->Contact->set($this->request->data);
-     if (!$this->Contact->validates()) {
-         $this->Session->setFlash('入力内容に不備があります。');
-         return;
-     }
-     switch ($this->request->data['confirm']) {
-        case 'confirm':
-          $this->render('contact_confirm');
-          break;
-        case 'send':
-          if ($this->sendContact($this->request->data['contacts'])) {
-            $this->redirect('/');
-          } else {
-            $this->redirect('/contacts/index');
-          }
-        break;
+   if ($this->request->is('post')) {
+    //  echo pr($this->request->data);
+    //  exit();
+   $this->Contact->set($this->request->data);
+   if (!$this->Contact->validates()) {
+     $this->Session->setFlash('入力内容に不備があります。');
+     return;
+   }
+   switch ($this->request->data['confirm']) {
+    case 'confirm':
+      $this->render('contact_confirm');
+      break;
+    case 'send':
+      if ($this->sendContact($this->request->data['contacts'])) {
+        $this->render('contact_complete');
+      } else {
+        exit();
+        $this->render('contact_confirm');
+      }
+      break;
      }
 	 }
  }
-
  private function sendContact($content) {
-    $body = 'アドレス:'.$content['email'].'本文'.$content['body'];
-   if (mb_send_mail('oneblow0701@gmail.com', 'お問い合わせが来ています。', $body)) {
+
+       mb_language('japanese');
+       mb_internal_encoding('utf-8');
+
+      $honbun='';
+    	$honbun.=$content['name']."様\n\nこの度は弊社サイトよりお問い合わせいただき誠に有難う御座います。\n";
+    	$honbun.="担当者より折り返しご連絡させていただきますので 今しばらくお待ちくださいませ。\n";
+    	$honbun.="その他ご不明な点、ご相談等ございましたら お気軽にお問い合わせください。\n";
+    	$honbun.="また、当サイトと関連していない問い合わせについては \n";
+    	$honbun.="ご対応致しかねますので予めご了承のほどお願い申し上げます\n";
+    	$honbun.="\n";
+
+    	$honbun.="□□□□□□□□□□□□□□□□□\n";
+    	$honbun.="\n";
+    	$honbun.="『FUD-24』どこよりも簡単な職業診断チェック係";
+    	$honbun.="\n";
+    	$honbun.="メール oneblow0701@gmail.com\n";
+    	$honbun.="\n";
+    	$honbun.="□□□□□□□□□□□□□□□□□\n";
+
+
+    	$title= 'お問い合わせありがとうございました。';
+    	$header = 'From:FUD-24 どこよりも簡単な職業診断チェック';
+      $honbun = html_entity_decode($honbun, ENT_QUOTES, 'UTF-8');
+      $header = mb_encode_mimeheader($header);
+
+   if (mb_send_mail($content['email'], $title, $honbun, $header)) {
+
+       mb_language('japanese');
+       mb_internal_encoding('utf-8');
+
+       $title= 'お客様からお問い合わがありました。';
+       $header = 'From:'.$content['email'];
+       $message = html_entity_decode($content['body'], ENT_QUOTES, 'UTF-8');
+       mb_send_mail('oneblow0701@gmail.com' ,$title, $content['body'], $header);
        return true;
    } else {
        return false;

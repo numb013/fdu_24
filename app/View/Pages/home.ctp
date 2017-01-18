@@ -74,7 +74,8 @@
 
 <div class="animate-box fh5co-cta">
   <div class="text-center container fh5co-heading">
-    <h3 style="color:#323232; margin-top:0px; font-size:18px;">お問い合わせ</h3>
-		<?php echo $this->Html->link('お問い合わせ', array('controller' => 'Contacts', 'action' => 'index', 'class' => 'occupation_link')); ?>
+    <h3 style="color:#323232; margin-top:0px; font-size:24px;">For inquiries from here</h3>
+		<!-- <?php echo $this->Html->link('お問い合わせ', array('controller' => 'Contacts', 'action' => 'index')); ?> -->
+		<a href="Contacts/index" class="occupation_link">お問い合わせ</a>
   </div>
 </div>
