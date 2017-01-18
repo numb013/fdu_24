@@ -40,9 +40,11 @@ class ContactsController extends AppController {
    if ($this->request->is('post')) {
     //  echo pr($this->request->data);
     //  exit();
-   $this->Contact->set($this->request->data);
+    $this->Contact->set($this->request->data['contacts']);
    if (!$this->Contact->validates()) {
-     $this->Session->setFlash('入力内容に不備があります。');
+    $error = $this->Contact->validationErrors;
+    $this->set('error', $error);
+    $this->render('index');
      return;
    }
    switch ($this->request->data['confirm']) {

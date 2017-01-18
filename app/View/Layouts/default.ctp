@@ -63,13 +63,13 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <meta name="viewport" content="width=device-width">
 <script type="text/javascript">
 jQuery(function($) {
-var nav    = $('#fixedBox'),
+var nav = $('#fixedBox'),
 		offset = nav.offset();
 	$(window).scroll(function () {
 		if($(window).scrollTop() > offset.top) {
 			nav.addClass('fixed');
 
-			if ($(document).height() < $(window).scrollTop() + $(window).height() + 150) {
+			if ($(document).height() < $(window).scrollTop() + $(window).height() + 230) {
 				$('.nav').css("display","none");
 			} else {
 				$('.nav').css("display","block");

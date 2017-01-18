@@ -166,7 +166,9 @@ class JobsController extends AppController {
 		if(!empty($this->request->data['jobs']['param'])) {
 			$param = $this->request->data['jobs']['param'];
 		}
-		parse_str($param,  $array1);
+		if(!empty($param)) {
+			parse_str($param,  $array1);
+		};
 		if (!empty($array1['like_checks'])) {
 			foreach ($array1['like_checks'] as $key => $value) {
 				$this->request->data['Profession']['like_checks'][$key] = $value;

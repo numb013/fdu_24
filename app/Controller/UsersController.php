@@ -36,6 +36,8 @@ class UsersController extends AppController {
  */
 	public $uses = array();
 
+	public $components = Array('Cookie');
+
 /**
  * Displays a view
  *
@@ -52,8 +54,11 @@ class UsersController extends AppController {
  public function admin_login() {
      if ($this->request->is('post')) {
          if ($this->Auth->login()) {
-            $this->redirect($this->Auth->redirect());
-             exit();
+					 echo pr($this->request->data);
+					//  exit();
+						$this->Cookie->write('Auth.User', $this->request->data['User'], false, '+4 weeks');
+						$this->redirect($this->Auth->redirect());
+						exit();
          } else {
              $this->Flash->error(__('パスワードちゃいまっせ～'));
          }
@@ -61,7 +66,9 @@ class UsersController extends AppController {
  }
 
  public function admin_logout() {
-     $this->redirect($this->Auth->logout());
+		$this->Cookie->delete('Auth.User');
+		$this->redirect($this->Auth->logout());
+		$this->autoRender = false;
  }
 
  public function admin_add() {

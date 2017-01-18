@@ -658,6 +658,16 @@ li.core_text {
   display: inline-block;
 }
 
+.set-btn-popup {
+  background: #369840;
+  margin: 0 auto;
+  margin-top: 8px;
+  margin-right: 6px;
+  border-radius: 5px;
+  text-align: center;
+  display: inline-block;
+}
+
 .btn_submit{
   padding: 15px 120px;
   background: #369840;
