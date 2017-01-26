@@ -13,8 +13,8 @@
             <?php echo $this->Form->hidden('Profession.profession_name', array('value' => $data['Profession']['profession_name'])); ?>
           </tr>
           <tr>
-            <td>職業ジャンル</td>
-            <td><?php echo $data['Profession']['genre']; ?></td>
+            <td>職業ジャンル1</td>
+            <td><?php echo $genre[$data['Profession']['genre']]; ?></td>
             <?php echo $this->Form->hidden('Profession.genre', array('value' => $data['Profession']['genre'])); ?>
           </tr>
           <tr>

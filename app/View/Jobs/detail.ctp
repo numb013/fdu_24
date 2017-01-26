@@ -13,7 +13,7 @@
       <div class="fh5co-copy col-md-12  text-center" style="margin-top:15px;">
         <h3><?php echo $datas['Profession']['profession_name']; ?></h3>
         <p>
-          <?php echo $datas['Profession']['job_content']; ?>
+          <?php echo nl2br($datas['Profession']['job_content']); ?>
       </p>
       </div>
   </div>

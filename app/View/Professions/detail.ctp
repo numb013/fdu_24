@@ -16,7 +16,7 @@
         <h3 class="detail_title">仕事内容・詳細</h3>
         <div class="rofession_text">
           <p>
-            <?php echo $datas['Profession']['job_content']; ?>
+            <?php echo nl2br($datas['Profession']['job_content']); ?>
           </p>
         </div>
       </div>
@@ -26,7 +26,7 @@
     <h3 class="detail_title"><?php echo $datas['Profession']['profession_name']; ?>になる為には</h3>
     <div class="rofession_text">
       <p>
-        <?php echo $datas['Profession']['job_step']; ?>
+        <?php echo nl2br($datas['Profession']['job_step']); ?>
       </p>
     </div>
   </div>

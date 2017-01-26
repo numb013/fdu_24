@@ -6,10 +6,10 @@
 * ======================================================= */
 
 body {
-  font-family: Quicksand, 游ゴシック体, "Yu Gothic", YuGothic, "ヒラギノ角ゴシック Pro", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+  font-family: 'メイリオ';
   font-weight: 400;
-  line-height: 2;
-  font-size: 16px;
+  line-height: 24px;
+  font-size: 17px;
   color: #545454;
   background: #fff;
   height: 100%;
@@ -173,6 +173,8 @@ div.buttom_edit {
   width: 90%;
   margin: 0 auto;
   margin-bottom: 30px;
+  text-align: left;
+
 }
 .checkbox-title {
   color: #000;
@@ -1069,8 +1071,10 @@ li.core_text {
     font-size: 30px;
     color: white;
     text-align: center;
+    margin-bottom: 15px;
   }
   .rofession_text {
+    text-align: left;
     width: 80%;
     margin: 0 auto;
     padding-top: 10px;
@@ -1121,6 +1125,10 @@ li.core_text {
   .more-search {
     padding: 3px;
     width: 65%;
+  }
+
+  .check-group {
+    width: 1150px;
   }
 }
 
@@ -1454,6 +1462,7 @@ li.core_text {
   font-size: 70px;
   font-weight: 400;
   color: #fff;
+  margin-bottom: 7%;
 }
 @media screen and (max-width: 768px) {
   #fh5co-hero .flexslider .slider-text > .slider-text-inner h2 {
@@ -1481,6 +1490,7 @@ li.core_text {
   .rofession_text {
     width: 60%;
     margin: 0 auto;
+    text-align: left;
   }
 }
 
@@ -1507,7 +1517,8 @@ li.core_text {
     font-size: 17px;
   }
   h3.detail_title {
-    font-size: 17px;
+    font-size: 19px;
+    margin-bottom: 10px;
   }
 }
 

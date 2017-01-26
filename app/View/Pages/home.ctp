@@ -63,7 +63,7 @@
 	<div class="overlay"></div>
 	<div class="container">
 		<div class="col-md-12 text-center animate-box">
-			<h3 style="color:#fff; font-size:26px;">What is FDU-24 !?</h3>
+			<h3 style="color:#fff; font-size:26px; margin-bottom:12px;">What is FDU-24 !?</h3>
 			<p style="font-size:18px;">
 				まだあなたが知らないだけで、この世界には色々な職業が存在します。「FDU-24:どこよりも簡単な職業診断チェック」はコアでマイナーな職業を紹介する職業診断を個性としています、もしかしたらあなたの能力が発揮できる職業が見つかるかもしれません。まずはトップ画面の２択のうち1つを選び診断スタートして下さい。
 				<!-- <?php echo $this->Html->link('Get started now!!', array('controller' => 'Pages','action' => 'content'), array('class' => 'btn btn-primary btn-outline with-arrow'));?> -->

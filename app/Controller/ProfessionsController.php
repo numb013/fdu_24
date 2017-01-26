@@ -673,6 +673,8 @@ public function admin_edit($id = null){
   // レイアウト関係
 	$this->layout = "default";
   if ($this->request->is(array('post', 'put'))) {
+
+
     foreach ($this->request->data['Movie'] as $key => $value) {
       if ($value['movie_uuid'] == 'fast') {
         $this->request->data['Movie'][$key]['movie_uuid'] = rand(11111,99999);

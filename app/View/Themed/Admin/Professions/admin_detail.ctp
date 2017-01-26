@@ -7,8 +7,8 @@
 
     <?php
 
-    //echo pr($this->request->data);
-    //exit();
+    // echo pr($this->request->data);
+    // exit();
 
      ?>
 
@@ -35,7 +35,7 @@
         </tr>
         <tr>
           <td>職業ジャンル</td>
-          <td><?php echo $data['Profession']['genre']; ?></td>
+          <td><?php echo $genre[$data['Profession']['genre']]; ?></td>
         </tr>
         <tr>
           <td>仕事内容</td>

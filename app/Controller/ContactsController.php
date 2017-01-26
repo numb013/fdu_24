@@ -47,6 +47,8 @@ class ContactsController extends AppController {
     $this->render('index');
      return;
    }
+
+
    switch ($this->request->data['confirm']) {
     case 'confirm':
       $this->render('contact_confirm');
@@ -62,7 +64,7 @@ class ContactsController extends AppController {
      }
 	 }
  }
- private function sendContact($content) {
+ public function sendContact($content) {
 
        mb_language('japanese');
        mb_internal_encoding('utf-8');
@@ -90,6 +92,9 @@ class ContactsController extends AppController {
       $header = mb_encode_mimeheader($header);
 
    if (mb_send_mail($content['email'], $title, $honbun, $header)) {
+
+
+
 
        mb_language('japanese');
        mb_internal_encoding('utf-8');

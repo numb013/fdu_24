@@ -1,7 +1,16 @@
 <?php
   $url = 'http://fdu24.com/'. $_SERVER["REQUEST_URI"];
   $line = rawurlencode( "テキスト " . $url );
-  $text = 'ABCDR';
+
+  if (!empty($datas)) {
+    $text = $datas['Profession']['profession_name'].'ってなに？
+    気になるお給料から'.$datas['Profession']['profession_name'].'のなり方まで
+    知らなかった職業を知れる「FDU-24」';
+  } else {
+    $text = 'まだあなたが知らないだけで、この世界には色々な職業が存在します。
+    「FDU-24:どこよりも簡単な職業診断チェック」はコアでマイナーな職業を紹介する職業診断を個性としています';
+  }
+
   $twitter = rawurlencode($url);
   $text = rawurlencode($text);
 ?>
