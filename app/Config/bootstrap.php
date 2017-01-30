@@ -110,5 +110,14 @@ CakeLog::config('error', array(
 	'file' => 'error',
 ));
 
+
+define('LOG_FOR_YOU', 'log_for_you');
+
+CakeLog::config('log_for_you', array(
+'engine' => 'FileLog',
+'types' => array('log_for_you'),
+'file' => 'log_for_you',
+));
+
 CakePlugin::load('DebugKit');
 CakePlugin::load('Search');

@@ -33,9 +33,59 @@ class JobsController extends AppController {
 	public $presetVars = true;
 	public $paginate = array();
 
+
+
+	function search_ajax() {
+		$this->autoRender = FALSE;
+		$searchData = $this->Session->read('ajax_serch_para');
+
+		$this->log('$this->request->data', LOG_FOR_YOU);
+		$this->log($this->request->data, LOG_FOR_YOU);
+
+		$this->log('$searchData1', LOG_FOR_YOU);
+		$this->log($searchData, LOG_FOR_YOU);
+
+if (empty($this->request->data['off'])) {
+	if (!empty($searchData['Profession']['like_checks'])) {
+		$count = count($searchData['Profession']['like_checks']);
+		$searchData['Profession']['like_checks'][$count] = $this->request->data['like_checks'];
+	} else {
+		$searchData['Profession']['like_checks'][0] = $this->request->data['like_checks'];
+	}
+} else {
+	foreach ($searchData['Profession']['like_checks'] as $key => $value) {
+		if ($value == $this->request->data['like_checks']) {
+			unset($searchData['Profession']['like_checks'][$key]);
+		}
+	}
+	$searchData['Profession']['like_checks'] = array_merge($searchData['Profession']['like_checks']);
+}
+
+
+
+		$this->log('$searchData2', LOG_FOR_YOU);
+		$this->log($searchData, LOG_FOR_YOU);
+
+
+		$this->Session->write('ajax_serch_para', $searchData);
+		$datas = $this->_searchJob($searchData);
+		$jobCount = count($datas);
+		$this->log($jobCount, LOG_FOR_YOU);
+		$data['count'] = $jobCount;
+		echo json_encode($data);
+	}
+
+
+
+
 	public function index($para = null) {
 		$this->set('title_for_layout', 'どこよりも簡単な職業診断チェック');
-		if (empty($this->request->data['back'])) {
+		if (!empty($this->request->data['back'])) {
+			$this->_getCheckParameter();
+			$this->request->data['Profession']['personal_check'] = $this->request->data['personal_checks'];
+			$flag = 1;
+			$this->set(compact('flag', 'para'));
+		} else {
 			$param = (!empty($_SERVER['QUERY_STRING'])) ? $_SERVER['QUERY_STRING'] : '';
 			if (!empty($this->request->query['param'])) {
 				$replaceText = str_replace("?", "", $this->request->query['param']);
@@ -57,65 +107,18 @@ class JobsController extends AppController {
 
 	    // レイアウト関係
 			$this->Prg->commonProcess();
-
-
 			if (!empty($this->request->data)) {
-
-
-
 				if (count($this->request->data['Profession']['personal_check']) > 2) {
-					$personalCheck = '';
-					foreach ($this->request->data['Profession']['personal_check'] as $key => $value) {
-						if ($key == 0) {
-							$Check[$key] = ' select * from professions T1 where T1.check_personal like "%,' . $value . ',%" or T1.check_personal like "'. $value . ',%" or T1.check_personal like "%,'. $value .'" AND T1.delete_flag = 0';
-						} else {
-							$Check[$key] = ' UNION ALL select * from professions T1 where T1.check_personal like "%,' . $value . ',%" or T1.check_personal like "'. $value . ',%" or T1.check_personal like "%,'. $value .'" AND T1.delete_flag = 0';
-						}
-						$personalCheck = $personalCheck . $Check[$key];
-					};
-					$likeCheck = '';
-					if (!empty($this->request->data['Profession']['like_checks'])) {
-						foreach ($this->request->data['Profession']['like_checks'] as $key => $value) {
-							if ($key == 0) {
-								$Check[$key] = ' (FIND_IN_SET('. $value .', `Profession`.`check_like`))';
-							} else {
-								$Check[$key] = ' AND (FIND_IN_SET('. $value .', `Profession`.`check_like`))';
-							}
-							$likeCheck = $likeCheck . $Check[$key];
-						}
-						$likeCheck = 'AND ('.$likeCheck.' )';
-					}
 
-					//変なソートの仕方
-					if(strpos($_SERVER["REQUEST_URI"],'sort:core_status/direction:asc') !== false) {
-						$sort = 'ASC';
-					} else {
-						$sort = 'DESC';
-					}
-					$sql = "select Profession.*, Image.url from
-					(select v_hit.*, COUNT('X') as cnt
-					from
-					 (".$personalCheck.") as v_hit GROUP BY v_hit.id ) As Profession
-						LEFT JOIN images As Image
-						ON (Profession.id = Image.partner_id)
-					 where Profession.cnt >= 3
-					 AND Image.delete_flag = 0
-					 AND Profession.delete_flag = 0
-					 " . $likeCheck . "
-					 GROUP BY Profession.id
-					 ORDER BY Profession.core_status " . $sort;
+					$this->Session->write('ajax_serch_para', $this->request->data);
 
+					//検索処理ファンクション化
+					$datas = $this->_searchJob($this->request->data);
 
-
-					$this->paginate = $sql; //$sqlの中身は生SQL
-					$datas = $this->paginate('Job');
-
-					if (empty($datas)) {
-						$datas = 'notdata';
-					}
 					$personalChecks = $this->request->data['Profession']['personal_check'];
+					$searchCounts = count($datas);
 					$list_flag = 1;
-					$this->set(compact('datas', 'para', 'param', 'list_flag', 'personalChecks'));
+					$this->set(compact('datas', 'para', 'param', 'list_flag', 'personalChecks', 'searchCounts'));
 				} else {
 					$flag = 1;
 					$error = 'error_text';
@@ -124,6 +127,7 @@ class JobsController extends AppController {
 			} else {
 				// 初期表示時
 				$this->Session->delete('personal_check');
+				$this->Session->delete('ajax_serch_para');
 				$this->paginate = array(
 					'conditions' => array(
 						 'delete_flag' => '0'
@@ -137,32 +141,65 @@ class JobsController extends AppController {
 				$flag = 1;
 				$this->set(compact('flag', 'back_flag', 'para'));
 			}
-
-			//$datas = $this->paginate();
-			//$count = count($datas);
-
-			//echo pr($this->Job->getDataSource()->getLog());
-			//exit();
-			//echo pr($datas);
-			//exit();
-
 			$this->_getCheckParameter();
-    //$this->set(compact('para', 'param', 'count'));
-		} else {
-			$this->_getCheckParameter();
-			$this->request->data['Profession']['personal_check'] = $this->request->data['personal_checks'];
-			$flag = 1;
-			$this->set(compact('flag', 'para'));
 		}
 	}
 
+	public function _searchJob($searchData) {
+		$personalCheck = '';
+		foreach ($searchData['Profession']['personal_check'] as $key => $value) {
+			if ($key == 0) {
+				$Check[$key] = ' select * from professions T1 where T1.check_personal like "%,' . $value . ',%" or T1.check_personal like "'. $value . ',%" or T1.check_personal like "%,'. $value .'" AND T1.delete_flag = 0';
+			} else {
+				$Check[$key] = ' UNION ALL select * from professions T1 where T1.check_personal like "%,' . $value . ',%" or T1.check_personal like "'. $value . ',%" or T1.check_personal like "%,'. $value .'" AND T1.delete_flag = 0';
+			}
+			$personalCheck = $personalCheck . $Check[$key];
+		};
+		$likeCheck = '';
+
+		if (!empty($searchData['Profession']['like_checks'])) {
+			foreach ($searchData['Profession']['like_checks'] as $key => $value) {
+				if ($key == 0) {
+					$Check[$key] = ' (FIND_IN_SET('. $value .', `Profession`.`check_like`))';
+				} else {
+					$Check[$key] = ' AND (FIND_IN_SET('. $value .', `Profession`.`check_like`))';
+				}
+				$likeCheck = $likeCheck . $Check[$key];
+			}
+			$likeCheck = 'AND ('.$likeCheck.' )';
+		}
+
+		//変なソートの仕方
+		if(strpos($_SERVER["REQUEST_URI"],'sort:core_status/direction:asc') !== false) {
+			$sort = 'ASC';
+		} else {
+			$sort = 'DESC';
+		}
+		$sql = "select Profession.*, Image.url from
+		(select v_hit.*, COUNT('X') as cnt
+		from
+		 (".$personalCheck.") as v_hit GROUP BY v_hit.id ) As Profession
+			LEFT JOIN images As Image
+			ON (Profession.id = Image.partner_id)
+		 where Profession.cnt >= 3
+		 AND Image.delete_flag = 0
+		 AND Profession.delete_flag = 0
+		 " . $likeCheck . "
+		 GROUP BY Profession.id
+		 ORDER BY Profession.core_status " . $sort;
+
+		$this->paginate = $sql; //$sqlの中身は生SQL
+		$datas = $this->paginate('Job');
+
+		if (empty($datas)) {
+			$datas = 'notdata';
+		}
+		return $datas;
+	}
 
   public function search_more($para = null) {
 		$this->set('title_for_layout', 'さらに絞り込み検索');
-
-		//echo pr($this->request->query);
-		//echo pr($this->request->data);
-
+		$searchCounts = $this->request->data['jobs']['searchCounts'];
 		if(!empty($this->request->data['jobs']['param'])) {
 			$param = $this->request->data['jobs']['param'];
 		}
@@ -176,7 +213,7 @@ class JobsController extends AppController {
 		}
 		$this->_getCheckParameter();
 		$search_flag = 1;
-    $this->set(compact('datas', 'para', 'param', 'search_flag'));
+    $this->set(compact('datas', 'para', 'param', 'search_flag', 'searchCounts'));
 	}
 
 	public function detail($id = null) {
@@ -226,51 +263,59 @@ class JobsController extends AppController {
 		}
 }
 
-/**
- * star method
- * お気に入りを追加/削除する
- *
- * @throws NotFoundException
- * @return void
- */
-	public function know_count() {
-		if (!$this->request->is('ajax')) {
-			throw new NotFoundException('お探しのページは見つかりませんでした。');
-		}
-		$this->autoRender = false;
-		$data = array();
-		$data['id'] =  $this->request->data['Profession']['id'];
-		$data['class'] = $this->request->data['Profession']['class'];
-			$knowCount = $this->Profession->find('first', array(
-				'fields' => array(
-					'Profession.know_count',
-				),
-				'conditions' => array(
-					'Profession.id' => $data['id'],
-				),
-				'recursive'  => -1
-			));
-			if ($this->request->data['Profession']['class'] == 'know_count plus') {
-	        $action = 'plus';
-					$data['Profession']['know_count'] = $knowCount['Profession']['know_count'] + 1;
-			} else {
-	      	$action = 'minus';
-					$data['Profession']['know_count'] = $knowCount['Profession']['know_count'] - 1;
-			}
-			$this->Profession->updateAll(
-				array(
-					'Profession.modified' => "'" . date('Y-m-d H:i:s') . "'",
-					'Profession.know_count' => $data['Profession']['know_count'],
-				),
-				array(
-					'Profession.id' => $data['id'],
-				)
-			);
-			$status = true;
-		$data['action'] = $action;
-		$data['status'] = $status;
-		echo json_encode($data);
-	}
+
+
+
+
+
+
+//
+// /**
+//  * star method
+//  * お気に入りを追加/削除する
+//  *
+//  * @throws NotFoundException
+//  * @return void
+//  */
+// 	public function know_count() {
+// 		if (!$this->request->is('ajax')) {
+// 			throw new NotFoundException('お探しのページは見つかりませんでした。');
+// 		}
+// 		$this->autoRender = false;
+// 		$data = array();
+// 		$data['id'] =  $this->request->data['Profession']['id'];
+// 		$data['class'] = $this->request->data['Profession']['class'];
+// 			$knowCount = $this->Profession->find('first', array(
+// 				'fields' => array(
+// 					'Profession.know_count',
+// 				),
+// 				'conditions' => array(
+// 					'Profession.id' => $data['id'],
+// 				),
+// 				'recursive'  => -1
+// 			));
+// 			if ($this->request->data['Profession']['class'] == 'know_count plus') {
+// 	        $action = 'plus';
+// 					$data['Profession']['know_count'] = $knowCount['Profession']['know_count'] + 1;
+// 			} else {
+// 	      	$action = 'minus';
+// 					$data['Profession']['know_count'] = $knowCount['Profession']['know_count'] - 1;
+// 			}
+// 			$this->Profession->updateAll(
+// 				array(
+// 					'Profession.modified' => "'" . date('Y-m-d H:i:s') . "'",
+// 					'Profession.know_count' => $data['Profession']['know_count'],
+// 				),
+// 				array(
+// 					'Profession.id' => $data['id'],
+// 				)
+// 			);
+// 			$status = true;
+// 		$data['action'] = $action;
+// 		$data['status'] = $status;
+// 		echo json_encode($data);
+// 	}
+//
 
 
 	public function _getCheckParameter() {

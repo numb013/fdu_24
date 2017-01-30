@@ -35,7 +35,7 @@
           </div>
         </div>
         <?php echo $this->Form->hidden('like_checks', array('value' => $para)); ?>
-        <div class="set-btn animated fadeInUp">
+        <div class="set-btn-diagnosis animated fadeInUp">
           <?php echo $this->Form->input('診断する', array('type' => 'submit', 'label' => false, 'div' => false, 'class' => 'btn_submit')); ?>
           <?php echo $this->Form->end(); ?>
         </div>
@@ -52,6 +52,7 @@
       <div class="more-search">
         <?php echo $this->Form->create('jobs', array('url' => array( 'controller' => 'jobs', 'action' => 'search_more'),'type' => 'post')); ?>
         <?php echo $this->Form->hidden('param', array('value' => $param)); ?>
+        <?php echo $this->Form->hidden('searchCounts', array('value' => $searchCounts)); ?>
     		<?php echo $this->Form->submit('さらに絞り込む▼', array('div' => false, 'class' => 'more-search', 'style' => 'width: 97%;')); ?>
     		<?php echo $this->Form->end(); ?>
       </div>

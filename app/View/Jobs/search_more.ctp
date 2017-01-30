@@ -1,6 +1,7 @@
 <div id="fixedBox" class="nav">
   <?php echo $this->Form->create('Profession', array('type' => 'file', 'url' =>  'index')); ?>
-  <div class="col-md-12 text-center" style="padding:0px;">
+  <div class="col-md-12 text-center">
+    <p class="search_count">該当職業 :<?php echo $searchCounts; ?>件</p>
     <div class="set-btn-popup">
       <?php echo $this->Form->input('診断する', array('type' => 'submit', 'label' => false, 'div' => false, 'class' => 'btn_submit')); ?>
     </div>
@@ -36,14 +37,63 @@
     </div>
   </div>
   <div class="col-md-12 text-center" style="padding:0px; position: static;">
+    <p class="search_count">該当職業 :<?php echo $searchCounts; ?>件</p>
     <div class="set-btn">
       <?php echo $this->Form->input('診断する', array('type' => 'submit', 'label' => false, 'div' => false, 'class' => 'btn_submit')); ?>
-      <?php //echo $this->Form->hidden('param', array('value' => $param)); ?>
+      <?php echo $this->Form->hidden('param', array('value' => $param)); ?>
       <?php echo $this->Form->end(); ?>
     </div>
   </div>
 </div>
 </div>
-
-
 </div>
+
+<script>
+$(function () {
+  $('.checkbox').change(function(){
+  	if ($(this).children('input').is(':checked')) {
+      var data = { like_checks: $(this).children('input').val() };
+        $.ajax({
+        type: 'POST',
+        url: '/jobs/search_ajax',
+        data: data,
+        dataType: 'json',
+        cache: false,
+        success: function(data) {
+          console.log(data);
+          var number = data.count;
+          $('.search_count').text('該当職業 :' + number + '件');
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          alert(textStatus);
+          alert(errorThrown);
+        }
+      });
+  	} else {
+      var data = { like_checks: $(this).children('input').val(), off:'off' };
+        $.ajax({
+        type: 'POST',
+        url: '/fdu24/jobs/search_ajax',
+        data: data,
+        dataType: 'json',
+        cache: false,
+        success: function(data) {
+          console.log(data);
+          var number = data.count;
+          $('.search_count').text('該当職業 :' + number + '件');
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          alert(textStatus);
+          alert(errorThrown);
+        }
+      });
+  	}
+  });
+
+  $('#bye').click(function(){
+      $('#result').html('');
+      return false;
+  });
+
+});
+</script>
