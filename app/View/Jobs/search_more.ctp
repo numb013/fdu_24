@@ -1,3 +1,20 @@
+<script type="text/javascript">
+jQuery(function($) {
+var nav = $('#fixedBox'),
+		offset = nav.offset();
+	$(window).scroll(function () {
+		if($(window).scrollTop() > offset.top) {
+			nav.addClass('fixed');
+
+			if ($(document).height() < $(window).scrollTop() + $(window).height() + 230) {
+				$('.nav').css("display","none");
+			} else {
+				$('.nav').css("display","block");
+			}
+		}
+	});
+});
+</script>
 <div id="fixedBox" class="nav">
   <?php echo $this->Form->create('Profession', array('type' => 'file', 'url' =>  'index')); ?>
   <div class="col-md-12 text-center">
@@ -70,11 +87,11 @@ $(function () {
         }
       });
   	} else {
-      var data = { like_checks: $(this).children('input').val(), off:'off' };
+      var data1 = { like_checks: $(this).children('input').val(), off:'off' };
         $.ajax({
         type: 'POST',
-        url: '/fdu24/jobs/search_ajax',
-        data: data,
+        url: '/jobs/search_ajax',
+        data: data1,
         dataType: 'json',
         cache: false,
         success: function(data) {
@@ -83,17 +100,13 @@ $(function () {
           $('.search_count').text('該当職業 :' + number + '件');
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
+          console.log(textStatus);
+          console.log(errorThrown);
           alert(textStatus);
           alert(errorThrown);
         }
       });
   	}
   });
-
-  $('#bye').click(function(){
-      $('#result').html('');
-      return false;
-  });
-
 });
 </script>

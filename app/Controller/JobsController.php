@@ -33,50 +33,39 @@ class JobsController extends AppController {
 	public $presetVars = true;
 	public $paginate = array();
 
-
-
 	function search_ajax() {
 		$this->autoRender = FALSE;
 		$searchData = $this->Session->read('ajax_serch_para');
 
-		$this->log('$this->request->data', LOG_FOR_YOU);
-		$this->log($this->request->data, LOG_FOR_YOU);
-
-		$this->log('$searchData1', LOG_FOR_YOU);
-		$this->log($searchData, LOG_FOR_YOU);
-
-if (empty($this->request->data['off'])) {
-	if (!empty($searchData['Profession']['like_checks'])) {
-		$count = count($searchData['Profession']['like_checks']);
-		$searchData['Profession']['like_checks'][$count] = $this->request->data['like_checks'];
-	} else {
-		$searchData['Profession']['like_checks'][0] = $this->request->data['like_checks'];
-	}
-} else {
-	foreach ($searchData['Profession']['like_checks'] as $key => $value) {
-		if ($value == $this->request->data['like_checks']) {
-			unset($searchData['Profession']['like_checks'][$key]);
+		if (empty($this->request->data['off'])) {
+			if (!empty($searchData['Profession']['like_checks'])) {
+				$count = count($searchData['Profession']['like_checks']);
+				$searchData['Profession']['like_checks'][$count] = $this->request->data['like_checks'];
+			} else {
+				$searchData['Profession']['like_checks'][0] = $this->request->data['like_checks'];
+			}
+		} else {
+			foreach ($searchData['Profession']['like_checks'] as $key => $value) {
+				if ($value == $this->request->data['like_checks']) {
+					unset($searchData['Profession']['like_checks'][$key]);
+				}
+			}
+			$searchData['Profession']['like_checks'] = array_merge($searchData['Profession']['like_checks']);
 		}
-	}
-	$searchData['Profession']['like_checks'] = array_merge($searchData['Profession']['like_checks']);
-}
-
-
-
-		$this->log('$searchData2', LOG_FOR_YOU);
-		$this->log($searchData, LOG_FOR_YOU);
-
+		// $this->log($searchData, LOG_FOR_YOU);
 
 		$this->Session->write('ajax_serch_para', $searchData);
 		$datas = $this->_searchJob($searchData);
-		$jobCount = count($datas);
-		$this->log($jobCount, LOG_FOR_YOU);
+		// $this->log($datas, LOG_FOR_YOU);
+		if ($datas == 'notdata') {
+			$jobCount = 0;
+		} else {
+			$jobCount = count($datas);
+		}
 		$data['count'] = $jobCount;
+		// $this->log($data, LOG_FOR_YOU);
 		echo json_encode($data);
 	}
-
-
-
 
 	public function index($para = null) {
 		$this->set('title_for_layout', 'どこよりも簡単な職業診断チェック');
@@ -116,7 +105,13 @@ if (empty($this->request->data['off'])) {
 					$datas = $this->_searchJob($this->request->data);
 
 					$personalChecks = $this->request->data['Profession']['personal_check'];
-					$searchCounts = count($datas);
+
+					if ($datas == 'notdata') {
+						$searchCounts = 0;
+					} else {
+						$searchCounts = count($datas);
+					}
+
 					$list_flag = 1;
 					$this->set(compact('datas', 'para', 'param', 'list_flag', 'personalChecks', 'searchCounts'));
 				} else {
