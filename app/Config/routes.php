@@ -31,6 +31,10 @@
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 	//Router::connect('/professions/*', array('controller' => 'professions', 'action' => 'detail'));
+
+  //サイトマップXML
+  Router::connect('/sitemap', array('controller' => 'Sitemaps', 'action' => 'index'));
+
 /**
  * Load all plugin routes. See the CakePlugin documentation on
  * how to customize the loading of plugin routes.

@@ -47,6 +47,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <link rel="shortcut icon" href="/img/favicon.ico">
 <link rel="apple-touch-icon-precomposed" href="/img/180.png">
 <meta name="description" content="まだあなたが知らないだけで、この世界には色々な職業が存在します。「FDU-24:どこよりも簡単な職業診断チェック」はコアでマイナーな職業を紹介する職業診断を個性としています、もしかしたらあなたの能力が発揮できる職業が見つかるかもしれません。まずはトップ画面の２択のうち1つを選び診断スタートして下さい。">
+<meta name="google-site-verification" content="x353_ujDJJV6H__kTHhDVCtuDklhAc5OQ5pHIx23fUI" />
 </head>
 <script type="text/javascript"src="//webfonts.sakura.ne.jp/js/sakura.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Denk+One" rel="stylesheet">
