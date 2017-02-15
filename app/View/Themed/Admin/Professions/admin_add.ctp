@@ -7,8 +7,8 @@
   <body>
     <?php
 
-//echo pr($related);
-//echo pr($check_personals);
+// echo pr($related);
+// echo pr($check_personals);
 
 
      ?>

@@ -391,9 +391,6 @@ public function detail($id = null) {
       $now = date("YmdHis");
       $finfo = finfo_open(FILEINFO_MIME_TYPE);
 
-
-
-
       foreach($this->request->data['Image'] as $key => $val){
         if(!$val["tmp_name"]) continue;
         if(!empty($val["url"])) continue;
@@ -533,7 +530,6 @@ public function detail($id = null) {
 			),
 			'recursive'  => -1
 		);
-
 		$relatedProfessions = $this->Profession->find('all', $options);
 
 		foreach ($relatedProfessions as $key => $relatedProfession) {
@@ -574,8 +570,23 @@ public function detail($id = null) {
           }
         }
         $this->request->data['Movie'][0] = '';
-
 				$this->_getCheckParameter();
+
+				$options = array(
+					'fields' => array(
+						'Profession.id','Profession.profession_name'
+					),
+					'conditions' =>
+					array(
+						'delete_flag' => '0'
+					),
+					'recursive'  => -1
+				);
+				$relatedProfessions = $this->Profession->find('all', $options);
+				foreach ($relatedProfessions as $key => $relatedProfession) {
+					$related[$relatedProfession['Profession']['id']] = $relatedProfession['Profession']['profession_name'];
+				}
+				$this->set('related', $related);
 
         $this->render('/Professions/admin_add');
 			} elseif (isset($this->request->data['regist'])) {
