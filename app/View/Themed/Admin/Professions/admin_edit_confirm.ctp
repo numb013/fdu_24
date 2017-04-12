@@ -13,8 +13,8 @@
             <?php echo $this->Form->hidden('Profession.profession_name', array('value' => $data['Profession']['profession_name'])); ?>
           </tr>
           <tr>
-            <td>職業ジャンル1</td>
-            <td><?php echo $genre[$data['Profession']['genre']]; ?></td>
+            <td>職業ジャンル</td>
+            <td><?php echo $data['Profession']['genre']; ?></td>
             <?php echo $this->Form->hidden('Profession.genre', array('value' => $data['Profession']['genre'])); ?>
           </tr>
           <tr>
@@ -25,7 +25,7 @@
                   <?php if(!empty($photo)):?>
                     <?php echo $this->Html->image($photo['url'] ,array('width' => '15%' )); ?>
                     <?php //echo $this->Html->image("top/comp25.jpg", array('width' => '15%')); ?>
-                    <?php if (empty($photo['id'])):?>
+                    <?php if (!empty($photo['name'])):?>
                       <?php echo $this->Form->hidden('Image.'.$key.'.Image.name', array('value' => $photo['name'])); ?>
                       <?php echo $this->Form->hidden('Image.'.$key.'.Image.type', array('value' => $photo['type'])); ?>
                       <?php echo $this->Form->hidden('Image.'.$key.'.Image.tmp_name', array('value' => $photo['tmp_name'])); ?>

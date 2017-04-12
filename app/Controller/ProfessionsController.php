@@ -148,14 +148,10 @@ public function detail($id = null) {
 				'Profession.delete_flag' => 0
 			)
 		);
-
-
-//echo pr($status);
-
 		// 以下がデータベース関係
 		$datas = $this->Profession->find('first', $status);
-		//echo pr($datas);
-
+	//echo pr($datas);
+	//exit();
 		if (!empty($datas['Profession']['image_flag'])) {
 			$id = $datas['Profession']['id'];
 			$status = array(
@@ -169,9 +165,9 @@ public function detail($id = null) {
 			$datas['Image'] = $this->Image->find('all', $status);
 		}
 
-//echo pr($datas['Image']);
-//exit();
 
+	//echo pr($datas);
+	//exit();
 
 		if (!empty($datas['Profession']['movie_flag'])) {
 			$id = $datas['Profession']['id'];
@@ -186,23 +182,10 @@ public function detail($id = null) {
 			$datas['Movie'] = $this->Movie->find('all', $status);
 		}
 
-//echo pr($datas);
-//exit();
-
-
-
-
-
-
-
-
-
-		$this->set('title_for_layout', $datas['Profession']['profession_name'].'のお仕事詳細');
+		$this->set('title_for_layout', $datas['Profession']['profession_name'].'のお仕事・なりかた・給料・向いてる性格');
 		$datas['Profession']['check_personal'] = explode(",", $datas['Profession']['check_personal']);
 		$datas['Profession']['check_like'] = explode(",", $datas['Profession']['check_like']);
 		$datas['Profession']['related_profession'] = explode(",", $datas['Profession']['related_profession']);
-
-
 
 		$status = array(
 			'fields' => array(
@@ -216,21 +199,6 @@ public function detail($id = null) {
 			'recursive'  => -1
 		);
 		$related = $this->Profession->find('all', $status);
-
-//echo pr($this->Profession->getDataSource()->getLog());
-//exit();
-//echo pr($datas);
-//
-//
-//echo pr($related);
-//exit();
-
-
-
-
-
-
-
 
 		$this->_getCheckParameter();
 		$know_flag = 1;
@@ -595,6 +563,7 @@ public function detail($id = null) {
 				$this->request->data['Profession']['check_like'] = implode(",", $this->request->data['Profession']['check_like']);
 				$this->request->data['Profession']['related_profession'] = implode(",", $this->request->data['Profession']['related_profession']);
         $data = $this->request->data;
+
         if (!empty($data['Image'])) {
           $data['Profession']['image_flag'] = 1;
           foreach ($data['Image'] as $key => $value) {
@@ -660,71 +629,66 @@ public function detail($id = null) {
 /*
 /**/
 public function admin_edit($id = null){
-	$this->_getCheckParameter();
-
-	$options = array(
-		'fields' => array(
-			'Profession.id','Profession.profession_name'
-		),
-		'conditions' =>
-		array(
-			'delete_flag' => '0'
-		),
-		'recursive'  => -1
-	);
-
-	$relatedProfessions = $this->Profession->find('all', $options);
-
-	foreach ($relatedProfessions as $key => $relatedProfession) {
-		$related[$relatedProfession['Profession']['id']] = $relatedProfession['Profession']['profession_name'];
-	}
-	$this->set('related', $related);
-
-	//exit();
-  // レイアウト関係
+	// レイアウト関係
 	$this->layout = "default";
+	//変更処理
   if ($this->request->is(array('post', 'put'))) {
 
+		// $Movie = $this->Session->read('Movie');
+		// echo 'movie-sesssion';
+		// echo '<br>';
+		// echo pr($Movie);
+		// echo 'movie';
+		// echo '<br>';
+		// echo pr($this->request->data['Movie']);
 
+
+
+		//動画にユニークID入れる
     foreach ($this->request->data['Movie'] as $key => $value) {
       if ($value['movie_uuid'] == 'fast') {
         $this->request->data['Movie'][$key]['movie_uuid'] = rand(11111,99999);
       }
     }
-
+		//画像がエラーの物削除
     foreach ($this->request->data['Image'] as $key => $value) {
         if ($value['error'] == 4) {
           unset($this->request->data['Image'][$key]);
         }
     }
     $this->request->data['Image'] = array_merge($this->request->data['Image']);
-
-    if ($this->Session->read('image')) {
-      $Image = $this->Session->read('image');
+		//画像セッション読み込み
+    if ($this->request->data['Profession']['BeforeImage']) {
       $count = count($this->request->data['Image']);
+			//追加なければセッションの値そのまま入れる
       if ($count == 0) {
-        $this->request->data['Image'] = $Image;
+        $this->request->data['Image'] = $this->request->data['Profession']['BeforeImage'];
       } else {
         $countkey = $count - 1;
         foreach ($this->request->data['Image'] as $key => $phots) {
           if ($key == $countkey) {
-            foreach ($Image as $key => $value) {
+            foreach ($this->request->data['Profession']['BeforeImage'] as $key => $value) {
               $this->request->data['Image'][$count] = $value;
               $count++;
             }
           }
         }
       }
+			//セッション削除
       $this->Session->delete('image');
     }
 
-    $Movie = $this->Session->read('Movie');
+
+		$image = $this->Session->read('image');
+		//空のデータが入ってくるので削除
     if (empty($this->request->data['Movie'][0]['movie_url'])) {
         unset($this->request->data['Movie'][0]);
     }
+		//順番整える
     $this->request->data['Movie'] = array_merge($this->request->data['Movie']);
     if ($this->Session->read('Movie')) {
-      $Movie = $this->Session->read('Movie');
+			//動画セッション読み込み
+	    $Movie = $this->Session->read('Movie');
       $count = count($this->request->data['Movie']);
       if ($count == 0) {
         $this->request->data['Movie'] = $Movie;
@@ -738,8 +702,12 @@ public function admin_edit($id = null){
       }
       $this->Session->delete('Movie');
     }
+
     $now = date("YmdHis");
     $finfo = finfo_open(FILEINFO_MIME_TYPE);
+
+		// exit();
+
     // 仮アップロード
     foreach($this->request->data['Image'] as $key => $val){
         if(empty($val["tmp_name"])) continue;
@@ -756,6 +724,8 @@ public function admin_edit($id = null){
 				$this->request->data['Image'][$key]["url"] = "/files/updir/tmp/" ."{$now}_{$key}.{$ext}";
       }
       finfo_close($finfo);
+
+			//動画アップロード形式に反感
       foreach ($this->request->data['Movie'] as $key => $value) {
         if (!empty($value)) {
           if(preg_match('/youtube/', $value['movie_url'])){
@@ -769,7 +739,7 @@ public function admin_edit($id = null){
       $this->Profession->set($this->request->data);
       // 2. モデル[ModelName]のvalidatesメソッドを使ってバリデーションを行う。
       if ($this->Profession->validates()) {
-        //削除チェックの入ったものを削除
+        //画像削除チェックの入ったものを削除
         if (!empty($this->request->data['Check'])) {
           foreach ($this->request->data['Check'] as $key => $Checkd) {
             if ($Checkd['photo'] != '0') {
@@ -780,11 +750,12 @@ public function admin_edit($id = null){
               }
             }
           }
-          if (empty($this->request->data['Image'][0]["name"])) {
+          if (empty($this->request->data['Image'][0]["url"])) {
             unset($this->request->data['Image'][0]);
           }
         }
         $this->request->data['Image'] = array_merge($this->request->data['Image']);
+				//動画削除チェックの入ったものを削除
         if (!empty($this->request->data['Check_Movie'])) {
           foreach ($this->request->data['Check_Movie'] as $key => $Checkd) {
             if ($Checkd['movie_uuid'] != '0') {
@@ -803,18 +774,17 @@ public function admin_edit($id = null){
         $this->request->data['Movie'] = array_merge($this->request->data['Movie']);
 
 
-
+			//最初に削除していて一回「戻るボタン」して再度「確認」押下時に必要処理
+			//再度削除処理にセットしている
       if (!empty($this->request->data['photo_dele'])) {
         if (!empty($this->request->data['Check'])) {
           $checkcount = count($this->request->data['Check']);
           foreach ($this->request->data['Check'] as $key => $CheckPhoto) {
-
               foreach ($this->request->data['photo_dele'] as $key => $photo_dele) {
                 if ($photo_dele != '0') {
                   $this->request->data['Check'][$checkcount + $key]['photo'] = $photo_dele;
                 }
               }
-
           }
         } elseif (!empty($this->request->data['photo_dele'])) {
           foreach ($this->request->data['photo_dele'] as $key => $photo_dele) {
@@ -823,18 +793,17 @@ public function admin_edit($id = null){
         }
       }
 
-
+			//最初に削除していて一回「戻るボタン」して再度「確認」押下時に必要処理
+			//再度削除処理にセットしている
       if (!empty($this->request->data['movie_dele'])) {
         if (!empty($this->request->data['Check_Movie'])) {
           $moviecount = count($this->request->data['Check_Movie']);
           foreach ($this->request->data['Check_Movie'] as $key => $CheckMovie) {
-
               foreach ($this->request->data['movie_dele'] as $key => $movie_dele) {
                 if ($movie_dele != '0') {
                   $this->request->data['Check_Movie'][$moviecount + $key]['movie_uuid'] = $movie_dele;
                 }
               }
-
           }
         } elseif (!empty($this->request->data['movie_dele'])) {
           foreach ($this->request->data['movie_dele'] as $key => $movie_dele) {
@@ -842,6 +811,9 @@ public function admin_edit($id = null){
           }
         }
       }
+
+			//array_uniqueはソートしてくれる
+			//array_mergeは重複削除
       if (!empty($this->request->data['movie_dele'])) {
         $this->request->data['Check_Movie'] = array_unique($this->request->data['Check_Movie']);
         $this->request->data['Check_Movie'] = array_merge($this->request->data['Check_Movie']);
@@ -856,6 +828,7 @@ public function admin_edit($id = null){
         $this->request->data['photo_dele'] = array_unique($this->request->data['photo_dele']);
         $this->request->data['photo_dele'] = array_merge($this->request->data['photo_dele']);
       }
+
         //画像/動画をセッションに保存
         $this->Session->write('Image', $this->request->data['Image']);
         $this->Session->write('Movie', $this->request->data['Movie']);
@@ -866,24 +839,17 @@ public function admin_edit($id = null){
 					'fields' => array(
 						'Profession.id','Profession.profession_name'
 					),
-					'conditions' =>
-					array(
-						'delete_flag' => '0'
+					'conditions' => array(
+						'delete_flag' => '0',
 					),
 					'recursive'  => -1
 				);
 
 				$relatedProfessions = $this->Profession->find('all', $options);
-
 				foreach ($relatedProfessions as $key => $relatedProfession) {
 					$relatedNmae[$relatedProfession['Profession']['id']] = $relatedProfession['Profession']['profession_name'];
 				}
 				$this->set('relatedNmae', $relatedNmae);
-
-
-
-
-
         $this->set('data',$this->request->data);
         $this->render('/Professions/admin_edit_confirm');
 
@@ -915,9 +881,9 @@ public function admin_edit($id = null){
           for ($i=0 ; $i < $photcount; $i++) {
             $this->request->data['Check'][$i] = 0;
           }
+					//降順
           ksort($this->request->data['Check']);
         }
-
 
         if (!empty($this->request->data['Movie'])) {
           $moviecount = 0;
@@ -940,6 +906,9 @@ public function admin_edit($id = null){
         return false;
       }
     } else {
+
+
+			//初期処理
       if (isset($id)) {
         $status = array(
         'conditions' =>
@@ -965,9 +934,28 @@ public function admin_edit($id = null){
 				if (!empty($this->request->data['Image'])) {
             $this->Session->write('image', $this->request->data['Image']);
         }
+				$this->_getCheckParameter();
 
+				$options = array(
+					'fields' => array(
+						'Profession.id','Profession.profession_name'
+					),
+					'conditions' =>
+					array(
+						'delete_flag' => '0'
+					),
+					'recursive'  => -1
+				);
+				$relatedProfessions = $this->Profession->find('all', $options);
+				foreach ($relatedProfessions as $key => $relatedProfession) {
+					$related[$relatedProfession['Profession']['id']] = $relatedProfession['Profession']['profession_name'];
+				}
+				$this->set('related', $related);
       }
+
     }
+
+
   }
 
 
@@ -1027,9 +1015,8 @@ public function admin_edit($id = null){
 				$data['Profession']['related_profession'] = implode(",", $data['Profession']['related_profession']);
 
 
-
         if (!empty($data['Image'])) {
-          $data['Profession']['photo_flag'] = 1;
+          $data['Profession']['image_flag'] = 1;
           foreach ($data['Image'] as $key => $value) {
             $data['Image'][$key]['Image']['partner_name'] = 'Profession';
           }

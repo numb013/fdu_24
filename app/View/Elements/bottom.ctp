@@ -15,7 +15,7 @@
   $text = rawurlencode($text);
 ?>
 <div id="fh5co-blog" class="animate-box sns_box">
-  <div class="text-center container fh5co-heading">
+  <div class="text-center container detail_container fh5co-heading">
       <h3 style="color:#323232; margin-top:0px; font-size:18px;">友達・知り合いに拡散する</h3>
   <ul class="sns_list">
     <a href="http://www.facebook.com/share.php?u=http://fdu24.com/<?php echo $_SERVER["REQUEST_URI"] ?>" onclick="window.open(this.href, 'FBwindow', 'width=650, height=450, menubar=no, toolbar=no, scrollbars=yes'); return false;">

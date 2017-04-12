@@ -57,6 +57,8 @@
                   )); ?>
               </td>
             </tr>
+            <?php echo $this->Form->hidden('BeforeImage]['.$key.'][id]', array('value' => $phot['id'])); ?>
+            <?php echo $this->Form->hidden('BeforeImage]['.$key.'][url]', array('value' => $phot['url'])); ?>
           <?php endforeach; ?>
         <?php endif;?>
         </tr>
@@ -156,7 +158,6 @@
           <td id="movieshow">
           </td>
         </tr>
-
       <?php if(!empty($this->request->data['Movie'])):?>
         <?php foreach ($this->request->data['Movie'] as $key => $movie): ?>
           <?php if ($key != 0): ?>
@@ -176,6 +177,7 @@
                 </div>
               </td>
             </tr>
+            <?php echo $this->Form->hidden('BeforeMovie]['.$key, array('value' => $movie['movie_url'])); ?>
           <?php endif;?>
          <?php endforeach; ?>
        <?php endif;?>
@@ -183,20 +185,20 @@
     <?php
     if (!empty($this->request->data['photo_dele'])) {
       foreach ($this->request->data['photo_dele'] as $key => $PhotoDele) {
-        echo $this->Form->hidden('photo_dele.'.$key, array('value' => $PhotoDele));
+        echo $this->Form->hidden('photo_dele]['.$key, array('value' => $PhotoDele));
       }
     } elseif (!empty($this->request->data['Check'])) {
         foreach ($this->request->data['Check'] as $key => $CheckPhoto) {
-          echo $this->Form->hidden('photo_dele.'.$key, array('value' => $CheckPhoto['photo']));
+          echo $this->Form->hidden('photo_dele]['.$key, array('value' => $CheckPhoto['photo']));
         }
       }
     if (!empty($this->request->data['movie_dele'])) {
       foreach ($this->request->data['movie_dele'] as $key => $MovieDele) {
-        echo $this->Form->hidden('movie_dele.'.$key, array('value' => $MovieDele));
+        echo $this->Form->hidden('movie_dele]['.$key, array('value' => $MovieDele));
       }
     } elseif (!empty($this->request->data['Check_Movie'])) {
       foreach ($this->request->data['Check_Movie'] as $key => $CheckMovie) {
-        echo $this->Form->hidden('movie_dele.'.$key, array('value' => $CheckMovie['movie_uuid']));
+        echo $this->Form->hidden('movie_dele]['.$key, array('value' => $CheckMovie['movie_uuid']));
       }
     }
     ?>

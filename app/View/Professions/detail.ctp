@@ -23,7 +23,7 @@
   </div>
 
   <div class="fh5co-copy col-md-12  text-center detail_tex">
-    <h3 class="detail_title"><?php echo $datas['Profession']['profession_name']; ?>になる為には</h3>
+    <h3 class="detail_title"><?php echo $datas['Profession']['profession_name']; ?>のなりかた</h3>
     <div class="rofession_text">
       <p>
         <?php echo nl2br($datas['Profession']['job_step']); ?>
@@ -44,7 +44,7 @@
 
 
   <div id ='fh5co-why-us' class="fh5co-services">
-    <div class="container">
+    <div class="container detail_container">
         <div class="col-md-4 col-sm-4 text-center item-block animate-box">
           <h3 class="detail_title">向いてる性格</h3>
           <p class="job_step">
@@ -72,10 +72,10 @@
   </div>
 
   <div id ='fh5co-why-us' class="fh5co-services">
-    <div class="container">
+    <div class="container detail_container">
         <div class="col-md-4 col-sm-4 text-center item-block animate-box">
           <h3 class="detail_title">関連動画</h3>
-          <?php echo '<iframe width="230" height="140" src='.'https://www.youtube.com/embed/'.$datas['Movie'][0]['Movie']['movie_url'].' frameborder="0" allowfullscreen></iframe>' ?>
+          <?php echo '<iframe width="95%" height="165" src='.'https://www.youtube.com/embed/'.$datas['Movie'][0]['Movie']['movie_url'].' frameborder="0" allowfullscreen></iframe>' ?>
         </div>
         <div class="col-md-4 col-sm-4 text-center item-block animate-box">
           <div class="Advertisement">

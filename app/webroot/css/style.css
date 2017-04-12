@@ -47,6 +47,10 @@ p.parameter {
   width: 100%;
 }
 
+.footer_link a{
+  color:#4c5454;
+  text-decoration: underline;
+}
 
 .parameter-frame a {
   font-family: 'Denk One', Quicksand, 游ゴシック体, "Yu Gothic", YuGothic, "ヒラギノ角ゴシック Pro", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
@@ -1535,6 +1539,9 @@ li.core_text {
   h3.detail_title {
     font-size: 19px;
     margin-bottom: 10px;
+  }
+  .Advertisement img {
+    width: 95%;
   }
 }
 

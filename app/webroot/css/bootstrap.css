@@ -953,6 +953,18 @@ pre code {
   }
 }
 
+@media (min-width: 992px) {
+  .detail_container {
+    width: 800px;
+  }
+}
+@media (min-width: 1280px) {
+  .detail_container {
+    width: 800px;
+  }
+}
+
+
 .container-fluid {
   margin-right: auto;
   margin-left: auto;
