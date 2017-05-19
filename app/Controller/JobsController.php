@@ -94,10 +94,16 @@ class JobsController extends AppController {
 			}
 
 
+                        
+
 	    // レイアウト関係
 			$this->Prg->commonProcess();
 			if (!empty($this->request->data)) {
-				if (count($this->request->data['Profession']['personal_check']) > 2) {
+                            if (!empty($this->Session->read('personalChecks'))) {
+                                $this->request->data['Profession']['personal_check'] = $this->Session->read('personalChecks');
+                                $this->Session->delete('personalChecks');
+                            }                            
+                            if (count($this->request->data['Profession']['personal_check']) > 2) {
 
 					$this->Session->write('ajax_serch_para', $this->request->data);
 
@@ -111,7 +117,7 @@ class JobsController extends AppController {
 					} else {
 						$searchCounts = count($datas);
 					}
-
+                                        $this->Session->write('personalChecks', $personalChecks);
 					$list_flag = 1;
 					$this->set(compact('datas', 'para', 'param', 'list_flag', 'personalChecks', 'searchCounts'));
 				} else {
@@ -123,6 +129,12 @@ class JobsController extends AppController {
 				// 初期表示時
 				$this->Session->delete('personal_check');
 				$this->Session->delete('ajax_serch_para');
+
+
+                                $this->Session->delete('personalChecks');
+  
+
+
 				$this->paginate = array(
 					'conditions' => array(
 						 'delete_flag' => '0'

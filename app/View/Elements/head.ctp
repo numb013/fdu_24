@@ -2,8 +2,7 @@
 <header id="fh5co-header" role="banner">
   <div class="container">
     <div class="header-inner">
-      <h1>
-
+      <h1 itemprop="name">
           <?php if ($_SERVER['DOCUMENT_ROOT'] == 'C:/xampp/htdocs'): ?>
             <a href="/fdu24/">
           <?php else: ?>

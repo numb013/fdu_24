@@ -35,7 +35,6 @@ class PagesController extends AppController {
  *
  * @var array
  */
-	public $uses = array();
 
 	public function beforeFilter() {
 		$this->set('title_for_layout', 'どこよりも簡単な職業診断チェック');
@@ -51,10 +50,10 @@ class PagesController extends AppController {
 	 *	or MissingViewException in debug mode.
 	 */
 		public function display() {
+                    
 			$this->set('title_for_layout', 'どこよりも簡単な職業診断チェック');
 			$this->layout = "default";
-			$this->render('home');
-
+                        $this->render('home');
 		}
 /**
  * Displays a view

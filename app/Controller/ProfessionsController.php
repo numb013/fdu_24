@@ -182,7 +182,7 @@ public function detail($id = null) {
 			$datas['Movie'] = $this->Movie->find('all', $status);
 		}
 
-		$this->set('title_for_layout', $datas['Profession']['profession_name'].'のお仕事・なりかた・給料・向いてる性格');
+		$this->set('title_for_layout', $datas['Profession']['profession_name'].'業界とは・なりかた・給料・向いてる性格');
 		$datas['Profession']['check_personal'] = explode(",", $datas['Profession']['check_personal']);
 		$datas['Profession']['check_like'] = explode(",", $datas['Profession']['check_like']);
 		$datas['Profession']['related_profession'] = explode(",", $datas['Profession']['related_profession']);
@@ -259,10 +259,6 @@ public function detail($id = null) {
 		$this->paginate = array(
 			'limit' => 5,
 		);
-
-		//echo pr($this->request->data);
-		//exit();
-
 		$this->Prg->commonProcess();
 		$this->paginate['conditions'] = $this->Profession->parseCriteria($this->passedArgs);
 		if (empty($this->request->data)) {

@@ -54,11 +54,9 @@ class UsersController extends AppController {
  public function admin_login() {
      if ($this->request->is('post')) {
          if ($this->Auth->login()) {
-					 echo pr($this->request->data);
-					//  exit();
-						$this->Cookie->write('Auth.User', $this->request->data['User'], false, '+4 weeks');
-						$this->redirect($this->Auth->redirect());
-						exit();
+            $this->Cookie->write('Auth.User', $this->request->data['User'], false, '+4 weeks');
+            $this->redirect($this->Auth->redirect());
+            exit();
          } else {
              $this->Flash->error(__('パスワードちゃいまっせ～'));
          }
@@ -71,8 +69,19 @@ class UsersController extends AppController {
 		$this->autoRender = false;
  }
 
- public function admin_add() {
-
- }
-
+public function admin_add() {
+    if ($this->request->is('post')) {
+        $this->User->create();
+        if ($this->User->save($this->request->data)) {
+            $this->Flash->success(__('The user has been saved'));
+            return $this->redirect(
+              array('controller' => 'Dashboards', 'action' => 'admin_index')
+            );
+        }
+        $this->Flash->error(
+            __('The user could not be saved. Please, try again.')
+        );
+    }
+} 
+ 
 }

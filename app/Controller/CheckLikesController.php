@@ -83,8 +83,7 @@ class CheckLikesController extends AppController {
         );
         $this->CheckLike->updateAll($status, $conditions);
 
-//echo pr($this->CheckLike->getDataSource()->getLog());
-//exit();
+
 
         return $this->redirect(
           array('controller' => 'CheckLikes', 'action' => 'admin_index')
@@ -97,6 +96,19 @@ class CheckLikesController extends AppController {
       ));
     }
   }
+
+
+  public function admin_delete($id = null) {
+	$this->layout = "default";
+      if ($this->CheckLike->delete($id)) {
+        return $this->redirect(
+          array('controller' => 'CheckLikes', 'action' => 'admin_index')
+        );
+      } else {
+        return false;
+      }
+  }
+
 
 	public function admin_detail($id = null) {
 		$this->_getCheckGenre();

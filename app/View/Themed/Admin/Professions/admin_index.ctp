@@ -92,14 +92,29 @@
       <tr>
         <th>職業名<?php echo $this->Paginator->sort('id');?></th>
         <th>職業ジャンル</th>
+        <th>動画</th>
         <th>詳細</th>
         <th>編集</th>
         <th>削除</th>
       </tr>
+
+
+      
       <?php foreach ($datas as $data): ?>
-        <tr>
+
+
+      
+      
+      <tr>
           <td><?php echo $data['Profession']['profession_name']; ?></td>
           <td><?php echo $genre[$data['Profession']['genre']]; ?></td>
+          <td>
+              <?php if ($data['Profession']['movie_flag'] == '1'): ?>
+              <?php echo '<iframe width="120" height="100" src='.'https://www.youtube.com/embed/'.$data['Movie'][0]['movie_url'].' frameborder="0" allowfullscreen></iframe>' ?>
+              <?php else: ?>
+              なし
+              <?php endif; ?>
+          </td>
           <td><?php echo $this->Html->link('詳細', array('controller' => 'Professions', 'action' => 'detail', $data['Profession']['id'])); ?></td>
           <td><?php echo $this->Html->link('編集', array('controller' => 'Professions', 'action' => 'edit', $data['Profession']['id'])); ?></td>
           <td><?php echo $this->Html->link('削除', array('controller' => 'Professions', 'action' => 'delete', $data['Profession']['id'])); ?></td>

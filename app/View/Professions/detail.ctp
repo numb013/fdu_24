@@ -79,18 +79,14 @@
         </div>
         <div class="col-md-4 col-sm-4 text-center item-block animate-box">
           <div class="Advertisement">
-            <?php
-            echo $this->Html->image('images.jpg');
-            ?>
-          </div>
+<script language="javascript" src="//ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3342556&pid=884673553"></script><noscript><a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3342556&pid=884673553" target="_blank" rel="nofollow"><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3342556&pid=884673553" border="0"></a></noscript>
+</div>
         </div>
         <div class="col-md-4 col-sm-4 text-center item-block animate-box">
           <div class="Advertisement">
-            <?php
-            echo $this->Html->image('images.jpg');
-            ?>
-          </div>
+<script language="javascript" src="//ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3342556&pid=884614813"></script><noscript><a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3342556&pid=884614813" target="_blank" rel="nofollow"><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3342556&pid=884614813" border="0"></a></noscript></div>
         </div>
     </div>
   </div>
 	<?php echo $this->element('bottom'); ?>
+	

@@ -3,9 +3,9 @@
   $line = rawurlencode( "テキスト " . $url );
 
   if (!empty($datas)) {
-    $text = $datas['Profession']['profession_name'].'ってなに？
-    気になるお給料から'.$datas['Profession']['profession_name'].'のなり方まで
-    知らなかった職業を知れる「FDU-24」';
+$text = $datas['Profession']['profession_name'].'とは？
+気になるお給料から'.$datas['Profession']['profession_name'].'のなりかたまで
+知らなかった職業を知れる「FDU-24」';
   } else {
     $text = 'まだあなたが知らないだけで、この世界には色々な職業が存在します。
     「FDU-24:どこよりも簡単な職業診断チェック」はコアでマイナーな職業を紹介する職業診断を個性としています';
@@ -16,7 +16,7 @@
 ?>
 <div id="fh5co-blog" class="animate-box sns_box">
   <div class="text-center container detail_container fh5co-heading">
-      <h3 style="color:#323232; margin-top:0px; font-size:18px;">友達・知り合いに拡散する</h3>
+      <h3 style="color:#323232; margin-top:0px; font-size:18px;">友達・知り合いにシェアする</h3>
   <ul class="sns_list">
     <a href="http://www.facebook.com/share.php?u=http://fdu24.com/<?php echo $_SERVER["REQUEST_URI"] ?>" onclick="window.open(this.href, 'FBwindow', 'width=650, height=450, menubar=no, toolbar=no, scrollbars=yes'); return false;">
       <li class="sns_button" style="background:#3b5998;">
@@ -33,8 +33,6 @@
         <?php echo $this->Html->image('line.png', array('class' => 'sns_button')); ?>LINEを送る
       </li>
     </a>
-
-
   </ul>
   </div>
 </div>
