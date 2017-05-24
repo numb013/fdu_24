@@ -81,6 +81,22 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <link href="https://fonts.googleapis.com/css?family=Denk+One" rel="stylesheet">
 <meta name="viewport" content="width=device-width">
 <body>
+
+<script type="text/javascript">
+    window._pt_lt = new Date().getTime();
+    window._pt_sp_2 = [];
+    _pt_sp_2.push('setAccount,50cb4f1c');
+    var _protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    (function() {
+        var atag = document.createElement('script'); atag.type = 'text/javascript'; atag.async = true;
+        atag.src = _protocol + 'js.ptengine.jp/pta.js';
+        var stag = document.createElement('script'); stag.type = 'text/javascript'; stag.async = true;
+        stag.src = _protocol + 'js.ptengine.jp/pts.js';
+        var s = document.getElementsByTagName('script')[0]; 
+        s.parentNode.insertBefore(atag, s); s.parentNode.insertBefore(stag, s);
+    })();
+</script>
+
 	<?php echo $this->element('head'); ?>
 	<?php echo $this->Flash->render(); ?>
 	<?php echo $this->fetch('content'); ?>
