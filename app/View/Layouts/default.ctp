@@ -69,11 +69,12 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <meta property="og:site_name" content="FDU-24:どこよりも簡単な職業診断チェック" />
 <meta property="og:image" content="http://fdu24.com<?php echo $datas['Image'][0]['Image']['url']; ?>" />
 
-<meta name="twitter:card" content="summarylargeimage" />
+<meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:site" content="@fdu24com" />
 <meta name="twitter:player" content="@fdu24com" />
-<meta name="twitter:domain" content="http://fdu24.com/" />
-
+<meta name="twitter:domain" content="http://fdu24.com" />
+<meta name="twitter:url" content="http://fdu24.com<?php echo $_SERVER["REQUEST_URI"]; ?>" />
+<meta name="twitter:image" content="http://fdu24.com<?php echo $datas['Image'][0]['Image']['url']; ?>" />
 </head>
 
 
