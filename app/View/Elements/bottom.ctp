@@ -14,7 +14,7 @@ $text = $datas['Profession']['profession_name'].'とは？
   $twitter = rawurlencode($url);
   $text = rawurlencode($text);
 ?>
-<div id="fh5co-blog" class="animate-box sns_box">
+<div id="fh5co-blog" class="sns_box">
   <div class="text-center container detail_container fh5co-heading">
       <h3 style="color:#323232; margin-top:0px; font-size:18px;">友達・知り合いにシェアする</h3>
   <ul class="sns_list">
@@ -36,7 +36,7 @@ $text = $datas['Profession']['profession_name'].'とは？
   </ul>
   </div>
 </div>
-<div class="animate-box fh5co-cta">
+<div class="fh5co-cta">
   <div class="text-center container fh5co-heading">
     <h3 style="color:#323232; margin-top:0px; font-size:18px;">簡単な職業診断チェック!!</h3>
     <a href="/" class="occupation_link">職業診断スタート</a>

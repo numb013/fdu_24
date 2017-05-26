@@ -30,7 +30,7 @@ App::uses('File', 'Utility');
  * @link http://book.cakephp.org/2.0/en/controllers/pages-controller.html
  */
 class ProfessionsController extends AppController {
-	public $uses = array('Profession', 'Image', 'Movie' ,'CheckLike', 'CheckPersonal');
+	public $uses = array('Profession', 'Image', 'Movie' ,'CheckLike', 'CheckPersonal', 'WriteDown');
 	public $components = array('Search.Prg', 'Session', 'Master');
 	public $presetVars = true;
 	public $paginate = array();
@@ -182,27 +182,31 @@ public function detail($id = null) {
 			$datas['Movie'] = $this->Movie->find('all', $status);
 		}
 
+
+		$id = $datas['Profession']['id'];
+		$status = array(
+			'conditions' =>
+			array(
+				'profession_id' => $id,
+				'up_flag' => 0,
+				'delete_flag' => 0
+			),
+			'order' => array(
+				'created' => 'DESC',
+			),
+		);
+		$datas['write'] = $this->WriteDown->find('all', $status);
+
 		$this->set('title_for_layout', $datas['Profession']['profession_name'].'業界とは・なりかた・給料・向いてる性格');
 		$datas['Profession']['check_personal'] = explode(",", $datas['Profession']['check_personal']);
 		$datas['Profession']['check_like'] = explode(",", $datas['Profession']['check_like']);
+
+
 		$datas['Profession']['related_profession'] = explode(",", $datas['Profession']['related_profession']);
-
-		$status = array(
-			'fields' => array(
-				'Profession.id', 'Profession.profession_name'
-			),
-			'conditions' =>
-			array(
-				'Profession.id' => $datas['Profession']['related_profession'],
-				'delete_flag' => 0
-			),
-			'recursive'  => -1
-		);
-		$related = $this->Profession->find('all', $status);
-
+		$this->_getSideContent($datas);
 		$this->_getCheckParameter();
 		$know_flag = 1;
-		$this->set(compact('datas', 'know_flag', 'related'));
+		$this->set(compact('datas', 'know_flag'));
 	}
 }
 
@@ -251,6 +255,30 @@ public function detail($id = null) {
 		$data['status'] = $status;
 		echo json_encode($data);
 	}
+
+	public function write_post() {
+		$this->log($this->request->data, LOG_DEBUG);
+		if (!$this->request->is('ajax')) {
+		  throw new NotFoundException('お探しのページは見つかりませんでした。');
+		}
+		$this->autoRender = false;
+		$data = array();
+		$data['profession_id'] =  $this->request->data['wirte_down']['profession_id'];
+		$data['write_name'] = $this->request->data['wirte_down']['write_name'];
+		$data['write_text'] = $this->request->data['wirte_down']['write_text'];
+		$data['up_flag'] = $this->request->data['wirte_down']['up_flag'];
+
+		if (!$this->WriteDown->save($data)) {
+			 $status = flase;
+		} else {
+			$aaa = $this->WriteDown('sql_dump');
+					$this->log($aaa, LOG_DEBUG);
+			 $status = true;
+		}
+		$this->log($this->element('sql_dump'), LOG_DEBUG);
+		echo json_encode($status);
+	}
+
 
 
 
@@ -1183,6 +1211,45 @@ public function admin_edit($id = null){
     );
     $this->Profession->updateAll($status, $conditions);
     return $this->redirect( array('controller' => 'Professions', 'action' => 'admin_index'));
+  }
+
+	public function _getSideContent($datas = null) {
+		//$status = array(
+		//'conditions' => array(
+		//	'image_flag' => '1'
+		//),
+		//'order' => array(
+		//	'created' => 'DESC'
+		//),
+		//'limit' => 6,
+		//);
+		// 以下がデータベース関係
+		//$new_content = $this->Profession->find('all', $status);
+		$status = array(
+			'fields' => array(
+				'Profession.id', 'Profession.profession_name', 'job_salary', 'personality'
+			),
+			'conditions' =>
+			array(
+				'Profession.id' => $datas['Profession']['related_profession'],
+				'delete_flag' => 0
+			),
+			'recursive'  => -1
+		);
+		$related = $this->Profession->find('all', $status);
+
+		$status = array(
+		'conditions' => array(
+			'image_flag' => '1'
+		),
+		'order' => array(
+			'core_status' => 'DESC',
+		),
+		'limit' => 6,
+		);
+		// 以下がデータベース関係
+		$core_content = $this->Profession->find('all', $status);
+		$this->set(compact("related", "core_content"));
   }
 
 	public function _getCheckParameter() {
