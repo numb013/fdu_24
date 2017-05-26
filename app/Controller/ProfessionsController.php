@@ -182,6 +182,11 @@ public function detail($id = null) {
 			$datas['Movie'] = $this->Movie->find('all', $status);
 		}
 
+		$this->set('title_for_layout', $datas['Profession']['profession_name'].'業界とは・なりかた・給料・向いてる性格');
+		$datas['title'] = $datas['Profession']['profession_name'].'業界とは・なりかた・給料・向いてる性格';
+		$datas['Profession']['check_personal'] = explode(",", $datas['Profession']['check_personal']);
+		$datas['Profession']['check_like'] = explode(",", $datas['Profession']['check_like']);
+		$datas['Profession']['related_profession'] = explode(",", $datas['Profession']['related_profession']);
 
 		$id = $datas['Profession']['id'];
 		$status = array(

@@ -71,7 +71,11 @@ class JobsController extends AppController {
 		$this->set('title_for_layout', 'どこよりも簡単な職業診断チェック');
 		if (!empty($this->request->data['back'])) {
 			$this->_getCheckParameter();
-			$this->request->data['Profession']['personal_check'] = $this->request->data['personal_checks'];
+			//$this->request->data['Profession']['personal_check'] = $this->request->data['personal_checks'];
+                        if (!empty($this->Session->read('personalChecks'))) {
+                            $this->request->data['Profession']['personal_check'] = $this->Session->read('personalChecks');
+                            $this->Session->delete('personalChecks');
+                        }                           
 			$flag = 1;
 			$this->set(compact('flag', 'para'));
 		} else {
@@ -127,14 +131,8 @@ class JobsController extends AppController {
 				}
 			} else {
 				// 初期表示時
-				$this->Session->delete('personal_check');
+				$this->Session->delete('personalChecks');
 				$this->Session->delete('ajax_serch_para');
-
-
-                                $this->Session->delete('personalChecks');
-  
-
-
 				$this->paginate = array(
 					'conditions' => array(
 						 'delete_flag' => '0'

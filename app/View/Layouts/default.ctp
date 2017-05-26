@@ -18,7 +18,7 @@ $cakeDescription = __d('cake_dev', 'FDU-24');
 $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 ?>
 <!DOCTYPE html>
-<html>
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
@@ -43,16 +43,61 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		echo $this->fetch('css');
 		echo $this->fetch('script');
 	?>
-
 <link rel="shortcut icon" href="/img/favicon.ico">
 <link rel="apple-touch-icon-precomposed" href="/img/180.png">
 <meta name="description" content="まだあなたが知らないだけで、この世界には色々な職業が存在します。「FDU-24:どこよりも簡単な職業診断チェック」はコアでマイナーな職業を紹介する職業診断を個性としています、もしかしたらあなたの能力が発揮できる職業が見つかるかもしれません。まずはトップ画面の２択のうち1つを選び診断スタートして下さい。">
 <meta name="google-site-verification" content="x353_ujDJJV6H__kTHhDVCtuDklhAc5OQ5pHIx23fUI" />
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9667532213038599",
+    enable_page_level_ads: true
+  });
+</script>
+
+<?php
+// echo $_SERVER["REQUEST_URI"];
+// echo pr($datas['title']);
+
+
+ ?>
+<meta property="fb:app_id" content="1910038995905929" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://fdu24.com<?php echo $_SERVER["REQUEST_URI"]; ?>" />
+ <meta property="og:title" content="<?php echo $datas['title']; ?>:FDU-24" />
+<meta property="og:description" content=<?php echo $datas['Profession']['job_content']; ?> />
+<meta property="og:site_name" content="FDU-24:どこよりも簡単な職業診断チェック" />
+<meta property="og:image" content="http://fdu24.com<?php echo $datas['Image'][0]['Image']['url']; ?>" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@fdu24com" />
+<meta name="twitter:player" content="@fdu24com" />
+<meta name="twitter:domain" content="http://fdu24.com" />
+<meta name="twitter:url" content="http://fdu24.com<?php echo $_SERVER["REQUEST_URI"]; ?>" />
+<meta name="twitter:image" content="http://fdu24.com<?php echo $datas['Image'][0]['Image']['url']; ?>" />
 </head>
+
+
 <script type="text/javascript"src="//webfonts.sakura.ne.jp/js/sakura.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Denk+One" rel="stylesheet">
 <meta name="viewport" content="width=device-width">
 <body>
+
+<script type="text/javascript">
+    window._pt_lt = new Date().getTime();
+    window._pt_sp_2 = [];
+    _pt_sp_2.push('setAccount,50cb4f1c');
+    var _protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    (function() {
+        var atag = document.createElement('script'); atag.type = 'text/javascript'; atag.async = true;
+        atag.src = _protocol + 'js.ptengine.jp/pta.js';
+        var stag = document.createElement('script'); stag.type = 'text/javascript'; stag.async = true;
+        stag.src = _protocol + 'js.ptengine.jp/pts.js';
+        var s = document.getElementsByTagName('script')[0]; 
+        s.parentNode.insertBefore(atag, s); s.parentNode.insertBefore(stag, s);
+    })();
+</script>
+
 	<?php echo $this->element('head'); ?>
 	<?php echo $this->Flash->render(); ?>
 	<?php echo $this->fetch('content'); ?>
