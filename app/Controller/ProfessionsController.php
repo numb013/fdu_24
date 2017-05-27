@@ -202,12 +202,6 @@ public function detail($id = null) {
 		);
 		$datas['write'] = $this->WriteDown->find('all', $status);
 
-		$this->set('title_for_layout', $datas['Profession']['profession_name'].'業界とは・なりかた・給料・向いてる性格');
-		$datas['Profession']['check_personal'] = explode(",", $datas['Profession']['check_personal']);
-		$datas['Profession']['check_like'] = explode(",", $datas['Profession']['check_like']);
-
-
-		$datas['Profession']['related_profession'] = explode(",", $datas['Profession']['related_profession']);
 		$this->_getSideContent($datas);
 		$this->_getCheckParameter();
 		$know_flag = 1;

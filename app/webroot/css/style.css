@@ -73,6 +73,9 @@ ul.write_title li {
       padding-top: 10px;
       width: 95%;
     }
+    .add_img li img {
+      width: 100%;
+    }
 }
 
 @media screen and (max-width: 1100px) {
@@ -90,12 +93,15 @@ ul.write_title li {
   }
 
   .add_img li img{
-    width: 100%;
+    width: 90%;
     height: 100%
   }
 }
 
 @media screen and (max-width: 991px) {
+  .rofession_text {
+    width: 100%;
+  }
   .wapper {
     margin: 0 auto;
     width: 90%;
@@ -124,10 +130,10 @@ ul.write_title li {
     text-align: center;
     width: 100%;
   }
-  .add_img li img{
+  /*.add_img li img{
     width: 70%;
     height: 70%
-  }
+  }*/
 }
 
 @media screen and (min-width: 445px) and (max-width: 991px) {
@@ -352,11 +358,9 @@ div.buttom_edit {
   font-weight: bold;
 }
 .rofession_text {
-  width: 90%;
-  margin: 0 auto;
+  width: 95%;
   margin-bottom: 30px;
   text-align: left;
-
 }
 .checkbox-title {
   color: #000;
@@ -1280,12 +1284,11 @@ li.core_text {
     text-align: center;
     margin-bottom: 15px;
   }
+
   .rofession_text {
     text-align: left;
-    width: 80%;
-    margin: 0 auto;
-    padding-top: 10px;
   }
+
   li.sns_button{
     width:32%;
     margin: 0 3px;
@@ -1480,6 +1483,11 @@ li.core_text {
   letter-spacing: -0.5px;
 }
 
+@media screen and (max-width: 991px) {
+  .rofession_text {
+    width: 100%;
+  }
+}
 
 
 

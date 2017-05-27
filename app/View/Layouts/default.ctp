@@ -64,17 +64,28 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <meta property="fb:app_id" content="1910038995905929" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://fdu24.com<?php echo $_SERVER["REQUEST_URI"]; ?>" />
- <meta property="og:title" content="<?php echo $datas['title']; ?>:FDU-24" />
+<?php if (!empty($datas['title'])): ?>
+<meta property="og:title" content="<?php echo $datas['title']; ?>:FDU-24" />
 <meta property="og:description" content=<?php echo $datas['Profession']['job_content']; ?> />
-<meta property="og:site_name" content="FDU-24:どこよりも簡単な職業診断チェック" />
 <meta property="og:image" content="http://fdu24.com<?php echo $datas['Image'][0]['Image']['url']; ?>" />
+<?php else: ?>
+<meta property="og:title" content="FDU-24:どこよりも簡単な職業診断チェック" />
+<meta property="og:description" content="まだあなたが知らないだけで、この世界には色々な職業が存在します。「FDU-24:どこよりも簡単な職業診断チェック」はコアでマイナーな職業を紹介する職業診断を個性としています、もしかしたらあなたの能力が発揮できる職業が見つかるかもしれません。" />
+<meta property="og:image" content="http://localhost/fdu24/files/updir/20170209010031_0.jpeg" />
+<?php endif; ?>
+<meta property="og:site_name" content="FDU-24:どこよりも簡単な職業診断チェック" />
+
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:site" content="@fdu24com" />
 <meta name="twitter:player" content="@fdu24com" />
 <meta name="twitter:domain" content="http://fdu24.com" />
 <meta name="twitter:url" content="http://fdu24.com<?php echo $_SERVER["REQUEST_URI"]; ?>" />
+<?php if (!empty($datas['title'])): ?>
 <meta name="twitter:image" content="http://fdu24.com<?php echo $datas['Image'][0]['Image']['url']; ?>" />
+<?php else: ?>
+<meta property="og:image" content="http://localhost/fdu24/files/updir/20170209010031_0.jpeg" />
+<?php endif; ?>
 </head>
 
 
@@ -93,7 +104,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
         atag.src = _protocol + 'js.ptengine.jp/pta.js';
         var stag = document.createElement('script'); stag.type = 'text/javascript'; stag.async = true;
         stag.src = _protocol + 'js.ptengine.jp/pts.js';
-        var s = document.getElementsByTagName('script')[0]; 
+        var s = document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(atag, s); s.parentNode.insertBefore(stag, s);
     })();
 </script>

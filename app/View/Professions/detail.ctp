@@ -80,12 +80,13 @@
           </div>
           <div class="col-md-4 col-sm-4 text-center item-block">
             <div class="Advertisement">
-              <script language="javascript" src="//ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3342556&pid=884673553"></script><noscript><a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3342556&pid=884673553" target="_blank" rel="nofollow"><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3342556&pid=884673553" border="0"></a></noscript>
-            </div>
+                <script language="javascript" src="//ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3342556&pid=884692765"></script><noscript><a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3342556&pid=884692765" target="_blank" rel="nofollow"><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3342556&pid=884692765" border="0"></a></noscript>
+              </div>
           </div>
           <div class="col-md-4 col-sm-4 text-center item-block">
             <div class="Advertisement">
-              <script language="javascript" src="//ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3342556&pid=884614813"></script><noscript><a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3342556&pid=884614813" target="_blank" rel="nofollow"><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3342556&pid=884614813" border="0"></a></noscript></div>
+            <script language="javascript" src="//ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3342556&pid=884692753"></script><noscript><a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3342556&pid=884692753" target="_blank" rel="nofollow"><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3342556&pid=884692753" border="0"></a></noscript>
+          </div>
           </div>
         </div>
       </div>
@@ -160,7 +161,7 @@
     console.log(JSON.stringify(data));
     $.ajax({
       type: 'POST',
-      url: '/fdu24/professions/know_count',
+      url: '/professions/know_count',
       data: data,
       dataType: 'json',
       cache: false,
