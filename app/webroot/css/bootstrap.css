@@ -957,10 +957,16 @@ pre code {
   .detail_container {
     width: 800px;
   }
+  .bottoml_container {
+    width: 100%;
+  }
 }
 @media (min-width: 1280px) {
   .detail_container {
     width: 800px;
+  }
+  .bottoml_container {
+    width: 100%;
   }
 }
 

@@ -14,16 +14,10 @@
   width: 75%;
 }
 
-.side_rss {
-  float: left;
-  width: 73%;
-}
-
 .side_1 {
-  width: 25%;
-  float: right;
-  padding-top: 5px;
-  margin-top: 40px;
+  width:25%;
+  float:right;
+  padding-top: 30px;
 }
 
 .job_list {
@@ -34,12 +28,8 @@
   border-bottom: 1px solid #bfbfbf;
 }
 .job_list li h4 {
-  font-size: 16px;
+  font-size: 18px;
   color: #369840;
-  font-family: 'inherit';
-}
-p.sm_text {
-    font-family: 'inherit';
 }
 .job_list li p {
   font-size: 15px;
@@ -76,12 +66,6 @@ ul.write_title li {
 .write_text {
   clear: both;
 }
-.rss_title a {
-    color: #000;
-}
-p.bottom_text {
-    font-size: 14px;
-}
 
 @media screen and (min-width: 1024px) {
     .rofession_text {
@@ -105,6 +89,7 @@ p.bottom_text {
 
   .side_1 {
     width:20%;
+    padding-top: 30px;
   }
 
   .add_img li img{
@@ -127,6 +112,7 @@ p.bottom_text {
 
   .side_1 {
     width:100%;
+    padding-top: 30px;
   }
   .add_img li {
     width: 33.3333%;
@@ -194,14 +180,9 @@ p.bottom_text {
   }
 }
 
-@media screen and (max-width: 360px) {
-  .text_none {
-    display: none;
-  }
-}
 
 body {
-  font-family: inherit;
+  font-family: 'メイリオ';
   font-weight: 400;
   line-height: 24px;
   font-size: 17px;
@@ -260,7 +241,7 @@ h1, h2, h3, h4, h5, figure {
 
 h6 {
   color: #000;
-  font-family: inherit;
+  font-family: 'Denk One', Quicksand, 游ゴシック体, "Yu Gothic", YuGothic, "ヒラギノ角ゴシック Pro", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
   font-weight: 900;
   padding-bottom: 10px;
   font-size: 20px;
@@ -322,16 +303,8 @@ li.sns_button .twitter{
 h2.professions_title {
   font-size: 13px;
   font-weight: bold;
-  font-family: 'inherit';
+  font-family: 'Denk One', Quicksand, 游ゴシック体, "Yu Gothic", YuGothic, "ヒラギノ角ゴシック Pro", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
   margin: 2px;
-  line-height:18px;
-}
-
-h2.rss_title {
-  font-size: 13px;
-  font-family: 'inherit';
-  margin: 2px;
-  line-height:18px;
 }
 
 .fh5co-cta p.occupation_diagnosis {
@@ -341,8 +314,7 @@ h2.rss_title {
 }
 
 .occupation_link {
-  width: 250px;
-  padding: 30px 0;
+  padding: 10px 50px;
   border: 1px solid #000;
   margin-top: 10px;
   display: inline-block;
@@ -373,7 +345,7 @@ div.buttom_edit {
   font-size: 20px;
   color: black;
   text-align: center;
-  font-family: inherit;
+  font-family: 'Denk One', Quicksand, 游ゴシック体, "Yu Gothic", YuGothic, "ヒラギノ角ゴシック Pro", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
   font-weight: bold;
 }
 
@@ -382,7 +354,7 @@ div.buttom_edit {
   font-size: 20px;
   color: white;
   text-align: center;
-  font-family: inherit;
+  font-family: 'Denk One', Quicksand, 游ゴシック体, "Yu Gothic", YuGothic, "ヒラギノ角ゴシック Pro", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
   font-weight: bold;
 }
 .rofession_text {
@@ -392,10 +364,10 @@ div.buttom_edit {
 }
 .checkbox-title {
   color: #000;
-  font-family: inherit;
+  font-family: Quicksand, 游ゴシック体, "Yu Gothic", YuGothic, "ヒラギノ角ゴシック Pro", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
   font-weight: 900;
   padding: 60px 0 5px 0;
-  font-size: 13px;
+  font-size: 14px;
   background: #fff;
 }
 .error_text{
@@ -688,7 +660,7 @@ div.buttom_edit {
 }
 
 .sort-search a {
-  width: 100%;
+  width: 95%;
   display: inline-block;
 }
 
@@ -781,24 +753,6 @@ div.buttom_edit {
   margin-bottom:0px;
 }
 
-.rss-memu {
-  width: 50%;
-  height: 160px;
-  float: left;
-  background: #fff;
-  text-align: center;
-  border: 1px solid #000;
-}
-.rss-memu img {
-  margin: 0 auto;
-  border: 4px solid #fff;
-}
-.rss-memu p {
-  margin-top: 10px;
-  font-size: 20px;
-  color: #000;
-  margin-bottom:0px;
-}
 .check-group input {
   display: none;
 }
@@ -930,7 +884,7 @@ li.core_text {
 }
 
 .btn_submit{
-  padding: 15px 50px;
+  padding: 15px 120px;
   background: #369840;
   text-transform:uppercase;
   color:#fff;
@@ -1000,7 +954,7 @@ li.core_text {
 }
 
 .item-block {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 .fh5co-services {
   padding: 0px 0px 20px 0px;
@@ -1034,18 +988,6 @@ li.core_text {
     border: 4px solid #000;
   }
 
-    .rss-memu {
-        width: 50%;
-        float: left;
-        background: #fff;
-        text-align: center;
-        height: 225px;
-        float: left;
-        background: #fff;
-        text-align: center;
-        border: 4px solid #000;
-    }
-
   .job-notdata {
   width: 100%;
   padding: 10px 150px;
@@ -1074,10 +1016,6 @@ li.core_text {
   h2.professions_title{
     margin-top: 5px;
   }
-h2.rss_title {
-margin-top: 5px;
-}
-
   ul.core_list{
     margin-top: 1px;
   }
@@ -1106,28 +1044,6 @@ margin-top: 5px;
     color: #000;
     margin-bottom:0px;
   }
-  
-  .rss-memu {
-    width: 50%;
-    float: left;
-    background: #fff;
-    text-align: center;
-    height: 290px;
-    float: left;
-    background: #fff;
-    text-align: center;
-    border: 4px solid #000;
-  }
-  .rss-memu img {
-    margin: 0 auto;
-  }
-  .rss-memu p {
-    margin-top: 5px;
-    font-size: 15px;
-    color: #000;
-    margin-bottom:0px;
-  }
-
   .photo-cut{
     position: relative;
     width: 100%;
@@ -1279,16 +1195,6 @@ margin-top: 5px;
     text-align: center;
     border: 4px solid #000;
   }
-
-  .rss-memu {
-    width: 25%;
-    height: 210px;
-    float: left;
-    background: #fff;
-    text-align: center;
-    border: 4px solid #000;
-  }
-
   .check-group {
     width: 992px;
     margin: 0 auto;
@@ -1354,15 +1260,6 @@ margin-top: 5px;
 }
 
 @media screen and (min-width: 1024px) {
-  .rss-memu {
-    width: 32%;
-    height: 280px;
-    float: left;
-    background: #fff;
-    text-align: center;
-    border: 4px solid #000;
-  }
-
   .job-memu {
     width: 25%;
     height: 210px;
@@ -1408,16 +1305,6 @@ margin-top: 5px;
     line-height: 19px;
     color: #000;
   }
-
-  .rss-memu {
-    width: 33.3333%;
-    height: 245px;
-    float: left;
-    background: #fff;
-    text-align: center;
-    border: 4px solid #000;
-  }
-
   .job-memu {
     width: 25%;
     height: 245px;
@@ -1841,7 +1728,8 @@ margin-top: 5px;
     font-size: 17px;
   }
   h3.detail_title {
-    font-size: 19px;;
+    font-size: 19px;
+    margin-bottom: 10px;
   }
   .Advertisement img {
     width: 95%;
