@@ -37,7 +37,7 @@ class PagesController extends AppController {
  */
 
 	public function beforeFilter() {
-		$this->set('title_for_layout', 'どこよりも簡単な職業診断チェック');
+		$this->set('title_for_layout', '簡単で当たる！職業診断 -コアでマイナーで珍しい職業-');
 	 parent::beforeFilter();
 	 $this->Auth->allow('add', 'index', 'home', 'search', 'check_box', 'display');
 	}
@@ -50,8 +50,7 @@ class PagesController extends AppController {
 	 *	or MissingViewException in debug mode.
 	 */
 		public function display() {
-                    
-			$this->set('title_for_layout', 'どこよりも簡単な職業診断チェック');
+			$this->set('title_for_layout', '簡単で当たる！職業診断 -コアでマイナーで珍しい職業-');
 			$this->layout = "default";
                         $this->render('home');
 		}

@@ -14,7 +14,7 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = __d('cake_dev', 'FDU-24');
+$cakeDescription = __d('cake_dev', 'FDU-24 簡単で当たる！職業診断 -コアでマイナーで珍しい職業-');
 $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 ?>
 <!DOCTYPE html>
@@ -22,15 +22,20 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php echo $cakeDescription ?>:
-		<?php echo $this->fetch('title'); ?>
-	</title>
+            <?php if (empty($datas)): ?>
+                <?php echo $cakeDescription ?>
+            <?php else: ?>
+                <?php echo $this->fetch('title'); ?> :
+                <?php echo $cakeDescription ?>
+            <?php endif; ?>       
+        </title>
 	<?php
 		echo $this->Html->meta('icon');
 		echo $this->Html->css('animate');
 		//echo $this->Html->css('icomoon');
 		echo $this->Html->css('bootstrap');
 		echo $this->Html->css('flexslider');
+                echo $this->Html->css('slider-pro');
 		echo $this->Html->css('style');
 		echo $this->Html->script('jquery.min.js');
 		echo $this->Html->script('main');
@@ -39,13 +44,18 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		echo $this->Html->script('jquery.flexslider-min');
 		echo $this->Html->script('bootstrap.min');
 		echo $this->Html->script('modernizr-2.6.2.min');
+                echo $this->Html->script('jquery.sliderPro.min');
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
 	?>
 <link rel="shortcut icon" href="/img/favicon.ico">
 <link rel="apple-touch-icon-precomposed" href="/img/180.png">
-<meta name="description" content="まだあなたが知らないだけで、この世界には色々な職業が存在します。「FDU-24:どこよりも簡単な職業診断チェック」はコアでマイナーな職業を紹介する職業診断を個性としています、もしかしたらあなたの能力が発揮できる職業が見つかるかもしれません。まずはトップ画面の２択のうち1つを選び診断スタートして下さい。">
+<?php if (!empty($datas['Profession'])): ?>
+<meta name="description"content="<?php echo preg_replace('/\n|\r|\r\n/', '', $datas['Profession']['job_content']); ?>" />
+<?php else: ?>
+<meta name="description" content="まだあなたが知らないだけで、この世界には色々な職業が存在します。「FDU-24:簡単で当たる！職業診断」はコアでマイナーで珍しい職業を紹介する職業診断を個性としています、もしかしたらあなたの能力が発揮できる職業が見つかるかもしれません。">
+<?php endif; ?>
 <meta name="google-site-verification" content="x353_ujDJJV6H__kTHhDVCtuDklhAc5OQ5pHIx23fUI" />
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <script>
@@ -66,14 +76,14 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <meta property="og:url" content="http://fdu24.com<?php echo $_SERVER["REQUEST_URI"]; ?>" />
 <?php if (!empty($datas['title'])): ?>
 <meta property="og:title" content="<?php echo $datas['title']; ?>:FDU-24" />
-<meta property="og:description" content=<?php echo $datas['Profession']['job_content']; ?> />
+<meta property="og:description" content="<?php echo preg_replace('/\n|\r|\r\n/', '', $datas['Profession']['job_content']); ?>" />
 <meta property="og:image" content="http://fdu24.com<?php echo $datas['Image'][0]['Image']['url']; ?>" />
 <?php else: ?>
-<meta property="og:title" content="FDU-24:どこよりも簡単な職業診断チェック" />
-<meta property="og:description" content="まだあなたが知らないだけで、この世界には色々な職業が存在します。「FDU-24:どこよりも簡単な職業診断チェック」はコアでマイナーな職業を紹介する職業診断を個性としています、もしかしたらあなたの能力が発揮できる職業が見つかるかもしれません。" />
-<meta property="og:image" content="http://localhost/fdu24/files/updir/20170209010031_0.jpeg" />
+<meta property="og:title" content="FDU-24:簡単で当たる！職業診断" />
+<meta property="og:description" content="まだあなたが知らないだけで、この世界には色々な職業が存在します。「FDU-24:簡単で当たる！職業診断」はコアでマイナーで珍しい職業を紹介する職業診断を個性としています、もしかしたらあなたの能力が発揮できる職業が見つかるかもしれません。" />
+<meta property="og:image" content="http://fdu24.com/files/updir/20170209010031_0.jpeg" />
 <?php endif; ?>
-<meta property="og:site_name" content="FDU-24:どこよりも簡単な職業診断チェック" />
+<meta property="og:site_name" content="FDU-24:簡単で当たる！職業診断" />
 
 
 <meta name="twitter:card" content="summary_large_image" />
@@ -84,16 +94,15 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <?php if (!empty($datas['title'])): ?>
 <meta name="twitter:image" content="http://fdu24.com<?php echo $datas['Image'][0]['Image']['url']; ?>" />
 <?php else: ?>
-<meta property="og:image" content="http://localhost/fdu24/files/updir/20170209010031_0.jpeg" />
+<meta property="og:image" content="http://fdu24.com/files/updir/20170209010031_0.jpeg" />
 <?php endif; ?>
 </head>
 
 
 <script type="text/javascript"src="//webfonts.sakura.ne.jp/js/sakura.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Denk+One" rel="stylesheet">
-<meta name="viewport" content="width=device-width">
+<meta name="viewport" content="width=device-width; initial-scale=1.0" />
 <body>
-
 <script type="text/javascript">
     window._pt_lt = new Date().getTime();
     window._pt_sp_2 = [];
@@ -107,6 +116,29 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
         var s = document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(atag, s); s.parentNode.insertBefore(stag, s);
     })();
+
+$(function(){
+	 $('#caption').sliderPro();
+});
+
+//シンプル
+
+
+//キャプション付き
+	$( document ).ready(function( $ ) {
+		$('#caption').sliderPro({
+			autoScaleLayers:false,//キャプションの自動変形
+			waitForLayers: true,//キャプションのアニメーションが終了してからスライドするか
+			width: 600,//横幅
+			autoplay:false,//自動再生
+			arrows: true,//左右の矢印
+			buttons: true,//ナビゲーションボタン
+			slideDistance:0,//スライド同士の距離
+		});
+	});
+
+
+
 </script>
 
 	<?php echo $this->element('head'); ?>

@@ -37,6 +37,7 @@ class ContactsController extends AppController {
  *	or MissingViewException in debug mode.
  */
  public function index() {
+     $this->set('title_for_layout', 'お問い合わせ');
    if ($this->request->is('post')) {
     //  echo pr($this->request->data);
     //  exit();
@@ -79,7 +80,7 @@ class ContactsController extends AppController {
 
     	$honbun.="□□□□□□□□□□□□□□□□□\n";
     	$honbun.="\n";
-    	$honbun.="『FUD-24』どこよりも簡単な職業診断チェック係";
+    	$honbun.="『FUD-24』簡単で当たる！職業診断係";
     	$honbun.="\n";
     	$honbun.="メール oneblow0701@gmail.com\n";
     	$honbun.="\n";
@@ -87,7 +88,7 @@ class ContactsController extends AppController {
 
 
     	$title= 'お問い合わせありがとうございました。';
-    	$header = 'From:FUD-24 どこよりも簡単な職業診断チェック';
+    	$header = 'From:FUD-24 簡単で当たる！職業診断';
       $honbun = html_entity_decode($honbun, ENT_QUOTES, 'UTF-8');
       $header = mb_encode_mimeheader($header);
 

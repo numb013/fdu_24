@@ -11,7 +11,7 @@
           FDU<span>-</span>24
         </a>
       </h1>
-        <p class="title-small-text">どこよりも簡単な<br>職業診断チェック</p>
+        <p class="title-small-text">簡単で当たる！<br>職業診断サイト</p>
     </div>
     <?php if(!empty($back_flag)): ?>
       <?php if ($_SERVER['DOCUMENT_ROOT'] == 'C:/xampp/htdocs'): ?>
@@ -33,6 +33,16 @@
     <?php elseif(!empty($search_flag)): ?>
       <div class="history_back">
         <a href="javascript:history.back();">BACK</a>
+      </div>
+    <?php elseif(!empty($first)): ?>
+      <div class="history_back">
+        <?php if ($_SERVER['DOCUMENT_ROOT'] == 'C:/xampp/htdocs'): ?>
+          <a href="/fdu24/">
+        <?php else: ?>
+          <a href="/">
+        <?php endif; ?>
+        職業診断する
+      </a>
       </div>
     <?php elseif(!empty($know_flag)): ?>
       <div class="history_back">

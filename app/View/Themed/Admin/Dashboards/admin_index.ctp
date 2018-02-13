@@ -17,6 +17,14 @@
         <th>趣味一覧</th>
         <td><?php echo $this->Html->link('一覧リンク', array('controller' => 'CheckLikes', 'action' => 'index')); ?></td>
       </tr>
+    <tr>
+        <th>まとめニュース</th>
+        <td><?php echo $this->Html->link('一覧リンク', array('controller' => 'Rsses', 'action' => 'index')); ?></td>
+    </tr>
+    <tr>
+        <th>広告画像リンク</th>
+        <td><?php echo $this->Html->link('一覧リンク', array('controller' => 'Advertisements', 'action' => 'index')); ?></td>
+    </tr>
     </table>
   </body>
 </html>

@@ -88,9 +88,9 @@
       <div class="job-memu animate-box sss">
 
         <?php if ($_SERVER['DOCUMENT_ROOT'] == 'C:/xampp/htdocs'): ?>
-          <a href="/fdu24/professions/detail/<?php echo $data['Profession']['id']; ?>">
+          <a href="/fdu24/professions/detail/<?php echo $data['Profession']['id']; ?>/1">
         <?php else: ?>
-          <a href="/professions/detail/<?php echo $data['Profession']['id']; ?>">
+          <a href="/professions/detail/<?php echo $data['Profession']['id']; ?>/1">
         <?php endif; ?>
 
 
@@ -99,10 +99,18 @@
           </div>
           <h2  class="professions_title"><?php echo $data['Profession']['profession_name'] ;?></h2>
           <ul class="core_list">
-            <li class="core_text">
+            <?php
+              $text_none = mb_strlen($data['Profession']['profession_name']);
+            ?>
+            <?php if($text_none > '11'): ?>
+            <li class="core_text text_none">
+                      <?php else: ?>
+                        <li class="core_text">
+                        <?php endif; ?>
               <?php echo $genre[$data['Profession']['genre']] ;?>
             </li>
-            <li class="core_text">
+
+              <li class="core_text">
               コアレベル:<span class="core_status">
               <?php
               for ($i = 0; $i < $data['Profession']['core_status']; $i++) {

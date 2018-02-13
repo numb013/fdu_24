@@ -54,17 +54,26 @@ class UsersController extends AppController {
  public function admin_login() {
      if ($this->request->is('post')) {
          if ($this->Auth->login()) {
-            $this->Cookie->write('Auth.User', $this->request->data['User'], false, '+4 weeks');
+            $this->Cookie->write('Auth', $this->request->data, true, '+4 weeks');            
             $this->redirect($this->Auth->redirect());
             exit();
          } else {
              $this->Flash->error(__('パスワードちゃいまっせ～'));
          }
+     } else {
+        $this->request->data = $this->Cookie->read('Auth');
+//        echo pr($this->request->data);
+//        exit();
+        if ($this->Auth->login()) {
+            // ログインリダイレクト
+            return $this->redirect( $this->Auth->redirect());
+        // ログイン NG
+        } 
      }
  }
 
  public function admin_logout() {
-		$this->Cookie->delete('Auth.User');
+		$this->Cookie->delete('Auth');
 		$this->redirect($this->Auth->logout());
 		$this->autoRender = false;
  }

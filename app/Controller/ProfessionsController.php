@@ -135,7 +135,7 @@ class ProfessionsController extends AppController {
 
 
 
-public function detail($id = null) {
+public function detail($id = null, $first = null) {
 	//exit();
 	//echo pr($id);
 	// レイアウト関係
@@ -182,8 +182,8 @@ public function detail($id = null) {
 			$datas['Movie'] = $this->Movie->find('all', $status);
 		}
 
-		$this->set('title_for_layout', $datas['Profession']['profession_name'].'業界とは・なりかた・給料・向いてる性格');
-		$datas['title'] = $datas['Profession']['profession_name'].'業界とは・なりかた・給料・向いてる性格';
+		$this->set('title_for_layout', $datas['Profession']['profession_name'].'の仕事内容・なりかた・給料・向いてる性格');
+		$datas['title'] = $datas['Profession']['profession_name'].'の仕事内容・なりかた・給料・向いてる性格';
 		$datas['Profession']['check_personal'] = explode(",", $datas['Profession']['check_personal']);
 		$datas['Profession']['check_like'] = explode(",", $datas['Profession']['check_like']);
 		$datas['Profession']['related_profession'] = explode(",", $datas['Profession']['related_profession']);
@@ -205,6 +205,11 @@ public function detail($id = null) {
 		$this->_getSideContent($datas);
 		$this->_getCheckParameter();
 		$know_flag = 1;
+		//直接urlからきたら$first来たら来たらをviewにおくる
+		if (empty($first)) {
+			$first = 1;
+			$this->set('first', $first);
+		}
 		$this->set(compact('datas', 'know_flag'));
 	}
 }
@@ -287,7 +292,7 @@ public function detail($id = null) {
 			'limit' => 5,
 		);
 		$this->Prg->commonProcess();
-		$this->paginate['conditions'] = $this->Profession->parseCriteria($this->passedArgs);
+                $this->paginate['conditions'] = $this->Profession->parseCriteria($this->passedArgs);
 		if (empty($this->request->data)) {
 			// 初期表示時
 			$this->paginate = array(
@@ -1248,8 +1253,9 @@ public function admin_edit($id = null){
 		);
 		// 以下がデータベース関係
 		$core_content = $this->Profession->find('all', $status);
-		$this->set(compact("related", "core_content"));
-  }
+                shuffle($core_content);
+                $this->set(compact("related", "core_content"));
+        }
 
 	public function _getCheckParameter() {
 		$check_personals = $this->Master->getCheckPersonals();

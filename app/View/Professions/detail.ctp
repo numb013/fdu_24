@@ -64,9 +64,7 @@
               <h3 class="detail_title">興味が出たら</h3>
                               <p>興味が出たらクリックしてね</p>
               <div class="job_know">
-
-                <a href="javascript:void(0);" class='know_count plus' id="<?php echo $datas['Profession']['id'];?>">
-                  興味が出た : <span class="count"><?php echo $datas['Profession']['know_count']; ?></span>
+                <a href="javascript:void(0);" class='know_count plus' id="<?php echo $datas['Profession']['id'];?>">興味が出た : <span class="count"><?php echo $datas['Profession']['know_count']; ?></span>
                 </a>
               </div>
             </div>
@@ -80,13 +78,13 @@
           </div>
           <div class="col-md-4 col-sm-4 text-center item-block">
             <div class="Advertisement">
-                <script language="javascript" src="//ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3342556&pid=884692765"></script><noscript><a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3342556&pid=884692765" target="_blank" rel="nofollow"><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3342556&pid=884692765" border="0"></a></noscript>
+                  <script language="javascript" src="//ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3342556&pid=884790659"></script><noscript><a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3342556&pid=884790659" target="_blank" rel="nofollow"><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3342556&pid=884790659" border="0"></a></noscript>
               </div>
           </div>
           <div class="col-md-4 col-sm-4 text-center item-block">
             <div class="Advertisement">
-            <script language="javascript" src="//ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3342556&pid=884692753"></script><noscript><a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3342556&pid=884692753" target="_blank" rel="nofollow"><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3342556&pid=884692753" border="0"></a></noscript>
-          </div>
+                <script language="javascript" src="//ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3342556&pid=884790657"></script><noscript><a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3342556&pid=884790657" target="_blank" rel="nofollow"><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3342556&pid=884790657" border="0"></a></noscript>
+            </div>
           </div>
         </div>
       </div>
@@ -190,43 +188,6 @@
     });
     return false;
   });
-
-  $('.btn_write').click(function() {
-    var data = { Profession: { id: $('.job_know').find('a').attr('id'), class: $('.job_know').find('a').attr('class')} };
-    console.log(JSON.stringify(data));
-    $.ajax({
-      type: 'POST',
-      url: '/professions/know_count',
-      data: data,
-      dataType: 'json',
-      cache: false,
-      success: function(data) {
-        if (data.status) {
-          if (data.action === 'plus') {
-            var know = parseInt($('span.count').text());
-            var knowCount = know + 1;
-            $('.count').text(knowCount);
-            $('div').find('.know_count').attr('class','know_count minus');
-            $('.know_count').css('color','#fff');
-            $('.know_count').css('background-color','#369840');
-          } else {
-            var know = parseInt($('span.count').text());
-            var knowCount = know - 1;
-            $('.count').text(knowCount);
-            $('div').find('.know_count').attr('class','know_count plus');
-            $('.know_count').css('color','#369840');
-            $('.know_count').css('background-color','#fff');
-
-          }
-        }
-      },
-    error: function(XMLHttpRequest, textStatus, errorThrown) {
-    }
-    });
-    return false;
-  });
-
-
 
 $('.btn_write').click(function() {
   var name = $('#ProfessionDetailForm [name=write_name]').val();

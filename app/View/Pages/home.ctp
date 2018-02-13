@@ -65,17 +65,24 @@
 		<div class="col-md-12 text-center animate-box">
 			<h3 style="color:#fff; font-size:26px; margin-bottom:12px;">What is FDU-24 !?</h3>
 			<p style="font-size:18px;">
-				まだあなたが知らないだけで、この世界には色々な職業が存在します。「FDU-24:どこよりも簡単な職業診断チェック」はコアでマイナーな職業を紹介する職業診断を個性としています、職業診断は項目を3つ以上選ぶだけの超簡単なチェック型診断方法。もしかしたら自分に合った職業が見つかるかもしれません。まずはトップ画面の２択のうち1つを選び診断スタートして下さい。
+				まだあなたが知らないだけで、この世界には色々な職業が存在します。「FDU-24:簡単で当たる！職業診断」はコアでマイナーで珍しい職業を紹介する職業診断を個性としています、もしかしたらあなたの能力が発揮できる職業が見つかるかもしれません。まずはトップ画面の２択のうち1つを選び診断スタートして下さい。
 				<!-- <?php echo $this->Html->link('Get started now!!', array('controller' => 'Pages','action' => 'content'), array('class' => 'btn btn-primary btn-outline with-arrow'));?> -->
 			</p>
 		</div>
 	</div>
 </div>
 
+
+<div class="fh5co-cta" style='background: #f7f7f7;'>
+  <div class="text-center container fh5co-heading">
+    <h3 style="color:#323232; margin-top:0px; font-size:18px;">転職に役だつ情報をピックアップ</h3>
+    <?php echo $this->Html->link('転職ニュースまとめ', array('controller' => 'Rsses', 'action' => 'index'), array('class' => 'occupation_link')); ?>
+  </div>
+</div>
 <div class="animate-box fh5co-cta">
   <div class="text-center container fh5co-heading">
     <h3 style="color:#323232; margin-top:0px; font-size:24px;">For inquiries from here</h3>
-		<!-- <?php echo $this->Html->link('お問い合わせ', array('controller' => 'Contacts', 'action' => 'index')); ?> -->
-		<a href="Contacts/index" class="occupation_link">お問い合わせ</a>
+        <!-- <?php echo $this->Html->link('お問い合わせ', array('controller' => 'Contacts', 'action' => 'index')); ?> -->
+        <a href="Contacts/index" class="occupation_link">お問い合わせ</a>
   </div>
 </div>

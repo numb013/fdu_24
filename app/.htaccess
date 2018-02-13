@@ -3,9 +3,6 @@
     RewriteBase /
     RewriteRule    ^$    webroot/    [L]
     RewriteRule    (.*) webroot/$1    [L]
+    allow from all
 </IfModule>
 
-<Limit POST>
-order allow,deny
-allow from all
-</Limit>

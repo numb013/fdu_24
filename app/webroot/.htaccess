@@ -1,13 +1,9 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    Options +FollowSymLinks
     RewriteBase /
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^(.*)$ index.php [QSA,L]
+    allow from all
 </IfModule>
 
-<Limit POST>
-order allow,deny
-allow from all
-</Limit>

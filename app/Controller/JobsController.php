@@ -68,18 +68,19 @@ class JobsController extends AppController {
 	}
 
 	public function index($para = null) {
-		$this->set('title_for_layout', 'どこよりも簡単な職業診断チェック');
+		$this->set('title_for_layout', '簡単で当たる！職業診断 -コアでマイナーで珍しい職業-');
 		if (!empty($this->request->data['back'])) {
 			$this->_getCheckParameter();
 			//$this->request->data['Profession']['personal_check'] = $this->request->data['personal_checks'];
                         if (!empty($this->Session->read('personalChecks'))) {
                             $this->request->data['Profession']['personal_check'] = $this->Session->read('personalChecks');
                             $this->Session->delete('personalChecks');
-                        }                           
+                        }
 			$flag = 1;
 			$this->set(compact('flag', 'para'));
 		} else {
 			$param = (!empty($_SERVER['QUERY_STRING'])) ? $_SERVER['QUERY_STRING'] : '';
+			$para_flag = 0;
 			if (!empty($this->request->query['param'])) {
 				$replaceText = str_replace("?", "", $this->request->query['param']);
 				$array1 = array();
@@ -95,18 +96,19 @@ class JobsController extends AppController {
 						$this->request->query['personal_check'][$key] = $value;
 					}
 				}
+				$para_flag = 1;
 			}
 
 
-                        
+
 
 	    // レイアウト関係
 			$this->Prg->commonProcess();
 			if (!empty($this->request->data)) {
-                            if (!empty($this->Session->read('personalChecks'))) {
+                            if (!empty($this->Session->read('personalChecks')) && $para_flag == 1 ) {
                                 $this->request->data['Profession']['personal_check'] = $this->Session->read('personalChecks');
                                 $this->Session->delete('personalChecks');
-                            }                            
+                            }
                             if (count($this->request->data['Profession']['personal_check']) > 2) {
 
 					$this->Session->write('ajax_serch_para', $this->request->data);

@@ -2,13 +2,13 @@
   $url = 'http://fdu24.com/'. $_SERVER["REQUEST_URI"];
   $line = rawurlencode( "テキスト " . $url );
 
-  if (!empty($datas)) {
+  if (!empty($datas['Profession']['profession_name'])) {
 $text = $datas['Profession']['profession_name'].'とは？
 気になるお給料から'.$datas['Profession']['profession_name'].'のなりかたまで
 知らなかった職業を知れる「FDU-24」';
   } else {
     $text = 'まだあなたが知らないだけで、この世界には色々な職業が存在します。
-    「FDU-24:どこよりも簡単な職業診断チェック」はコアでマイナーな職業を紹介する職業診断を個性としています';
+    「FDU-24:簡単で当たる！職業診断」はコアでマイナーな職業を紹介する職業診断を個性としています';
   }
 
   $twitter = rawurlencode($url);
@@ -36,9 +36,28 @@ $text = $datas['Profession']['profession_name'].'とは？
   </ul>
   </div>
 </div>
-<div class="fh5co-cta">
-  <div class="text-center container fh5co-heading">
-    <h3 style="color:#323232; margin-top:0px; font-size:18px;">簡単な職業診断チェック!!</h3>
-    <a href="/" class="occupation_link">職業診断スタート</a>
+
+<div class="fh5co-copy col-md-12  text-center detail_tex">
+  <div class="container bottom_container">
+
+      <div class="col-md-4 col-sm-4 text-center item-block">
+        <h3 class="detail_title">簡単な職業診断チェック</h3>
+        <p class="bottom_text">あたなにぴったりの職業がわかるかも！？</p>
+          <a href="/" class="occupation_link">職業診断スタート</a>
+      </div>
+
+      <div class="col-md-4 col-sm-4 text-center item-block">
+        <h3 class="detail_title">転職に役だつ情報をピックアップ!!</h3>
+        <p class="bottom_text">最新のニュースからまとめサイトまで</p>
+          <?php echo $this->Html->link('転職ニュースまとめ', array('controller' => 'Rsses', 'action' => 'index'), array('class' => 'occupation_link')); ?>
+      </div>
+
+      <div class="col-md-4 col-sm-4 text-center item-block">
+        <h3 class="detail_title">お問い合わせ</h3>
+           <p class="bottom_text">お問い合わせは下のボタンから</p>
+          <?php echo $this->Html->link('お問い合わせ', array('controller' => 'Contacts', 'action' => 'index'), array('class' => 'occupation_link')); ?>
+      </div>
+
   </div>
 </div>
+
