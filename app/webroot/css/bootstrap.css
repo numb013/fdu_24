@@ -372,11 +372,7 @@ img {
 }
 
 
-.yoko {
-  box-shadow:0px 1px 14px 1px #000;
-  -moz-box-shadow:0px 1px 14px 1px #000;
-  -webkit-box-shadow:0px 1px 14px 1px #000;
-}
+
 
 
 @media screen and (max-width: 414px) {
@@ -393,7 +389,7 @@ img {
       display: none;
   }
   .yoko {
-    width: 100%;
+    width: 95%;
   }
   .yoko_img {
     width: 100%;
@@ -406,24 +402,19 @@ img {
   .work-img {
       display: none;
   }
-  .img-responsive {
-    text-align: center;
-    color: #fff;
-    height: 500px;
-  }
 }
 
-@media screen and (min-width: 1024px) {
+/*@media screen and (min-width: 1024px) {
   .yoko {
     width: 83%;
   }
-}
+}*/
 
-@media screen and (min-width: 1280px) {
+/*@media screen and (min-width: 1280px) {
   .yoko {
     width: 60%;
   }
-}
+}*/
 
 
 .img-rounded {

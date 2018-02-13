@@ -6,17 +6,24 @@
 
    ?>
 
-  <div class="job-img">
-      <div class="fh5co-copy col-md-12 img-responsive">
-          <h1 class="profession_title"><?php echo $datas['Profession']['profession_name']; ?></h1>
-        <?php echo $this->Html->image($datas['Image'][0]['Image']['url'] ,array('width' => '100%', 'class' => "work-img")); ?>
-        <?php echo $this->Html->image($datas['Image'][0]['Image']['url'] ,array('class' => "yoko")); ?>
-      </div>
-  </div>
 
-  <div class="wapper">
+
+  <div class="wapper detail">
+
+
 
     <div class="side">
+
+      <div class="job-img">
+          <div class="fh5co-copy col-md-12 img-responsive">
+              <h1 class="profession_title"><?php echo $datas['Profession']['profession_name']; ?></h1>
+            <?php echo $this->Html->image($datas['Image'][0]['Image']['url'] ,array('width' => '100%', 'class' => "work-img")); ?>
+            <?php echo $this->Html->image($datas['Image'][0]['Image']['url'] ,array('class' => "yoko")); ?>
+          </div>
+      </div>
+
+
+
       <div class="fh5co-copy col-md-12  text-center detail_tex">
         <h3 class="detail_title" style="text-align:left">仕事内容・詳細</h3>
         <div class="rofession_text">
@@ -47,20 +54,20 @@
       <?php endif; ?>
 
       <div class="fh5co-copy col-md-12  text-center detail_tex">
-        <div class="container detail_container">
-            <div class="col-md-4 col-sm-4 text-center item-block">
+        <div class="detail_container">
+            <div class="col-md-4 col-sm-4 text-center item-block_box">
               <h3 class="detail_title">向いてる性格</h3>
               <p class="job_step">
                 <?php echo nl2br($datas['Profession']['personality']); ?>
               </p>
             </div>
-            <div class="col-md-4 col-sm-4 text-center item-block">
-              <h3 class="detail_title"><?php echo $datas['Profession']['profession_name']; ?>のお給料</h3>
+            <div class="col-md-4 col-sm-4 text-center item-block_box">
+              <h3 class="detail_title">お給料</h3>
               <p class="job_step">
                 <?php echo nl2br($datas['Profession']['job_salary']); ?>
               </p>
             </div>
-            <div class="col-md-4 col-sm-4 text-center item-block">
+            <div class="col-md-4 col-sm-4 text-center item-block_box">
               <h3 class="detail_title">興味が出たら</h3>
                               <p>興味が出たらクリックしてね</p>
               <div class="job_know">
@@ -71,7 +78,7 @@
         </div>
       </div>
       <div class="fh5co-copy col-md-12  text-center detail_tex">
-        <div class="container detail_container">
+        <div class="detail_container">
           <div class="col-md-4 col-sm-4 text-center item-block">
             <h3 class="detail_title">関連動画</h3>
             <?php echo '<iframe width="95%" height="165" src='.'https://www.youtube.com/embed/'.$datas['Movie'][0]['Movie']['movie_url'].' frameborder="0" allowfullscreen></iframe>' ?>

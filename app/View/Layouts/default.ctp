@@ -73,15 +73,15 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
  ?>
 <meta property="fb:app_id" content="1910038995905929" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="http://fdu24.com<?php echo $_SERVER["REQUEST_URI"]; ?>" />
+<meta property="og:url" content="http://fdu24.shop<?php echo $_SERVER["REQUEST_URI"]; ?>" />
 <?php if (!empty($datas['title'])): ?>
 <meta property="og:title" content="<?php echo $datas['title']; ?>:FDU-24" />
 <meta property="og:description" content="<?php echo preg_replace('/\n|\r|\r\n/', '', $datas['Profession']['job_content']); ?>" />
-<meta property="og:image" content="http://fdu24.com<?php echo $datas['Image'][0]['Image']['url']; ?>" />
+<meta property="og:image" content="http://fdu24.shop<?php echo $datas['Image'][0]['Image']['url']; ?>" />
 <?php else: ?>
 <meta property="og:title" content="FDU-24:簡単で当たる！職業診断" />
 <meta property="og:description" content="まだあなたが知らないだけで、この世界には色々な職業が存在します。「FDU-24:簡単で当たる！職業診断」はコアでマイナーで珍しい職業を紹介する職業診断を個性としています、もしかしたらあなたの能力が発揮できる職業が見つかるかもしれません。" />
-<meta property="og:image" content="http://fdu24.com/files/updir/20170209010031_0.jpeg" />
+<meta property="og:image" content="http://fdu24.shop/files/updir/20170209010031_0.jpeg" />
 <?php endif; ?>
 <meta property="og:site_name" content="FDU-24:簡単で当たる！職業診断" />
 
@@ -89,12 +89,12 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:site" content="@fdu24com" />
 <meta name="twitter:player" content="@fdu24com" />
-<meta name="twitter:domain" content="http://fdu24.com" />
-<meta name="twitter:url" content="http://fdu24.com<?php echo $_SERVER["REQUEST_URI"]; ?>" />
+<meta name="twitter:domain" content="http://fdu24.shop" />
+<meta name="twitter:url" content="http://fdu24.shop<?php echo $_SERVER["REQUEST_URI"]; ?>" />
 <?php if (!empty($datas['title'])): ?>
-<meta name="twitter:image" content="http://fdu24.com<?php echo $datas['Image'][0]['Image']['url']; ?>" />
+<meta name="twitter:image" content="http://fdu24.shop<?php echo $datas['Image'][0]['Image']['url']; ?>" />
 <?php else: ?>
-<meta property="og:image" content="http://fdu24.com/files/updir/20170209010031_0.jpeg" />
+<meta property="og:image" content="http://fdu24.shop/files/updir/20170209010031_0.jpeg" />
 <?php endif; ?>
 </head>
 

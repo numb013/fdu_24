@@ -3,7 +3,7 @@
   <div class="container">
     <div class="header-inner">
       <h1 itemprop="name">
-          <?php if ($_SERVER['DOCUMENT_ROOT'] == 'C:/xampp/htdocs'): ?>
+<?php if ($_SERVER['DOCUMENT_ROOT'] == '/Applications/MAMP/htdocs' || $_SERVER['DOCUMENT_ROOT'] == 'C:/xampp/htdocs' ): ?>
             <a href="/fdu24/">
           <?php else: ?>
             <a href="/">
@@ -14,7 +14,7 @@
         <p class="title-small-text">簡単で当たる！<br>職業診断サイト</p>
     </div>
     <?php if(!empty($back_flag)): ?>
-      <?php if ($_SERVER['DOCUMENT_ROOT'] == 'C:/xampp/htdocs'): ?>
+<?php if ($_SERVER['DOCUMENT_ROOT'] == '/Applications/MAMP/htdocs' || $_SERVER['DOCUMENT_ROOT'] == 'C:/xampp/htdocs' ): ?>
         <div class="history_back">
           <a href="/fdu24/">BACK</a>
         </div>
@@ -36,7 +36,7 @@
       </div>
     <?php elseif(!empty($first)): ?>
       <div class="history_back">
-        <?php if ($_SERVER['DOCUMENT_ROOT'] == 'C:/xampp/htdocs'): ?>
+<?php if ($_SERVER['DOCUMENT_ROOT'] == '/Applications/MAMP/htdocs' || $_SERVER['DOCUMENT_ROOT'] == 'C:/xampp/htdocs' ): ?>
           <a href="/fdu24/">
         <?php else: ?>
           <a href="/">

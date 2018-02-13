@@ -24,7 +24,7 @@
     <?php foreach ($core_content as $key => $value): ?>
 
     <li class="core_list">
-      <a href="http://fdu24.com/professions/detail/<?php echo $value['Profession']['id']; ?>/1">
+      <a href="http://fdu24.shop/professions/detail/<?php echo $value['Profession']['id']; ?>/1">
       <div class="job_list_img">
         <div class = 'photo-cut_1'>
           <?php echo $this->Html->image($value['Image'][0]['url']); ?>
@@ -47,19 +47,11 @@
   <ul class="job_list">
     <?php foreach ($related as $key => $value): ?>
     <li>
-      <a href="http://fdu24.com/professions/detail/<?php echo $value['Profession']['id']; ?>/1">
+      <a href="http://fdu24.shop/professions/detail/<?php echo $value['Profession']['id']; ?>/1">
       <h4><?php echo $value['Profession']['profession_name']; ?></h4>
       <p><?php echo mb_strimwidth($value['Profession']['job_salary'], 0, 33, "..."); ?><p>
       </a>
     </li>
     <?php endforeach; ?>
   </ul>
-
-
-
-
-
-
-
-
 </div>

@@ -1,5 +1,5 @@
 <?php
-  $url = 'http://fdu24.com/'. $_SERVER["REQUEST_URI"];
+  $url = 'http://fdu24.shop/'. $_SERVER["REQUEST_URI"];
   $line = rawurlencode( "テキスト " . $url );
 
   if (!empty($datas['Profession']['profession_name'])) {
@@ -18,7 +18,7 @@ $text = $datas['Profession']['profession_name'].'とは？
   <div class="text-center container detail_container fh5co-heading">
       <h3 style="color:#323232; margin-top:0px; font-size:18px;">友達・知り合いにシェアする</h3>
   <ul class="sns_list">
-    <a href="http://www.facebook.com/share.php?u=http://fdu24.com/<?php echo $_SERVER["REQUEST_URI"] ?>" onclick="window.open(this.href, 'FBwindow', 'width=650, height=450, menubar=no, toolbar=no, scrollbars=yes'); return false;">
+    <a href="http://www.facebook.com/share.php?u=http://fdu24.shop<?php echo $_SERVER["REQUEST_URI"] ?>" onclick="window.open(this.href, 'FBwindow', 'width=650, height=450, menubar=no, toolbar=no, scrollbars=yes'); return false;">
       <li class="sns_button" style="background:#3b5998;">
         <?php echo $this->Html->image('face.png', array('class' => 'sns_button')); ?>シェアする
       </li>

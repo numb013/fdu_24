@@ -87,7 +87,7 @@
     <?php foreach ($datas as $data): ?>
       <div class="job-memu animate-box sss">
 
-        <?php if ($_SERVER['DOCUMENT_ROOT'] == 'C:/xampp/htdocs'): ?>
+        <?php if ($_SERVER['DOCUMENT_ROOT'] == '/Applications/MAMP/htdocs' || $_SERVER['DOCUMENT_ROOT'] == 'C:/xampp/htdocs' ): ?>
           <a href="/fdu24/professions/detail/<?php echo $data['Profession']['id']; ?>/1">
         <?php else: ?>
           <a href="/professions/detail/<?php echo $data['Profession']['id']; ?>/1">
