@@ -41,6 +41,17 @@
 
 
       <div class="fh5co-copy col-md-12  text-center detail_tex">
+        <h3 class="detail_title" style="text-align:left"><?php echo $datas['Profession']['profession_name']; ?>のなりかた</h3>
+        <div class="rofession_text">
+          <p style="text-align:left">
+            <?php echo nl2br($datas['Profession']['job_step']); ?>
+          </p>
+        </div>
+      </div>
+
+
+
+      <div class="fh5co-copy col-md-12  text-center detail_tex">
         <div class="detail_container">
             <div class="col-md-4 col-sm-4 text-center item-block_box">
               <h3 class="detail_title">向いてる性格</h3>
@@ -49,10 +60,18 @@
               </p>
             </div>
             <div class="col-md-4 col-sm-4 text-center item-block_box">
-              <h3 class="detail_title">お給料</h3>
+ <!--              <h3 class="detail_title">お給料</h3>
               <p class="job_step">
                 <?php echo nl2br($datas['Profession']['job_salary']); ?>
-              </p>
+              </p> -->
+
+
+
+            <h3 class="detail_title">関連動画</h3>
+            <?php echo '<iframe width="95%" height="165" src='.'https://www.youtube.com/embed/'.$datas['Movie'][0]['Movie']['movie_url'].' frameborder="0" allowfullscreen></iframe>' ?>
+
+
+
             </div>
             <div class="col-md-4 col-sm-4 text-center item-block_box">
               <h3 class="detail_title">興味が出たら</h3>
@@ -103,6 +122,28 @@
           <?php echo $this->Form->end(); ?>
         </div>
       </div>
+
+<!-- 
+      <div class="fh5co-copy col-md-12  text-center detail_tex">
+        <div class="detail_container">
+          <div class="col-md-4 col-sm-4 text-center item-block">
+            <h3 class="detail_title">関連動画</h3>
+            <?php echo '<iframe width="95%" height="165" src='.'https://www.youtube.com/embed/'.$datas['Movie'][0]['Movie']['movie_url'].' frameborder="0" allowfullscreen></iframe>' ?>
+          </div>
+          <div class="col-md-4 col-sm-4 text-center item-block">
+            <div class="Advertisement">
+   <a href="http://www.bizsuma.com/plan/"><?php echo $this->Html->image('/img/k_suma.jpg'); ?></a>
+              </div>
+          </div>
+          <div class="col-md-4 col-sm-4 text-center item-block">
+            <div class="Advertisement">
+<a href="http://www.bizsuma.com/plan/"><?php echo $this->Html->image('/img/k_gara.jpg'); ?></a>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+
 
       <div class="fh5co-copy col-md-12  text-center detail_tex">
         <div class="detail_container">

@@ -25,6 +25,9 @@
   padding-top: 5px;
   margin-top: 90px;
 }
+.side_2 {
+  display: -webkit-box;
+}
 
 .job_list {
   margin: 5px 0 30px 0;
@@ -1590,17 +1593,15 @@ margin-top: 5px;
 }
 
 .job_know {
-  margin-top: 30px;
+  margin-top: 55px;
 }
 
 .know_count {
-  margin-top: 13px;
   font-size: 15px;
-  padding: 10px 10px 10px 10px;
+  padding: 30px;
   color: #fff;
   border: 1px solid #369840;
-  border-radius: 2px;
-  display: inline;
+  border-radius: 12px;
   background-color: #fff;
   color: #369840;
   letter-spacing: -0.5px;
@@ -1643,6 +1644,10 @@ margin-top: 5px;
   #fh5co-header nav {
     display: none;
   }
+.job_know {
+  margin: 55px;
+}
+
 }
 #fh5co-header nav ul {
   padding: 0;
@@ -1850,14 +1855,14 @@ margin-top: 5px;
 
 .item-block_box {
   background: #f3f3f3;
-  height: 170px;
+  height: 240px;
   margin-right: 8px;
   width: 32%;
   padding: 10px;
   border: 1px solid #ccc;
 }
 .item-block_box h3 {
-  padding-bottom: 5px;
+  padding: 10px;
   margin: 0px;
 }
 
@@ -1894,7 +1899,7 @@ margin-top: 5px;
     padding: 15px 15px 25px 15px;
   }
   .job_know {
-    margin-top: 15px;
+    margin-top: 55px;
   }
 }
 
