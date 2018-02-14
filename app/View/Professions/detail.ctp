@@ -1,19 +1,5 @@
-<div class="row">
-  <?php
-
-  //echo pr($datas);
-  //exit();
-
-   ?>
-
-
-
   <div class="wapper detail">
-
-
-
     <div class="side">
-
       <div class="job-img">
           <div class="fh5co-copy col-md-12 img-responsive">
               <h1 class="profession_title"><?php echo $datas['Profession']['profession_name']; ?></h1>
@@ -21,8 +7,6 @@
             <?php echo $this->Html->image($datas['Image'][0]['Image']['url'] ,array('class' => "yoko")); ?>
           </div>
       </div>
-
-
 
       <div class="fh5co-copy col-md-12  text-center detail_tex">
         <h3 class="detail_title" style="text-align:left">仕事内容・詳細</h3>
@@ -33,14 +17,6 @@
         </div>
       </div>
 
-      <div class="fh5co-copy col-md-12  text-center detail_tex">
-        <h3 class="detail_title" style="text-align:left"><?php echo $datas['Profession']['profession_name']; ?>のなりかた</h3>
-        <div class="rofession_text">
-          <p style="text-align:left">
-            <?php echo nl2br($datas['Profession']['job_step']); ?>
-          </p>
-        </div>
-      </div>
 
       <?php if(!empty($datas['Image'][1])): ?>
         <div class="fh5co-copy col-md-12  text-center detail_tex">
@@ -52,6 +28,17 @@
           </div>
         </div>
       <?php endif; ?>
+
+
+      <div class="fh5co-copy col-md-12  text-center detail_tex">
+        <h3 class="detail_title" style="text-align:left"><?php echo $datas['Profession']['profession_name']; ?>のなりかた</h3>
+        <div class="rofession_text">
+          <p style="text-align:left">
+            <?php echo nl2br($datas['Profession']['job_step']); ?>
+          </p>
+        </div>
+      </div>
+
 
       <div class="fh5co-copy col-md-12  text-center detail_tex">
         <div class="detail_container">
@@ -69,7 +56,7 @@
             </div>
             <div class="col-md-4 col-sm-4 text-center item-block_box">
               <h3 class="detail_title">興味が出たら</h3>
-                              <p>興味が出たらクリックしてね</p>
+              <p>興味が出たらクリックしてね</p>
               <div class="job_know">
                 <a href="javascript:void(0);" class='know_count plus' id="<?php echo $datas['Profession']['id'];?>">興味が出た : <span class="count"><?php echo $datas['Profession']['know_count']; ?></span>
                 </a>
@@ -77,24 +64,7 @@
             </div>
         </div>
       </div>
-      <div class="fh5co-copy col-md-12  text-center detail_tex">
-        <div class="detail_container">
-          <div class="col-md-4 col-sm-4 text-center item-block">
-            <h3 class="detail_title">関連動画</h3>
-            <?php echo '<iframe width="95%" height="165" src='.'https://www.youtube.com/embed/'.$datas['Movie'][0]['Movie']['movie_url'].' frameborder="0" allowfullscreen></iframe>' ?>
-          </div>
-          <div class="col-md-4 col-sm-4 text-center item-block">
-            <div class="Advertisement">
-                  <script language="javascript" src="//ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3342556&pid=884790659"></script><noscript><a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3342556&pid=884790659" target="_blank" rel="nofollow"><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3342556&pid=884790659" border="0"></a></noscript>
-              </div>
-          </div>
-          <div class="col-md-4 col-sm-4 text-center item-block">
-            <div class="Advertisement">
-                <script language="javascript" src="//ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3342556&pid=884790657"></script><noscript><a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3342556&pid=884790657" target="_blank" rel="nofollow"><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3342556&pid=884790657" border="0"></a></noscript>
-            </div>
-          </div>
-        </div>
-      </div>
+
 
       <div class="fh5co-copy col-md-12  text-center detail_tex">
         <h3 class="detail_title" style="text-align:left">ご意見・ご感想</h3>
@@ -135,6 +105,27 @@
       </div>
 
       <div class="fh5co-copy col-md-12  text-center detail_tex">
+        <div class="detail_container">
+          <div class="col-md-4 col-sm-4 text-center item-block">
+            <h3 class="detail_title">関連動画</h3>
+            <?php echo '<iframe width="95%" height="165" src='.'https://www.youtube.com/embed/'.$datas['Movie'][0]['Movie']['movie_url'].' frameborder="0" allowfullscreen></iframe>' ?>
+          </div>
+          <div class="col-md-4 col-sm-4 text-center item-block">
+            <div class="Advertisement">
+                  <script language="javascript" src="//ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3342556&pid=884790659"></script><noscript><a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3342556&pid=884790659" target="_blank" rel="nofollow"><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3342556&pid=884790659" border="0"></a></noscript>
+              </div>
+          </div>
+          <div class="col-md-4 col-sm-4 text-center item-block">
+            <div class="Advertisement">
+                <script language="javascript" src="//ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3342556&pid=884790657"></script><noscript><a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3342556&pid=884790657" target="_blank" rel="nofollow"><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3342556&pid=884790657" border="0"></a></noscript>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="fh5co-copy col-md-12  text-center detail_tex">
         <?php if (!empty($datas['write'])): ?>
           <?php foreach ($datas['write'] as $key => $value): ?>
             <div class='write_space'>
@@ -158,7 +149,7 @@
     </div>
     <?php echo $this->element('side'); ?>
   </div>
-	<?php echo $this->element('bottom'); ?>
+  <?php echo $this->element('bottom'); ?>
 
 <script type="text/javascript">
   $('.know_count').click(function() {

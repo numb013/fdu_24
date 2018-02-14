@@ -29,7 +29,6 @@
 
 
 <?php elseif(!empty($datas)): ?>
-
 <div class="col-md-12 text-center animate-box" style="background-color:#000; padding:0px;">
   <div class="col-md-12 col-sm-12 col-sm-push-0 col-xs-12 col-xs-push-0 col-top-mar" style="padding:0px;">
     <div class="serch-frame">

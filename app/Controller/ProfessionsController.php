@@ -1096,12 +1096,12 @@ public function admin_edit($id = null){
 
             if (!empty($data['Image'])) {
               foreach($data['Image'] as $key => $val){
-									$cut = 1;//カットしたい文字数
-									$val['Image']["url"] = substr( $val['Image']["url"] , $cut , strlen($val['Image']["url"])-$cut );
-									$file = new File(WWW_ROOT.$val['Image']["url"]);
-							    $file->copy(WWW_ROOT."/files/updir/" . $val['Image']["tmp_name"],true);
-									$file = new File(WWW_ROOT.$val['Image']["url"]);
-							    $file->delete();
+				  $cut = 1;//カットしたい文字数
+				  $val['Image']["url"] = substr( $val['Image']["url"] , $cut , strlen($val['Image']["url"])-$cut );
+				  $file = new File(WWW_ROOT.$val['Image']["url"]);
+				  $file->copy(WWW_ROOT."/files/updir/" . $val['Image']["tmp_name"],true);
+				  $file = new File(WWW_ROOT.$val['Image']["url"]);
+				  $file->delete();
                   $data['Image'][$key]['Image']["url"] = "/files/updir/" . $val['Image']["tmp_name"];
                   $data['Image'][$key]['Image']["partner_id"] = $partner_id;
                 }
