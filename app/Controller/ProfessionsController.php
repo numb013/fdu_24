@@ -661,17 +661,6 @@ public function admin_edit($id = null){
 	$this->layout = "default";
 	//変更処理
   if ($this->request->is(array('post', 'put'))) {
-
-		// $Movie = $this->Session->read('Movie');
-		// echo 'movie-sesssion';
-		// echo '<br>';
-		// echo pr($Movie);
-		// echo 'movie';
-		// echo '<br>';
-		// echo pr($this->request->data['Movie']);
-
-
-
 		//動画にユニークID入れる
     foreach ($this->request->data['Movie'] as $key => $value) {
       if ($value['movie_uuid'] == 'fast') {
@@ -702,13 +691,13 @@ public function admin_edit($id = null){
           }
         }
       }
-			//セッション削除
+	  //セッション削除
       $this->Session->delete('image');
     }
 
 
-		$image = $this->Session->read('image');
-		//空のデータが入ってくるので削除
+	$image = $this->Session->read('image');
+	//空のデータが入ってくるので削除
     if (empty($this->request->data['Movie'][0]['movie_url'])) {
         unset($this->request->data['Movie'][0]);
     }
@@ -768,9 +757,12 @@ public function admin_edit($id = null){
       // 2. モデル[ModelName]のvalidatesメソッドを使ってバリデーションを行う。
       if ($this->Profession->validates()) {
         //画像削除チェックの入ったものを削除
+        $delete_count = count($this->Session->read('delete_image'));
         if (!empty($this->request->data['Check'])) {
           foreach ($this->request->data['Check'] as $key => $Checkd) {
             if ($Checkd['photo'] != '0') {
+              $delete_count++;
+              $this->Session->write('delete_image.'.$delete_count, $Checkd['photo']);
               foreach ($this->request->data['Image'] as $key => $Images) {
                 if ($Images['url'] == $Checkd['photo']) {
                     unset($this->request->data['Image'][$key]);
@@ -860,24 +852,24 @@ public function admin_edit($id = null){
         //画像/動画をセッションに保存
         $this->Session->write('Image', $this->request->data['Image']);
         $this->Session->write('Movie', $this->request->data['Movie']);
-				$this->_getCheckParameter();
+		$this->_getCheckParameter();
 
 
-				$options = array(
-					'fields' => array(
-						'Profession.id','Profession.profession_name'
-					),
-					'conditions' => array(
-						'delete_flag' => '0',
-					),
-					'recursive'  => -1
-				);
+		$options = array(
+			'fields' => array(
+				'Profession.id','Profession.profession_name'
+			),
+			'conditions' => array(
+				'delete_flag' => '0',
+			),
+			'recursive'  => -1
+		);
 
-				$relatedProfessions = $this->Profession->find('all', $options);
-				foreach ($relatedProfessions as $key => $relatedProfession) {
-					$relatedNmae[$relatedProfession['Profession']['id']] = $relatedProfession['Profession']['profession_name'];
-				}
-				$this->set('relatedNmae', $relatedNmae);
+		$relatedProfessions = $this->Profession->find('all', $options);
+		foreach ($relatedProfessions as $key => $relatedProfession) {
+			$relatedNmae[$relatedProfession['Profession']['id']] = $relatedProfession['Profession']['profession_name'];
+		}
+		$this->set('relatedNmae', $relatedNmae);
         $this->set('data',$this->request->data);
         $this->render('/Professions/admin_edit_confirm');
 
@@ -983,7 +975,6 @@ public function admin_edit($id = null){
 
     }
 
-
   }
 
 
@@ -1062,15 +1053,15 @@ public function admin_edit($id = null){
         $this->Profession->set($data);
         // 2. モデル[ModelName]のvalidatesメソッドを使ってバリデーションを行う。
         if ($this->Profession->validates()) {
-          $this->Profession->save($data['Profession']);
-            $partner_id = $data['Profession']['id'];
+			$this->Profession->save($data['Profession']);
+            $partner_id = $data['Item']['id'];
+            $delete_image = $this->Session->read('delete_image');
+            $this->Session->delete('delete_image');
 
-            if (!empty($data['photo_dele'])) {
-              $data['photo_dele'] = array_merge($data['photo_dele']);
+            if (!empty($delete_image)) {
+              $data['photo_dele'] = array_merge($delete_image);
             }
-            if (!empty($data['movie_dele'])) {
-              $data['movie_dele'] = array_merge($data['movie_dele']);
-            }
+
             //画像削除
             if (!empty($data['photo_dele'])) {
               foreach ($data['photo_dele'] as $key => $photo_dele) {
