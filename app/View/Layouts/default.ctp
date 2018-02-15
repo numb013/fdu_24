@@ -35,7 +35,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		//echo $this->Html->css('icomoon');
 		echo $this->Html->css('bootstrap');
 		echo $this->Html->css('flexslider');
-                echo $this->Html->css('slider-pro');
+		echo $this->Html->css('slider-pro');
 		echo $this->Html->css('style');
 		echo $this->Html->script('jquery.min.js');
 		echo $this->Html->script('main');
@@ -44,7 +44,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		echo $this->Html->script('jquery.flexslider-min');
 		echo $this->Html->script('bootstrap.min');
 		echo $this->Html->script('modernizr-2.6.2.min');
-                echo $this->Html->script('jquery.sliderPro.min');
+		echo $this->Html->script('jquery.sliderPro.min');
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');

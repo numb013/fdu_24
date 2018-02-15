@@ -1,18 +1,4 @@
-<div class="row">
-  <?php
-
-  //echo pr($datas);
-  //exit();
-
-   ?>
-
-
-
-
-
-
-  <?php echo $this->Form->create('contacts', array('type' => 'file', 'url' =>  'index')); ?>
-
+<?php echo $this->Form->create('contacts', array('type' => 'file', 'url' =>  'index')); ?>
   <div class="fh5co-contact animate-box">
 		<div class="container">
 			<div class="row">
@@ -64,8 +50,4 @@
     </div>
   </div>
   <?php echo $this->Form->end(); ?>
-
-
-
-
 	<?php echo $this->element('bottom'); ?>

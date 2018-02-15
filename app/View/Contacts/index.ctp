@@ -1,15 +1,4 @@
-<div class="row">
-  <?php
-
-  // echo pr($error);
-  // exit();
-
-   ?>
-
-
-
-  <?php echo $this->Form->create('contacts', array('type' => 'post', 'url' =>  'index')); ?>
-
+<?php echo $this->Form->create('contacts', array('type' => 'post', 'url' =>  'index')); ?>
   <div class="fh5co-contact animate-box">
 		<div class="container">
 			<div class="row">
@@ -70,7 +59,4 @@
 			</div>
     </div>
   </div>
-
-
-
 	<?php echo $this->element('bottom'); ?>
