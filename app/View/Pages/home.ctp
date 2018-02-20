@@ -1,3 +1,11 @@
+<style>
+.sex {
+	font-size: 25px !important; 
+	color: #fff; 
+	font-family: メイリオ;
+}
+</style>
+
 <aside id="fh5co-hero" class="js-fullheight">
 	<div class="flexslider js-fullheight">
 		<ul class="slides">
@@ -6,8 +14,8 @@
 				<div class="container">
 					<div class="col-md-10 text-center js-fullheight slider-text">
 						<div class="slider-text-inner">
-							<h2>Your gender?</h2>
-							<div class="parameter-frame">
+							<h2 class="sex">あなたの性別は?</h2>
+							<div class="parameter-frame" style="margin-top: 10px;">
 								<p class="parameter">
 									<?php echo $this->Html->link('MAN', array('controller' => 'Jobs','action' => 'index', '1'), array('class'=>'btn btn-primary btn-lg'));?>
 								</p>
