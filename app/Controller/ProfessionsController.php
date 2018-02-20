@@ -1054,7 +1054,7 @@ public function admin_edit($id = null){
         // 2. モデル[ModelName]のvalidatesメソッドを使ってバリデーションを行う。
         if ($this->Profession->validates()) {
 			$this->Profession->save($data['Profession']);
-            $partner_id = $data['Item']['id'];
+            $partner_id = $data['Profession']['id'];
             $delete_image = $this->Session->read('delete_image');
             $this->Session->delete('delete_image');
 
