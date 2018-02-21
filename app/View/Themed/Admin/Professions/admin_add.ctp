@@ -72,7 +72,7 @@
         <td><?php echo $this->Form->textarea('job_content', array('type' => 'text', 'label' => false, 'div' => false, 'rows' => 10, 'style' => 'width:100%')); ?></td>
       </tr>
       <tr>
-        <th>なり方</th>
+        <th>必要な資格・学歴</th>
         <td><?php echo $this->Form->textarea('job_step', array('type' => 'text', 'label' => false, 'div' => false, 'rows' => 10, 'style' => 'width:100%')); ?></td>
       </tr>
       <tr>
